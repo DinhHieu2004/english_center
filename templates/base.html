@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trung Tâm Anh Ngữ</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#">ENGLISH CENTER</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Trang chủ</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Khóa học</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Lịch học</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Liên hệ</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <button class="btn btn-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng nhập</button>
+                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng ký</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Banner -->
+    <div class="bg-light py-5">
+        <div class="container text-center">
+            <h1 class="display-4 fw-bold mb-4">Tiếng Anh - Chìa khóa mở cửa tương lai</h1>
+            <p class="lead mb-4">Học tiếng Anh với giáo viên bản ngữ và phương pháp hiện đại</p>
+            <button class="btn btn-primary btn-lg">Đăng ký học thử miễn phí</button>
+        </div>
+    </div>
+
+    <!-- Courses Section -->
+    <div class="container py-5">
+        <h2 class="text-center mb-5">Các Khóa Học</h2>
+        <div class="row" id="coursesList">
+            <!-- Courses will be loaded here via Ajax -->
+            <div class="col-12 text-center">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features -->
+    <div class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-5">Tại sao chọn chúng tôi?</h2>
+            <div class="row">
+                <div class="col-md-4 text-center mb-4">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px">
+                        <i class="fas fa-chalkboard-teacher fa-2x"></i>
+                    </div>
+                    <h4>Giáo viên bản ngữ</h4>
+                    <p>100% giáo viên là người bản ngữ có chứng chỉ TESOL/CELTA</p>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px">
+                        <i class="fas fa-book-reader fa-2x"></i>
+                    </div>
+                    <h4>Phương pháp hiện đại</h4>
+                    <p>Áp dụng phương pháp học tương tác, thực hành nhiều</p>
+                </div>
+                <div class="col-md-4 text-center mb-4">
+                    <div class="bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px">
+                        <i class="fas fa-chart-line fa-2x"></i>
+                    </div>
+                    <h4>Cam kết đầu ra</h4>
+                    <p>Đảm bảo đầu ra theo khung năng lực châu Âu CEFR</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đăng nhập</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label">username</label>
+                            <input type="username" id="username" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Mật khẩu</label>
+                            <input type="password"id="password" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <!-- Register Modal -->
+<div class="modal fade" id="registerModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Đăng ký</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="studentRegisterForm">
+                    <div class="mb-3">
+                        <label class="form-label">Họ và tên</label>
+                        <input type="text" name="fullname" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Tên đăng nhập</label>
+                        <input type="text" name="username" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="email" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Số điện thoại</label>
+                        <input type="tel" name="phone" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mật khẩu</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Xác nhận mật khẩu</label>
+                        <input type="password" name="password2" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Địa chỉ</label>
+                        <textarea name="address" class="form-control" rows="3"></textarea>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ngày sinh</label>
+                        <input type="date" name="date_of_birth" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>Về chúng tôi</h5>
+                    <p>Trung tâm Anh ngữ hàng đầu với hơn 10 năm kinh nghiệm đào tạo</p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Liên hệ</h5>
+                    <p>
+                        <i class="fas fa-phone me-2"></i>1900 xxxx<br>
+                        <i class="fas fa-envelope me-2"></i>info@englishcenter.com<br>
+                        <i class="fas fa-map-marker-alt me-2"></i>123 Đường ABC, Quận XYZ
+                    </p>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Theo dõi chúng tôi</h5>
+                    <div class="d-flex gap-3">
+                        <a href="#" class="text-white"><i class="fab fa-facebook fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-instagram fa-2x"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-youtube fa-2x"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+
+function getCSRFToken() {
+    var name = "csrftoken=";
+    var decodedCookie = decodeURIComponent(document.cookie);
+    var ca = decodedCookie.split(';');
+    for (var i = 0; i < ca.length; i++) {
+        var c = ca[i].trim();
+        if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
+        // Xử lý form đăng nhập
+        $("#loginForm").on("submit", function(event) {
+            event.preventDefault(); // Ngăn chặn hành vi mặc định của form
+            
+            $.ajax({
+        url: 'http://127.0.0.1:8000/api/login/',  // Đảm bảo URL API đúng
+        method: 'POST',
+        data: {
+            username: $('#username').val(),
+            password: $('#password').val()
+        },
+        success: function(response) {
+            if (response.message === 'Login successful') {
+                const userType = response.user_type;
+                
+                if (userType === 'admin') {
+                    window.location.href = 'http://127.0.0.1:5500/templates/admin/dashboard.html';
+                } else if (userType === 'student') {
+                    window.location.href = 'http://127.0.0.1:5500/templates/student/dashboard.html';
+                } else if (userType === 'teacher') {
+                    window.location.href = 'http://127.0.0.1:5500/templates/teacher/dashboard.html';
+                }
+            } else {
+                alert('Invalid credentials');
+            }
+        },
+        error: function(err) {
+            alert('Đăng nhập thất bại');
+        }
+    });
+});
+$(document).ready(function() {
+    $('#studentRegisterForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            fullname: $('input[name="fullname"]').val(),
+            username: $('input[name="username"]').val(),
+            email: $('input[name="email"]').val(),
+            phone: $('input[name="phone"]').val(),
+            password: $('input[name="password"]').val(),
+            password2: $('input[name="password2"]').val(),
+            address: $('textarea[name="address"]').val(),
+            date_of_birth: $('input[name="date_of_birth"]').val()
+        };
+
+        if (formData.password !== formData.password2) {
+            alert('Mật khẩu xác nhận không khớp!');
+            return;
+        }
+
+        $.ajax({
+            url: 'http://127.0.0.1:8000/api/register/student/',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            headers: {
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            success: function(response) {
+                alert('Đăng ký thành công!');
+                $('#registerModal').modal('hide');
+                $('#studentRegisterForm')[0].reset();
+            },
+            error: function(xhr) {
+                if (xhr.responseJSON) {
+                    const errors = xhr.responseJSON;
+                    if (errors.username) {
+                        alert('Lỗi tên đăng nhập: ' + errors.username.join(', '));
+                    } else if (errors.email) {
+                        alert('Lỗi email: ' + errors.email.join(', '));
+                    } else if (errors.password) {
+                        alert('Lỗi mật khẩu: ' + errors.password.join(', '));
+                    } else {
+                        alert('Đăng ký thất bại. Vui lòng kiểm tra lại thông tin.');
+                    }
+                } else {
+                    alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
+                }
+            }
+        });
+    });
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+    $('#registerModal').on('hidden.bs.modal', function() {
+        $('#studentRegisterForm')[0].reset();
+    });
+
+    $('input[name="password2"]').on('input', function() {
+        const password = $('input[name="password"]').val();
+        const password2 = $(this).val();
+        
+        if (password2 && password !== password2) {
+            $(this).addClass('is-invalid');
+        } else {
+            $(this).removeClass('is-invalid');
+        }
+    });
+});
+    </script>
+    
+</body>
+</html>

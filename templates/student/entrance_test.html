@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Bài kiểm tra đầu vào</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3>Bài kiểm tra xác định trình độ</h3>
+                <p class="text-muted mb-0">Vui lòng hoàn thành bài kiểm tra để chúng tôi xác định trình độ phù hợp cho bạn</p>
+            </div>
+            <div class="card-body">
+                <div id="testProgress" class="progress mb-4" style="height: 20px;">
+                    <div class="progress-bar" role="progressbar" style="width: 0%"></div>
+                </div>
+
+                <form id="testForm">
+                    <div id="questionContainer">
+                        <!-- Questions will be loaded here -->
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <button type="button" class="btn btn-secondary" id="prevBtn" disabled>Câu trước</button>
+                        <span id="questionNumber">Câu 1/20</span>
+                        <button type="button" class="btn btn-primary" id="nextBtn">Câu tiếp</button>
+                    </div>
+
+                    <button type="submit" class="btn btn-success w-100 mt-4 d-none" id="submitBtn">Nộp bài</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        let currentQuestion = 0;
+        let questions = [];
+        let answers = {};
+
+        $(document).ready(function() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                window.location.href = '/login.html';
+                return;
+            }
+
+            // Load test questions
+            $.ajax({
+                url: '/api/entrance-test/questions/',
+                method: 'GET',
+                headers: {
+                    'Authorization': `Token ${token}`
+                },
+                success: function(response) {
+                    questions = response.questions;
+                    showQuestion(0);
+                    updateProgress();
+                }
+            });
+
+            // Next question button
+            $('#nextBtn').click(function() {
+                if (currentQuestion < questions.length - 1) {
+                    currentQuestion++;
+                    showQuestion(currentQuestion);
+                    updateProgress();
+                }
+            });
+
+            // Previous question button
+            $('#prevBtn').click(function() {
+                if (currentQuestion > 0) {
+                    currentQuestion--;
+                    showQuestion(currentQuestion);
+                    updateProgress();
+                }
+            });
+
+            // Submit test
+            $('#testForm').on('submit', function(e) {
+                e.preventDefault();
+
+                $.ajax({
+                    url: '/api/entrance-test/submit/',
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Token ${token}`
+                    },
+                    contentType: 'application/json',
+                    data: JSON.stringify({ answers: answers }),
+                    success: function(response) {
+                        alert(`Bạn đã hoàn thành bài kiểm tra! Trình độ của bạn là: ${response.level}`);
+                        window.location.href = '/student-dashboard.html';
+                    },
+                    error: function(xhr) {
+                        alert('Có lỗi xảy ra khi nộp bài. Vui lòng thử lại.');
+                    }
+                });
+            });
+        });
+
+        function showQuestion(index) {
+            const question = questions[index];
+            $('#questionContainer').html(`
+                <div class="mb-4">
+                    <h5>${index + 1}. ${question.text}</h5>
+                    ${question.options.map((option, i) => `
+                        <div class="form-check mt-2">
+                            <input class="form-check-input" type="radio" 
+                                name="question${index}" 
+                                value="${i}"
+                                ${answers[index] === i ? 'checked' : ''}
+                                onchange="saveAnswer(${index}, ${i})">
+                            <label class="form-check-label">
+                                ${option}
+                            </label>
+                        </div>
+                    `).join('')}
+                </div>
+            `);
+
+            // Update navigation buttons
+            $('#prevBtn').prop('disabled', index === 0);
+            $('#nextBtn').prop('disabled', index === questions.length - 1);
+            $('#submitBtn').toggleClass('d-none', index !== questions.length - 1);
+            $('#questionNumber').text(`Câu ${index + 1}/${questions.length}`);
+        }
+
+        function saveAnswer(questionIndex, answerIndex) {
+            answers[questionIndex] = answerIndex;
+            updateProgress();
+        }
+
+        function updateProgress() {
+            const progress = (Object.keys(answers).length / questions.length) * 100;
+            $('.progress-bar').css('width', `${progress}%`);
+        }
+    </script>
+</body>
+</html>

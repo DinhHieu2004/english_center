@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Đăng ký học viên</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Đăng ký tài khoản học viên</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="registerForm">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Tên đăng nhập</label>
+                                <input type="text" class="form-control" id="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Mật khẩu</label>
+                                <input type="password" class="form-control" id="password" required>
+                            </div>
+                            <div class="alert alert-danger d-none" id="errorMessage"></div>
+                            <button type="submit" class="btn btn-primary w-100">Đăng ký</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#registerForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                const data = {
+                    username: $('#username').val(),
+                    email: $('#email').val(),
+                    password: $('#password').val()
+                };
+
+                $.ajax({
+                    url: '/api/register/student/',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        localStorage.setItem('token', response.token);
+                        localStorage.setItem('userType', response.user_type);
+                        window.location.href = '/entrance-test.html';
+                    },
+                    error: function(xhr) {
+                        const errors = xhr.responseJSON;
+                        let errorMessage = '';
+                        for (const field in errors) {
+                            errorMessage += `${field}: ${errors[field].join(', ')}\n`;
+                        }
+                        $('#errorMessage').text(errorMessage).removeClass('d-none');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

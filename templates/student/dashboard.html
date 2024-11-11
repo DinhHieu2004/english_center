@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Hệ thống học trực tuyến</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span class="nav-link" id="studentName"></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <!-- Student Info Card -->
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Thông tin học viên</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Họ tên:</strong> <span id="fullName"></span></p>
+                        <p><strong>Email:</strong> <span id="email"></span></p>
+                        <p><strong>Trình độ:</strong> <span id="level"></span></p>
+                        <p><strong>Ngày tham gia:</strong> <span id="joinDate"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Current Courses -->
+            <div class="col-md-8">
+                <div class="card mb-4">
+                    <div class="card-header">
+                        <h5 class="mb-0">Khóa học đang tham gia</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="currentCourses"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Course Progress -->
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">Tiến độ học tập</h5>
+                    </div>
+                    <div class="card-body">
+                        <div id="courseProgress"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                return;
+            }
+
+            // Load student dashboard data
+            $.ajax({
+                url: '/api/student/dashboard/',
+                method: 'GET',
+                headers: {
+                    'Authorization': `Token ${token}`
+                },
+                success: function(response) {
+                    // Update student info
+                    $('#studentName').text(response.full_name);
+                    $('#fullName').text(response.full_name);
+                    $('#email').text(response.email);
+                    $('#level').text(response.level);
+                    $('#joinDate').text(new Date(response.join_date).toLocaleDateString());
+
+                    // Render current courses
+                    const coursesHtml = response.current_courses.map(course => `
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">${course.name}</h5>
+                                <p class="card-text">
+                                    <strong>Giảng viên:</strong> ${course.teacher}<br>
+                                    <strong>Thời gian học:</strong> ${course.schedule}<br>
+                                    <strong>Trình độ:</strong> ${course.level}
+                                </p>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" 
+                                         style="width: ${course.progress}%" 
+                                         aria-valuenow="${course.progress}" 
+                                         aria-valuemin="0" 
+                                         aria-valuemax="100">
+                                        ${course.progress}%
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                    $('#currentCourses').html(coursesHtml);
+
+                    // Render course progress
+                    const progressHtml = response.progress_history.map(progress => `
+                        <div class="mb-3">
+                            <h6>${progress.course_name}</h6>
+                            <p class="small text-muted">Hoàn thành: ${progress.completed_lessons}/${progress.total_lessons} bài học</p>
+                            <div class="progress">
+                                <div class="progress-bar" role="progressbar" 
+                                     style="width: ${(progress.completed_lessons/progress.total_lessons)*100}%">
+                                </div>
+                            </div>
+                        </div>
+                    `).join('');
+                    $('#courseProgress').html(progressHtml);
+                },
+                error: function() {
+                }
+            });
+
+            // Logout handler
+            $('#logoutBtn').click(function() {
+                localStorage.removeItem('token');
+                localStorage.removeItem('userType');
+            });
+        });
+    </script>
+</body>
+</html>

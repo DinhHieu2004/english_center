@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Điểm danh - {{ session.course.name }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row mb-4">
+        <div class="col">
+            <h2>Điểm danh buổi {{ session.session_number }}</h2>
+            <h4>Khóa học: {{ session.course.name }}</h4>
+            <p>Ngày: {{ session.date }}</p>
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Học viên</th>
+                                <th>Trạng thái</th>
+                                <th>Ghi chú</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for enrollment in session.course.courseenrollment_set.all %}
+                            <tr>
+                                <td>{{ enrollment.student.user.username }}</td>
+                                <td>
+                                    <select name="status_{{ enrollment.student.id }}" class="form-select">
+                                        <option value="present">Có mặt</option>
+                                        <option value="absent">Vắng mặt</option>
+                                        <option value="late">Đi muộn</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="text" name="note_{{ enrollment.student.id }}" 
+                                           class="form-control" placeholder="Ghi chú">
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Lưu điểm danh</button>
+    </form>
+</div>
+{% endblock %}

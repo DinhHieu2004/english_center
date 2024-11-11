@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Đăng nhập</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Đăng nhập</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="loginForm">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Tên đăng nhập</label>
+                                <input type="text" class="form-control" id="username" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Mật khẩu</label>
+                                <input type="password" class="form-control" id="password" required>
+                            </div>
+                            <div class="alert alert-danger d-none" id="errorMessage"></div>
+                            <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#loginForm').on('submit', function(e) {
+                e.preventDefault();
+                
+                const data = {
+                    username: $('#username').val(),
+                    password: $('#password').val()
+                };
+
+                $.ajax({
+                    url: '/api/login/',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify(data),
+                    success: function(response) {
+                        // Lưu token vào localStorage
+                        localStorage.setItem('token', response.token);
+                        localStorage.setItem('userType', response.user_type);
+                        
+                        // Chuyển hướng dựa vào loại user
+                        switch(response.user_type) {
+                            case 'admin':
+                                window.location.href = '/admin-dashboard.html';
+                                break;
+                            case 'teacher':
+                                window.location.href = '/teacher-dashboard.html';
+                                break;
+                            case 'student':
+                                if (!response.has_taken_test) {
+                                    window.location.href = '/entrance-test.html';
+                                } else {
+                                    window.location.href = '/student-dashboard.html';
+                                }
+                                break;
+                        }
+                    },
+                    error: function(xhr) {
+                        const errorMsg = xhr.responseJSON?.error || 'Đã có lỗi xảy ra';
+                        $('#errorMessage').text(errorMsg).removeClass('d-none');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
