@@ -225,11 +225,11 @@ function getCSRFToken() {
                 const userType = response.user_type;
                 
                 if (userType === 'admin') {
-                    window.location.href = 'http://127.0.0.1:5500/templates/admin/dashboard.html';
+                    window.location.href = '/templates/admin/dashboard.html';
                 } else if (userType === 'student') {
-                    window.location.href = 'http://127.0.0.1:5500/templates/student/dashboard.html';
+                    window.location.href = '/templates/student/dashboard.html';
                 } else if (userType === 'teacher') {
-                    window.location.href = 'http://127.0.0.1:5500/templates/teacher/dashboard.html';
+                    window.location.href = '/templates/teacher/dashboard.html';
                 }
             } else {
                 alert('Invalid credentials');

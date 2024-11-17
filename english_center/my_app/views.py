@@ -4,32 +4,15 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login
-from .serializers import StudentRegistrationSerializer, CreateTeacherSerializer
+from .serializers import UserSerializer, StudentSerializer, TeacherSerializer
 from rest_framework.views import APIView
 from rest_framework import generics, permissions, status
 from rest_framework.permissions import AllowAny
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
-from .models import User, Teacher
+from .models import Student, Teacher
 
 
-
-@api_view(['POST'])
-@permission_classes([AllowAny])
-def student_registration_view(request):
-    if request.method == 'POST':
-        serializer = StudentRegistrationSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            return Response({
-                "message": "Đăng ký tài khoản thành công",
-                "user": {
-                    "username": user.username,
-                    "email": user.email,
-                    "fullname": user.fullname
-                }
-            }, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 class LoginView(APIView):
@@ -52,19 +35,62 @@ class LoginView(APIView):
            else:
             user_type = 'unknown'
             
+           user_data = UserSerializer(user).data
+           if user_type == 'student':
+                student_data = StudentSerializer(user.student).data
+                user_data['student_details'] = student_data
+           elif user_type == 'teacher':
+                teacher_data = TeacherSerializer(user.teacher).data
+                user_data['teacher_details'] = teacher_data
+
            return Response({
-            'message': 'Login successful',
-            'user_type': user_type
-              })
+                'message': 'Login successful',
+                'user_type': user_type,
+                'user_data': user_data
+            })
         else:
-           return Response({
-              'message': 'Invalid credentials'
-           }, status=status.HTTP_401_UNAUTHORIZED)
- 
-class CreateTeacherView(APIView):
-    def post(self, request, *args, **kwargs):
-        serializer = CreateTeacherSerializer(data=request.data, context={'request': request})
-        if serializer.is_valid():
-            teacher = serializer.save()
-            return Response({"message": "Teacher created successfully", "teacher_id": teacher.id}, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response({
+                'message': 'Invalid credentials'
+            }, status=status.HTTP_401_UNAUTHORIZED)
+
+
+class RegisterStudent(APIView):
+    permission_classes = [AllowAny]  
+
+    def post(self, request):
+        user_data = request.data.get('user')
+        student_data = request.data.get('student', {})
+
+        user_serializer = UserSerializer(data=user_data)
+        if user_serializer.is_valid():
+            user = user_serializer.save(is_student=True, is_teacher=False)  
+
+            student_data['level'] = 'none'  
+            student_serializer = StudentSerializer(data=student_data)
+            if student_serializer.is_valid():
+                student = student_serializer.save(user=user)
+                return Response({'message': 'Student registered successfully!'}, status=status.HTTP_201_CREATED)
+            return Response(student_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+class RegisterTeacher(APIView):
+    permission_classes = [AllowAny]  
+
+    def post(self, request):
+        user_data = request.data.get('user')
+        teacher_data = request.data.get('teacher', {})
+
+        user_serializer = UserSerializer(data=user_data)
+        if user_serializer.is_valid():
+            user = user_serializer.save(is_student=False, is_teacher=True)  
+
+            teacher_serializer = TeacherSerializer(data=teacher_data)
+            if teacher_serializer.is_valid():
+                teacher = teacher_serializer.save(user=user)
+                return Response({'message': 'Teacher registered successfully!'}, status=status.HTTP_201_CREATED)
+            return Response(teacher_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+        return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+# Lấy thông tin người dùng hiện tại

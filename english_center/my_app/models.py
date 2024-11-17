@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.db.models import Q
 from datetime import datetime, timedelta
 from django.contrib.auth.models import AbstractUser, BaseUserManager
-from django.utils import timezone
+from django.utils import timezone 
 
 class User(AbstractUser):
     fullname =  models.CharField(max_length=30, null = False, blank=True)
@@ -19,13 +19,13 @@ class User(AbstractUser):
 
     groups = models.ManyToManyField(
       'auth.Group',
-        related_name='custom_user_groups',  # Đặt related_name khác để tránh xung đột
+        related_name='custom_user_groups', 
         blank=True,
         help_text='The groups this user belongs to.'
     )
     user_permissions = models.ManyToManyField(
         'auth.Permission',
-        related_name='custom_user_permissions',  # Đặt related_name khác để tránh xung đột
+        related_name='custom_user_permissions', 
         blank=True,
         help_text='Specific permissions for this user.'
     )
@@ -40,7 +40,7 @@ class Student(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     level = models.CharField(max_length=10, choices=LEVELS, default='none')
-    has_taken_test = models.BooleanField(default=False)  # Trường theo dõi việc làm bài kiểm tra đầu vào
+    has_taken_test = models.BooleanField(default=False)  # kiểm tra đầu vào hay chưa
 
     def __str__(self):
         return f"Student: {self.user.username}"
@@ -58,38 +58,6 @@ class Teacher(models.Model):
     def __str__(self):
         return f"Teacher: {self.user.username}"
     
-class Question(models.Model):
-    LEVELS = (
-        ('a1', 'A1'),
-        ('a2', 'A2'),
-        ('b1', 'B1'),
-        ('b2', 'B2')
-    )
-    
-    content = models.TextField()
-    level = models.CharField(max_length=2, choices=LEVELS)
-    
-    def __str__(self):
-        return f"Question {self.id} - Level {self.level}"
-
-class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
-    content = models.CharField(max_length=255)
-    is_correct = models.BooleanField(default=False)
-    
-    def __str__(self):
-        return f"Answer for {self.question.id}"
-
-class EntranceTest(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    score = models.IntegerField(default=0)
-    completed = models.BooleanField(default=False)
-    date_taken = models.DateTimeField(auto_now_add=True)
-
-class StudentAnswer(models.Model):
-    test = models.ForeignKey(EntranceTest, on_delete=models.CASCADE)
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
-    selected_answer = models.ForeignKey(Answer, on_delete=models.CASCADE)
 
 
 class Course(models.Model):
@@ -106,12 +74,12 @@ class Course(models.Model):
     teacher = models.ForeignKey('Teacher', on_delete=models.SET_NULL, null=True, blank=True)
     students = models.ManyToManyField('Student', through='CourseEnrollment')
     start_date = models.DateField()
-    total_session = models.IntegerField()  # Thay thế end_date bằng total_session
+    total_session = models.IntegerField() 
 
     def calculate_end_date(self):
         class_days = [schedule.weekday for schedule in self.schedules.all()]
         if not class_days:
-            return self.start_date  # Trả về start_date nếu không có ngày học nào được xếp lịch
+            return self.start_date  
         
         current_date = self.start_date
         session_count = 0
@@ -158,6 +126,63 @@ class CourseEnrollment(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.course}"
+    
+class PlacementTest(models.Model):
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    duration = models.PositiveIntegerField(help_text="Thời gian làm bài (phút)")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+    
+class FinalExam(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='final_exams')
+    title = models.CharField(max_length=200)
+    description = models.TextField(blank=True, null=True)
+    duration = models.PositiveIntegerField(help_text="Thời gian làm bài (phút)")
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+class Question(models.Model):
+    LEVEL_CHOICES = [
+        ('A1', 'A1'),
+        ('A2', 'A2'),
+        ('B1', 'B1'),
+        ('B2', 'B2')
+    ]
+
+    EXAM_TYPE_CHOICES = [
+        ('final', 'Final Exam'),
+        ('placement', 'Placement Test')
+    ]
+
+    placement_test = models.ForeignKey(PlacementTest, on_delete=models.CASCADE, related_name='questions', null=True, blank=True)
+    final_exam = models.ForeignKey('FinalExam', on_delete=models.CASCADE, related_name='questions', null=True, blank=True)  
+    text = models.TextField()
+    audio_file = models.FileField(upload_to='audio/', blank=True, null=True)
+    choice_a = models.CharField(max_length=200)
+    choice_b = models.CharField(max_length=200)
+    choice_c = models.CharField(max_length=200)
+    choice_d = models.CharField(max_length=200)
+    correct_answer = models.CharField(max_length=1, choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')])
+    level = models.CharField(max_length=2, choices=LEVEL_CHOICES)
+
+    def __str__(self):
+        return f"{self.text} ({self.level})"
+
+class Answer(models.Model):
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='answers')
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
+    selected_answer = models.CharField(max_length=1, choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')]) 
+    is_correct = models.BooleanField(default=False)  # Kiểm tra đáp án đúng hay sai
+    exam_type = models.CharField(max_length=10, choices=[('final', 'Final Exam'), ('placement', 'Placement Test')])
+    
+    def __str__(self):
+        return f"{self.student.user.username} - {self.question.text} - {self.selected_answer}"
+    
 """
 class Attendance(models.Model):
     ATTENDANCE_STATUS = (
@@ -174,27 +199,3 @@ class Attendance(models.Model):
     class Meta:
         unique_together = ('session', 'student')
 """
-class FinalTest(models.Model):
-    course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    title = models.CharField(max_length=200)
-    pass_score = models.IntegerField(default=80)  # Điểm đạt (%)
-
-class FinalTestQuestion(models.Model):
-    test = models.ForeignKey(FinalTest, on_delete=models.CASCADE, related_name='questions')
-    content = models.TextField()
-    points = models.IntegerField(default=1)
-
-class FinalTestAnswer(models.Model):
-    question = models.ForeignKey(FinalTestQuestion, on_delete=models.CASCADE, related_name='answers')
-    content = models.CharField(max_length=255)
-    is_correct = models.BooleanField(default=False)
-
-class StudentFinalTest(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    test = models.ForeignKey(FinalTest, on_delete=models.CASCADE)
-    score = models.IntegerField()
-    passed = models.BooleanField()
-    date_taken = models.DateTimeField(auto_now_add=True)
-    
-    class Meta:
-        unique_together = ('student', 'test')        
