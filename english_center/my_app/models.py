@@ -163,22 +163,22 @@ class Question(models.Model):
     final_exam = models.ForeignKey('FinalExam', on_delete=models.CASCADE, related_name='questions', null=True, blank=True)  
     text = models.TextField()
     audio_file = models.FileField(upload_to='audio/', blank=True, null=True)
-    choice_a = models.CharField(max_length=200)
-    choice_b = models.CharField(max_length=200)
-    choice_c = models.CharField(max_length=200)
-    choice_d = models.CharField(max_length=200)
-    correct_answer = models.CharField(max_length=1, choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')])
+    choice_a = models.TextField(max_length=200, default=" ")
+    choice_b = models.CharField(max_length=200, default=" ")
+    choice_c = models.TextField(max_length=200, default=" ")
+    choice_d = models.TextField(max_length=200, default=" ")
+    correct_answer = models.CharField(max_length=1, choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')], null=True)
     level = models.CharField(max_length=2, choices=LEVEL_CHOICES)
 
     def __str__(self):
         return f"{self.text} ({self.level})"
 
 class Answer(models.Model):
-    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='answers')
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='answers', null = True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
-    selected_answer = models.CharField(max_length=1, choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')]) 
+    selected_answer = models.CharField(max_length=1, choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')] , null = True,) 
     is_correct = models.BooleanField(default=False)  # Kiểm tra đáp án đúng hay sai
-    exam_type = models.CharField(max_length=10, choices=[('final', 'Final Exam'), ('placement', 'Placement Test')])
+    exam_type = models.CharField(max_length=10, choices=[('final', 'Final Exam'), ('placement', 'Placement Test')], default='placement')
     
     def __str__(self):
         return f"{self.student.user.username} - {self.question.text} - {self.selected_answer}"

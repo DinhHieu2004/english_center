@@ -23,7 +23,7 @@ class LoginSerializer(serializers.Serializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'password', 'fullname', 'phone', 'address', 'email', 'date_of_birth', 'is_student', 'is_teacher']
+        fields = ['username', 'password', 'fullname', 'phone', 'address', 'email', 'date_of_birth', 'is_student', 'is_teacher','join_date']
 
     def create(self, validated_data):
         password = validated_data.pop('password')
@@ -45,7 +45,7 @@ class UserSerializer(serializers.ModelSerializer):
 class StudentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Student
-        fields = [ 'has_taken_test']
+        fields = [ 'level','has_taken_test']
 
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
