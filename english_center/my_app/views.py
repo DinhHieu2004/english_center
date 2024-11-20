@@ -13,8 +13,6 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import Student, Teacher
 
 
-
-
 class LoginView(APIView):
     permission_classes = [AllowAny]  
 
@@ -94,3 +92,6 @@ class RegisterTeacher(APIView):
         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Lấy thông tin người dùng hiện tại
+
+
+

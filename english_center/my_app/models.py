@@ -137,11 +137,19 @@ class PlacementTest(models.Model):
         return self.title
     
 class FinalExam(models.Model):
+    LEVELS = (
+        ('a1', 'A1'),
+        ('a2', 'A2'),
+        ('b1', 'B1'),
+        ('b2', 'B2')
+    )
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='final_exams')
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True, null=True)
     duration = models.PositiveIntegerField(help_text="Thời gian làm bài (phút)")
     created_at = models.DateTimeField(auto_now_add=True)
+    level = models.CharField(max_length=2, choices=LEVELS)
+
 
     def __str__(self):
         return self.title

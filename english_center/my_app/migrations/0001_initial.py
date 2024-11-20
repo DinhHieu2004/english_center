@@ -79,6 +79,8 @@ class Migration(migrations.Migration):
                 ('duration', models.PositiveIntegerField(help_text='Thời gian làm bài (phút)')),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('course', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='final_exams', to='my_app.course')),
+                ('level', models.CharField(choices=[('A1', 'A1'), ('A2', 'A2'), ('B1', 'B1'), ('B2', 'B2')], max_length=2)),
+
             ],
         ),
         migrations.CreateModel(
