@@ -1,27 +1,114 @@
-{% extends 'base.html' %}
+<!DOCTYPE html>
+<html>
 
-{% block title %}Teacher Dashboard{% endblock %}
+<head>
+    <title>Teacher Dashboard</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+</head>
 
-{% block content %}
-<div class="row">
-    <div class="col-md-4">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Thông tin giáo viên</h5>
-                <p><strong>Tên:</strong> {{ teacher.user.username }}</p>
-                <p><strong>Email:</strong> {{ teacher.user.email }}</p>
-                <p><strong>Trình độ:</strong> {{ teacher.get_education_level_display }}</p>
-                <p><strong>Ngày bắt đầu:</strong> {{ teacher.start_date }}</p>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Hệ thống học trực tuyến</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span class="nav-link" id="teacherName" style="color: #fff;">AAAAA</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Thông tin giáo viên</h5>
+                        <p><strong>Họ tên:</strong> <span id="fullName"></span></p>
+                        <p><strong>Email:</strong> <span id="email"></span></p>
+                        <p><strong>Ngày tham gia:</strong> <span id="joinDate"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Lớp học đang giảng dạy</h5>
+                        <!-- Thêm danh sách lớp học ở đây -->
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-body">
-                <h5 class="card-title">Lớp học đang giảng dạy</h5>
-                <!-- Thêm danh sách lớp học ở đây -->
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            const token = localStorage.getItem('token');
+            console.log('Token:', token);
+            if (!token) {
+              
+                return;
+            }
+
+            $.ajax({
+                url: '/api/teacher/dashboard/',
+                method: 'GET',
+                headers: {
+                    'Authorization': `Token ${token}`
+                },
+                success: function (response) {
+                    $('#teacherName').text(response.full_name);
+                    $('#fullName').text(response.full_name);
+                    $('#email').text(response.email);
+                    $('#joinDate').text(new Date(response.join_date).toLocaleDateString());
+
+                    const coursesHtml = response.current_courses.map(course => `
+                        <div class="card mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title">${course.name}</h5>
+                                <p class="card-text">
+                                    <strong>Thời gian dạy:</strong> ${course.schedule}<br>
+                                </p>
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" 
+                                        style="width: ${course.progress}%" 
+                                        aria-valuenow="${course.progress}" 
+                                        aria-valuemin="0" 
+                                        aria-valuemax="100">
+                                        ${course.progress}%
+                                    </div>
+                                </div>
+                                <a href="/attendance.html/${course.id}" class="btn btn-primary mt-3">Chi tiết lớp học</a>
+                            </div>
+                        </div>
+                    `).join('');
+                    $('#currentCourses').html(coursesHtml);
+                },
+                error: function (xhr) {
+                    // Xử lý lỗi khi không thể lấy dữ liệu
+                    alert('Không thể lấy thông tin giáo viên. Vui lòng thử lại.');
+                }
+            });
+
+            // Xử lý đăng xuất
+            $('#logoutBtn').click(function (event) {
+                event.preventDefault();
+                localStorage.removeItem('token');
+                localStorage.removeItem('userType');
+                localStorage.removeItem('userData'); 
+                window.location.href = '../base.html';
+            });
+        });
+    </script>
+</body>
+
+</html>

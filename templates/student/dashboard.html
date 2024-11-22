@@ -119,6 +119,14 @@
                     $('#joinDate').text('Chưa có thông tin');
                 }
             }
+            // Xử lý đăng xuất
+            $('#logoutBtn').click(function (event) {
+                event.preventDefault();
+                localStorage.removeItem('token');
+                localStorage.removeItem('userType');
+                localStorage.removeItem('userData'); 
+                window.location.href = '../base.html';
+            });
         });
 
     </script>
