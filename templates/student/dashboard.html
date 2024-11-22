@@ -37,7 +37,9 @@
                     <div class="card-body">
                         <p><strong>Họ tên:</strong> <span id="fullName"></span></p>
                         <p><strong>Email:</strong> <span id="email"></span></p>
-                        <p><strong>Trình độ:</strong> <span id="level"></span></p>
+                        <p><strong>Trình độ:</strong> <span id="level"></span> 
+                            <button href="entrance_test.html" id="takeTestButton" style="display: none;">Làm bài kiểm tra đầu vào</button>
+                        </p>
                         <p><strong>Ngày tham gia:</strong> <span id="joinDate"></span></p>
                     </div>
                 </div>
@@ -101,10 +103,12 @@
                 return;
             }
 
+            
             $('#fullName').text(userData.fullname);
             $('#email').text(userData.email);
 
             if (userData.student_details) {
+                
                 $('#level').text(userData.student_details.level || 'Chưa xác định');
 
                 if (userData.join_date) {
@@ -119,6 +123,12 @@
                     $('#joinDate').text('Chưa có thông tin');
                 }
             }
+            if(!userData.student_details.has_taken_test){
+                document.getElementById("takeTestButton").style.display = "inline-block";
+            }
+         //   if(userData.student_details.level ==   "none"){
+          //      document.getElementById("level").text("chưa xác định");
+          //  }
         });
 
     </script>
