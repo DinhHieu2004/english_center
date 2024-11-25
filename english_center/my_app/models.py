@@ -190,7 +190,33 @@ class Answer(models.Model):
     
     def __str__(self):
         return f"{self.student.user.username} - {self.question.text} - {self.selected_answer}"
+
+class TestResult(models.Model):
+    TEST_TYPES = [
+        ('placement', 'Placement Test'),
+        ('final', 'Final Exam')
+    ]
     
+    LEVELS = [
+        ('A1', 'A1'),
+        ('A2', 'A2'),
+        ('B1', 'B1'),
+        ('B2', 'B2')
+    ]
+    
+    student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='test_results')
+    test_type = models.CharField(max_length=10, choices=TEST_TYPES)
+    score = models.FloatField()
+    level = models.CharField(max_length=2, choices=LEVELS)
+    total_questions = models.IntegerField()
+    correct_answers = models.IntegerField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    
+    class Meta:
+        ordering = ['-created_at']
+    
+    def __str__(self):
+        return f"{self.student.user.username} - {self.test_type} - {self.score}% - {self.level}"    
 """
 class Attendance(models.Model):
     ATTENDANCE_STATUS = (

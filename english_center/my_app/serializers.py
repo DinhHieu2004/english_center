@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Student, Teacher, Course, CourseSchedule
+from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
@@ -61,4 +61,18 @@ class CourseSerialozer(serializers.ModelSerializer):
 class CourseScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = CourseSchedule
-        fields = []      
+        fields = []    
+
+#
+class QuestionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Question
+        fields =['id', 'text','audio_file', 'choice_a', 'choice_b', 'choice_c','choice_d']
+
+#
+class PlacementTestSerializer(serializers.ModelSerializer):
+    questions  = QuestionSerializer(many = True, read_only = True)
+
+    class Meta:
+        model = PlacementTest
+        fields = ['id', 'title', 'description', 'duration', 'questions']

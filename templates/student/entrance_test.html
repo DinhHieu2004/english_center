@@ -1,121 +1,46 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bài Kiểm Tra TOEIC</title>
-  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bài Kiểm Tra TOEIC</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/templates/assets/css/entrance_test.css">
+
 </head>
 <body class="bg-light">
-  <div class="container mt-5">
-    <h2 class="text-center mb-4">Bài Kiểm Tra TOEIC - Nghe và Đọc</h2>
-    <div class="text-center mb-4" style="position: fixed; right: 0%;">
-        <h4>Thời gian còn lại: <span id="timer">10:00</span></h4>
-      </div>
-
-    <!-- Phần Nghe -->
-    <div id="listening-section" class="mb-5">
-      <h4 class="mb-3">Phần Nghe</h4>
-      <div class="question">
-        <p><strong>Câu 1:</strong> Nội dung câu hỏi nghe...</p>
-        <audio controls class="mb-3">
-            <source src="audio-file.mp3" type="audio/mpeg">
-            Trình duyệt của bạn không hỗ trợ phát âm thanh.
-          </audio>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1a" value="A">
-          <label class="form-check-label" for="q1a">Đáp án A</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1b" value="B">
-          <label class="form-check-label" for="q1b">Đáp án B</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1c" value="C">
-          <label class="form-check-label" for="q1c">Đáp án C</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1d" value="D">
-          <label class="form-check-label" for="q1d">Đáp án D</label>
-        </div>
-      </div>
-      <div class="question">
-        <p><strong>Câu 1:</strong> Nội dung câu hỏi nghe...</p>
-        <audio controls class="mb-3">
-            <source src="audio-file.mp3" type="audio/mpeg">
-            Trình duyệt của bạn không hỗ trợ phát âm thanh.
-          </audio>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1a" value="A">
-          <label class="form-check-label" for="q1a">Đáp án A</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1b" value="B">
-          <label class="form-check-label" for="q1b">Đáp án B</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1c" value="C">
-          <label class="form-check-label" for="q1c">Đáp án C</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1d" value="D">
-          <label class="form-check-label" for="q1d">Đáp án D</label>
-        </div>
-      </div>
-      <div class="question">
-        <p><strong>Câu 1:</strong> Nội dung câu hỏi nghe...</p>
-        <audio controls class="mb-3">
-            <source src="audio-file.mp3" type="audio/mpeg">
-            Trình duyệt của bạn không hỗ trợ phát âm thanh.
-          </audio>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1a" value="A">
-          <label class="form-check-label" for="q1a">Đáp án A</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1b" value="B">
-          <label class="form-check-label" for="q1b">Đáp án B</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1c" value="C">
-          <label class="form-check-label" for="q1c">Đáp án C</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question1" id="q1d" value="D">
-          <label class="form-check-label" for="q1d">Đáp án D</label>
-        </div>
-      </div>
+    <div id="error-message" class="alert alert-danger"></div>
+    
+    <div class="timer">
+        <h5 class="mb-0">Thời gian còn lại: <span id="countdown">--:--</span></h5>
     </div>
 
-    <!-- Phần Đọc -->
-    <div id="reading-section">
-      <h4 class="mb-3">Phần Đọc</h4>
-      <div class="question">
-        <p><strong>Câu 2:</strong> Nội dung câu hỏi đọc...</p>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question2" id="q2a" value="A">
-          <label class="form-check-label" for="q2a">Đáp án A</label>
+    <div class="container py-5">
+        <div class="test-info">
+            <h1 class="text-center h3 mb-4">Bài Kiểm Tra TOEIC - Đánh giá năng lực</h1>
+            <div id="test-description"></div>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question2" id="q2b" value="B">
-          <label class="form-check-label" for="q2b">Đáp án B</label>
+
+        <!-- Phần câu hỏi sẽ được phân chia thành Listening và Reading -->
+        <div id="listening-section">
+            <h3 class="section-title">Phần Nghe (Listening)</h3>
+            <div id="listening-questions"></div>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question2" id="q2c" value="C">
-          <label class="form-check-label" for="q2c">Đáp án C</label>
+
+        <div id="reading-section">
+            <h3 class="section-title">Phần Đọc (Reading)</h3>
+            <div id="reading-questions"></div>
         </div>
-        <div class="form-check">
-          <input class="form-check-input" type="radio" name="question2" id="q2d" value="D">
-          <label class="form-check-label" for="q2d">Đáp án D</label>
+
+        <div class="submit-section">
+            <button id="submit-test" class="btn btn-primary btn-lg px-5">Nộp bài</button>
         </div>
-      </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/templates/assets/js/entrance_test.js"></script>
 
-    <button class="btn btn-primary mt-4">Nộp bài</button>
-  </div>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+       
 </body>
 </html>

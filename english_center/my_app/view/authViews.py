@@ -1,28 +1,28 @@
-from rest_framework import status, generics, viewsets
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework import status
+from rest_framework.decorators import  permission_classes
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 from django.contrib.auth import authenticate, login
-from .serializers import UserSerializer, StudentSerializer, TeacherSerializer
+from ..serializers import UserSerializer, StudentSerializer, TeacherSerializer
 from rest_framework.views import APIView
 from rest_framework import generics, permissions, status
 from rest_framework.permissions import AllowAny
 from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
-from .models import Student, Teacher
+from ..models import Student, Teacher
 
 
 class LoginView(APIView):
-    permission_classes = [AllowAny]  
+    permission_classes = [AllowAny] 
 
     def post(self, request):
         username = request.data.get('username')
         password = request.data.get('password')
 
         user = authenticate(username=username, password=password)
-    
         if user is not None:
+           token, _ = Token.objects.get_or_create(user=user)
+
           # Xác định user type
            if user.is_superuser:
             user_type = 'admin'
@@ -43,6 +43,7 @@ class LoginView(APIView):
 
            return Response({
                 'message': 'Login successful',
+                'token': token.key, 
                 'user_type': user_type,
                 'user_data': user_data
             })
@@ -91,7 +92,6 @@ class RegisterTeacher(APIView):
         
         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-# Lấy thông tin người dùng hiện tại
 
 
 

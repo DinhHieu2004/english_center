@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User, Question, Answer, FinalExam, PlacementTest, Student, Teacher,Course, CourseEnrollment, CourseSchedule
+from .models import User, Question, FinalExam, PlacementTest, Student, Teacher,Course, CourseEnrollment, CourseSchedule, Answer, TestResult
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password
 
@@ -195,3 +195,7 @@ class CourseEnrollmentAdmin(admin.ModelAdmin):
     list_display = ('student', 'course', 'enrollment_date', 'completed', 'final_test_passed')
     list_filter = ('course', 'completed', 'final_test_passed')
     search_fields = ('student__user__username', 'course__name')
+
+@admin.register(TestResult)
+class TestResultAdmin(admin.ModelAdmin):
+    list_display =()    
