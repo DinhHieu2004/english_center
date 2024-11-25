@@ -115,6 +115,7 @@ class FinalExamAdmin(admin.ModelAdmin):
     inlines = [QuestionInline]
 
 @admin.register(PlacementTest)
+
 class PlacementTestAdmin(admin.ModelAdmin):
     list_display =('title', 'duration', 'created_at')
     list_filter = ('created_at',)
