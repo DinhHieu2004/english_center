@@ -3,95 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Điểm danh - Khóa học Lập trình Web</title>
+    <title>Điểm danh</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script>
-        let dayCount = 3; // Bắt đầu với 3 ngày
-
-        function addColumn() {
-            const dateInput = document.getElementById("dateInput"); // Lấy ngày từ input
-            const selectedDate = dateInput.value;
-
-            if (!selectedDate) {
-                alert("Vui lòng chọn ngày.");
-                return;
-            }
-
-            dayCount++; // Tăng số ngày lên 1
-
-            // Lấy bảng, thêm cột vào tiêu đề (thead)
-            const thead = document.querySelector("thead tr");
-            const th = document.createElement("th");
-            th.textContent = selectedDate;
-            thead.appendChild(th);
-
-            // Thêm cột vào phần thân bảng (tbody)
-            const rows = document.querySelectorAll("tbody tr");
-            rows.forEach(row => {
-                const td = document.createElement("td");
-                td.innerHTML = `<input type="text" class="status-input" oninput="checkStatus(this)">`;
-                row.appendChild(td);
-            });
-        }
-
-        function checkStatus(input) {
-            if (input.value.toLowerCase() === "x") {
-                input.style.backgroundColor = "#ffcccc"; // Đổi màu khi nhập "x"
-            } else {
-                input.style.backgroundColor = ""; // Đặt lại màu khi không phải "x"
-            }
-        }
-    </script>
-    <style>
-        /* Thiết lập chiều cao và chiều rộng cố định cho bảng */
-        table {
-            table-layout: fixed; /* Đảm bảo các ô có kích thước cố định */
-            width: 100%;
-            border: 1px solid #ddd; /* Thêm viền cho bảng */
-            border-collapse: collapse; /* Làm cho các viền ô không bị chồng lên nhau */
-        }
-        th, td {
-            border: 1px solid #ddd; /* Thêm viền cho các ô */
-            padding: 8px;
-            text-align: center;
-        }
-        th:first-child, td:first-child {
-            width: 200px; /* Kích thước cố định cho cột học viên */
-            position: -webkit-sticky; /* Duy trì cột học viên cố định trên Safari */
-            position: sticky;
-            left: 0;
-            background-color: #fff; /* Đảm bảo nền của cột học viên là trắng */
-            z-index: 2;
-        }
-
-        /* Chỉ cột điểm danh có chiều rộng và chiều cao cố định */
-        th:nth-child(n+2), td:nth-child(n+2) {
-            max-width: 200px;
-            width: 160px;
-        }
-
-        /* Thiết lập chiều cao cố định và cuộn cho bảng */
-        .table-responsive {
-            max-height: 400px; /* Bạn có thể thay đổi giá trị này tùy ý */
-            overflow-y: auto;
-            overflow-x: auto; /* Cho phép cuộn ngang khi bảng có thêm cột */
-        }
-
-        .status-input {
-            width: 100%;
-            text-align: center;
-            border: none;
-            background-color: transparent;
-            font-size: 16px;
-        }
-    </style>
 </head>
 <body>
     <div class="container">
         <div class="row mb-4">
             <div class="col">
-                <h2>Điểm danh khóa học Lập trình Web</h2>
-                <h4>Khóa học: Lập trình Web</h4>
+
             </div>
         </div>
 
@@ -139,5 +58,6 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/dashboardTeacher.js"></script>
 </body>
 </html>
