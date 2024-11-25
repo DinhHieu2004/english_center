@@ -31,9 +31,7 @@ function getCSRFToken() {
                     window.location.href = './templates/admin/dashboard.html';
                 } else if (userType === 'student') {
                     window.location.href = './templates/student/dashboard.html';
-                } else if (userType === 'teacher') {
-                    window.location.href = './templates/teacher/dashboard.html';
-                }
+                } 
             } else {
                 alert('Invalid credentials');
             }
