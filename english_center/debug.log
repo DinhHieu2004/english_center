@@ -803,3 +803,113 @@ Watching for file changes with StatReloader
 N:\web_python\english_center\my_app\view\authViews.py changed, reloading.
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /
+Not Found: /favicon.ico
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+User attempting to submit test: dinhHieu
+Found student: Student: dinhHieu
+Processing 3 answers for student Student: dinhHieu
+Deleted 3 old answers
+Created 3 new answers
+Student Student: dinhHieu scored 100.0% and achieved level B2
+Created test result: dinhHieu - placement - 100.0% - B2
+Updated student level to B2
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+User attempting to submit test: dinhHieu
+Found student: Student: dinhHieu
+Processing 3 answers for student Student: dinhHieu
+Deleted 3 old answers
+Created 3 new answers
+Student Student: dinhHieu scored 66.66666666666666% and achieved level A2
+Created test result: dinhHieu - placement - 66.66666666666666% - A2
+Updated student level to A2
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+User attempting to submit test: dinhHieu
+Found student: Student: dinhHieu
+Processing 3 answers for student Student: dinhHieu
+Deleted 3 old answers
+Created 3 new answers
+Student Student: dinhHieu scored 33.33333333333333% and achieved level A1
+Created test result: dinhHieu - placement - 33.33333333333333% - A1
+Updated student level to A1
+Not Found: /
+N:\web_python\english_center\my_app\models.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\models.py changed, reloading.
+Watching for file changes with StatReloader
+User attempting to submit test: dinhHieu
+Found student: Student: dinhHieu - Level: none
+Processing 3 answers for student Student: dinhHieu - Level: none
+Deleted 3 old answers
+Created 3 new answers
+Student Student: dinhHieu - Level: none scored 0.0% and achieved level A1
+Created test result: dinhHieu - placement - 0.0% - A1
+Updated student level to A1
+N:\web_python\english_center\my_app\models.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\models.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+User attempting to submit test: dinhHieu
+Found student: Student: dinhHieu - Level: none
+Processing 3 answers for student Student: dinhHieu - Level: none
+Deleted 3 old answers
+Created 3 new answers
+Student Student: dinhHieu - Level: none scored 33.33333333333333% and achieved level a1
+Created test result: dinhHieu - placement - 33.33333333333333% - a1
+Updated student level to a1
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+User attempting to submit test: dinhHieu
+Found student: Student: dinhHieu - Level: none
+Processing 3 answers for student Student: dinhHieu - Level: none
+Deleted 3 old answers
+Created 3 new answers
+Student Student: dinhHieu - Level: none scored 0.0% and achieved level A1
+Created test result: dinhHieu - placement - 0.0% - A1
+Updated student level to A1
+Unauthorized: /api/login/
+Unauthorized: /api/login/
+Unauthorized: /api/login/
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+User attempting to submit test: dinhHieu
+Found student: Student: dinhHieu - Level: none
+Processing 3 answers for student Student: dinhHieu - Level: none
+Deleted 3 old answers
+Created 3 new answers
+Student Student: dinhHieu - Level: none scored 0.0% and achieved level a1
+Created test result: dinhHieu - placement - 0.0% - a1
+Updated student level to a1
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+User attempting to submit test: dinhHieu
+Found student: Student: dinhHieu - Level: a1
+Processing 3 answers for student Student: dinhHieu - Level: a1
+Deleted 3 old answers
+Created 3 new answers
+Student Student: dinhHieu - Level: a1 scored 0.0% and achieved level a1
+Created test result: dinhHieu - placement - 0.0% - a1
+Updated student level to a1
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /api/user/profile/
+Not Found: /api/user/profile/
+Not Found: /api/user/profile/
+Not Found: /api/user/profile/
+Not Found: /api/user/profile/
+Not Found: /api/user/profile/
+Not Found: /api/user/profile/

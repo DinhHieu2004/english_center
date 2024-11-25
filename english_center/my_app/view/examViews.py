@@ -122,33 +122,42 @@ class PlacementTestView(APIView):
 
                 # Tính điểm và xác định level
                 score = (correct_count / total_questions * 100) if total_questions > 0 else 0
-                level = self.determine_level(score)
+                level_after_test = self.determine_level(score)
 
-                logger.info(f"Student {student} scored {score}% and achieved level {level}")
+                logger.info(f"Student {student} scored {score}% and achieved level {level_after_test}")
 
                 # Lưu kết quả bài test placement vào TestResult
                 test_result = TestResult.objects.create(
                     student=student,
                     test_type='placement',
                     score=score,
-                    level=level,
+                    level=level_after_test,
                     total_questions=total_questions,
                     correct_answers=correct_count
                 )
                 logger.info(f"Created test result: {test_result}")
 
                 # Cập nhật level cho student
-                student.current_level = level
+                student.level = level_after_test
+                student.has_taken_test = True
                 student.save()
-                logger.info(f"Updated student level to {level}")
+                logger.info(f"Updated student level to {level_after_test}")
 
-                return Response({
-                    "correct_answers": correct_count,
-                    "total_questions": total_questions,
-                    "score": round(score, 2),
-                    "level": level,
-                    "message": "Đã lưu kết quả bài test thành công"
-                })
+
+            response = Response({
+            "correct_answers": correct_count,
+            "total_questions": total_questions,
+            "score": round(score, 2),
+            "level": level_after_test,
+            "message": "Đã lưu kết quả bài test thành công"
+           })
+            """
+            response["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response["Pragma"] = "no-cache"
+            response["Expires"] = "0"
+            """
+            return response
+                
 
         except Exception as e:
             logger.error(f"Error in POST: {str(e)}", exc_info=True)
@@ -159,10 +168,10 @@ class PlacementTestView(APIView):
 
     def determine_level(self, score):
         if score >= 85:
-            return 'B2'
+            return 'b2'
         elif score >= 70:
-            return 'B1'
+            return 'b1'
         elif score >= 50:
-            return 'A2'
+            return 'a2'
         else:
-            return 'A1'
+            return 'a1'

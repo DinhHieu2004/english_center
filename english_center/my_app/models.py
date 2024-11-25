@@ -40,10 +40,13 @@ class Student(models.Model):
     
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     level = models.CharField(max_length=10, choices=LEVELS, default='none')
-    has_taken_test = models.BooleanField(default=False)  # kiểm tra đầu vào hay chưa
+    has_taken_test = models.BooleanField(default=False)  
 
     def __str__(self):
         return f"Student: {self.user.username}"
+    
+    def __str__(self):
+        return f"Student: {self.user.username} - Level: {self.level}"
 
 class Teacher(models.Model):
     EDUCATION_LEVELS = (
@@ -156,10 +159,10 @@ class FinalExam(models.Model):
 
 class Question(models.Model):
     LEVEL_CHOICES = [
-        ('A1', 'A1'),
-        ('A2', 'A2'),
-        ('B1', 'B1'),
-        ('B2', 'B2')
+        ('a1', 'A1'),
+        ('a2', 'A2'),
+        ('b1', 'B1'),
+        ('b2', 'B2')
     ]
 
     EXAM_TYPE_CHOICES = [
@@ -198,10 +201,10 @@ class TestResult(models.Model):
     ]
     
     LEVELS = [
-        ('A1', 'A1'),
-        ('A2', 'A2'),
-        ('B1', 'B1'),
-        ('B2', 'B2')
+        ('a1', 'A1'),
+        ('a2', 'A2'),
+        ('b1', 'B1'),
+        ('b2', 'B2')
     ]
     
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='test_results')

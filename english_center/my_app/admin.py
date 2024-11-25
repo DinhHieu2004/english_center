@@ -198,4 +198,4 @@ class CourseEnrollmentAdmin(admin.ModelAdmin):
 
 @admin.register(TestResult)
 class TestResultAdmin(admin.ModelAdmin):
-    list_display =()    
+    list_display =('student','test_type', 'score',  'level','total_questions','correct_answers')    
