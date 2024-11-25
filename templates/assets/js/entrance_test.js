@@ -131,8 +131,12 @@ class TOEICTest {
             Điểm số: ${result.score}%
             Trình độ: ${result.level.toUpperCase()}
         `;
+            const userData = JSON.parse(localStorage.getItem('userData'));
+            userData.student_details.level = result.level;
+            localStorage.setItem('userData', JSON.stringify(userData));
+
         alert(resultMessage);
-        window.location.href = '/test-result/';
+        window.location.href = 'dashboard.html';
     }
 
     showError(message) {

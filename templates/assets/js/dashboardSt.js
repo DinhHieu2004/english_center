@@ -11,9 +11,20 @@ $(document).ready(function () {
     $('#email').text(userData.email);
 
     if (userData.student_details) {
-
-        $('#level').text(userData.student_details.level || 'Chưa xác định');
-
+        const userLevel = userData.student_details.level || "none";
+    
+        $('#level').text(userLevel === "none" ? 'Chưa xác định' : userLevel);
+    
+        if (userLevel === "none") {
+            $('#takeTestButton').show();
+            $('#takeTestButton').click(function () {
+                // Điều hướng đến trang làm bài kiểm tra
+                window.location.href = 'entrance_test.html';
+            });
+        } else {
+            $('#takeTestButton').hide();
+        }
+    
         if (userData.join_date) {
             const joinDate = new Date(userData.join_date);
             const formattedDate = joinDate.toLocaleDateString('vi-VN', {
@@ -26,14 +37,7 @@ $(document).ready(function () {
             $('#joinDate').text('Chưa có thông tin');
         }
     }
-    if (!userData.student_details.has_taken_test) {
-        document.getElementById("takeTestButton").style.display = "inline-block";
-
-        takeTestButton.addEventListener('click', function () {
-            // Điều hướng đến trang làm bài kiểm tra
-            window.location.href = 'entrance_test.html';
-        });
-    }
+    
     //   if(userData.student_details.level ==   "none"){
     //      document.getElementById("level").text("chưa xác định");
     //  }
