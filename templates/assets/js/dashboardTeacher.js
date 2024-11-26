@@ -25,7 +25,46 @@ $(document).ready(function () {
             $('#joinDate').text('Chưa có thông tin');
         }
     }
-
+    // Hiển thị danh sách lớp học
+    $.ajax({
+        url: `http://127.0.0.1:8000/api/teacher/dashboard/`,
+        method: 'GET',
+        headers: {
+            'Authorization': 'Token ' + token, 
+            'Content-Type': 'application/json'
+        },
+        success: function(response) {  
+            if (response.courses_data && response.courses_data.length > 0) {
+                let classListHtml = '';
+                response.courses_data.forEach(course => {
+                    classListHtml += `
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                <h5 class="card-title">${course.name}</h5>
+                                <p>${course.description}</p>
+                                <p><strong>Cấp độ:</strong> ${course.level}</p>
+                                <p><strong>Ngày bắt đầu:</strong> ${course.start_date}</p>
+                                <p><strong>Số lượng buổi học:</strong> ${course.total_session}</p>
+                                <button class="btn btn-success look-course" data-id="${course.id}">Chi tiết</button>
+                            </div>
+                        </div>
+                    `;
+                });
+                $('#classList').html(classListHtml);
+            } else {
+                $('#classList').html('<p>Chưa có lớp học nào.</p>');
+            }
+        },
+        error: function(xhr, status, error) {
+            console.error('Có lỗi xảy ra:', error);
+            $('#classList').html('<p>Không thể lấy danh sách lớp học. Vui lòng thử lại sau.</p>');
+        }
+    });
+    // Xử lý sự kiện khi người dùng nhấn nút Xem chi tiết
+    $('#classList').on('click', '.look-course', function () {
+        const courseId = $(this).data('id');
+        window.location.href = `../teacher/course_detail.html?id=${courseId}`;
+    });
     // Xử lý đăng xuất
     $('#logoutBtn').click(function (event) {
         event.preventDefault();
@@ -34,39 +73,5 @@ $(document).ready(function () {
         localStorage.removeItem('userData'); 
         window.location.href = '../base.html';
     });
+    
 });
-let dayCount = 3; // Bắt đầu với 3 ngày
-
-        function addColumn() {
-            const dateInput = document.getElementById("dateInput"); // Lấy ngày từ input
-            const selectedDate = dateInput.value;
-
-            if (!selectedDate) {
-                alert("Vui lòng chọn ngày.");
-                return;
-            }
-
-            dayCount++; // Tăng số ngày lên 1
-
-            // Lấy bảng, thêm cột vào tiêu đề (thead)
-            const thead = document.querySelector("thead tr");
-            const th = document.createElement("th");
-            th.textContent = selectedDate;
-            thead.appendChild(th);
-
-            // Thêm cột vào phần thân bảng (tbody)
-            const rows = document.querySelectorAll("tbody tr");
-            rows.forEach(row => {
-                const td = document.createElement("td");
-                td.innerHTML = `<input type="text" class="status-input" oninput="checkStatus(this)">`;
-                row.appendChild(td);
-            });
-        }
-
-        function checkStatus(input) {
-            if (input.value.toLowerCase() === "x") {
-                input.style.backgroundColor = "#ffcccc"; // Đổi màu khi nhập "x"
-            } else {
-                input.style.backgroundColor = ""; // Đặt lại màu khi không phải "x"
-            }
-        }

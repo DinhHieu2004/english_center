@@ -56,7 +56,7 @@ class TeacherSerializer(serializers.ModelSerializer):
 class CourseSerialozer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ['id','name', 'level', 'description', 'teacher', 'start_date']
+        fields = ['id','name', 'level', 'description', 'teacher', 'start_date', 'total_session']
 
 class CourseScheduleSerializer(serializers.ModelSerializer):
     class Meta:

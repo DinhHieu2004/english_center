@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chi tiết lớp học</title>
+    <!-- Thêm Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Thêm Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Chi tiết lớp học</h2>
+
+        <!-- Thông tin lớp học -->
+        <div id="courseDetail" class="card mt-3">
+            
+        </div>
+
+        <!-- Danh sách sinh viên -->
+        <h3 class="mt-4">Danh sách sinh viên</h3>
+        <div id="studentList" class="list-group mt-3"></div>
+
+        <!-- Nút chuyển đến trang điểm danh -->
+        <div class="mt-4">
+            <a href="/diem-danh" class="btn btn-primary">
+                <i class="bi bi-check-circle"></i> Chuyển đến trang điểm danh
+            </a>
+        </div>
+    </div>
+
+    <!-- Thêm jQuery và Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Tải JavaScript từ file bên ngoài -->
+    <script>
+        // Hàm lấy thông tin chi tiết lớp học
+        $(document).ready(function() {
+            // Lấy courseId từ URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const courseId = urlParams.get('id');
+            console.log(courseId);
+    
+            if (courseId) {
+                $.ajax({
+                    url: `http://127.0.0.1:8000/api/course/${courseId}/`,  
+                    method: 'GET',
+                    headers: {
+                        'Authorization': 'Token ' + localStorage.getItem('token'),
+                        'Content-Type': 'application/json'
+                    },
+                    success: function(courseDetails) {
+                        console.log(courseDetails);
+                        let course = courseDetails.course;
+                        let teacherId = course.teacher;
+    
+                        // Gửi yêu cầu lấy thông tin giáo viên
+                        $.ajax({
+                            url: `http://127.0.0.1:8000/api/teacher/${teacherId}/`,  // API để lấy thông tin giáo viên theo ID
+                            method: 'GET',
+                            headers: {
+                        'Authorization': 'Token ' + localStorage.getItem('token'),
+                        'Content-Type': 'application/json'
+                    },
+                            success: function(teacherResponse) {
+                                // Lấy tên giáo viên từ phản hồi
+                                let teacherName = teacherResponse.teacher_name;
+                                // Tạo HTML để hiển thị thông tin lớp học và giáo viên
+                                let courseDetailsHtml = `
+                                    <h3>Thông tin lớp học: ${course.name}</h3>
+                                    <p><strong>Miêu tả:</strong> ${course.description}</p>
+                                    <p><strong>Trình độ:</strong> ${course.level}</p>
+                                    <p><strong>Ngày bắt đầu:</strong> ${course.start_date}</p>
+                                    <p><strong>Giáo viên:</strong> ${teacherName}</p>
+                                `;
+    
+                                // Chèn thông tin vào trong phần tử có id 'courseDetail'
+                                $('#courseDetail').html(courseDetailsHtml);
+                            },
+                            error: function() {
+                                alert("Không thể lấy thông tin giáo viên");
+                            }
+                        });
+                    },
+                    error: function() {
+                        alert("Không thể lấy thông tin lớp học");
+                    }
+                });
+            } else {
+                alert("Không có lớp học được tìm thấy.");
+            }
+        });
+    </script>
+    
+</body>
+</html>

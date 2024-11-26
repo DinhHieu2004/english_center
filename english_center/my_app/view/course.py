@@ -49,3 +49,13 @@ class CourseDetailView(APIView):
 
         course_data =CourseSerialozer(course).data
         return Response({'course': course_data}, status= 200)            
+
+class TeacherDashboardView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        user = request.user     
+        teacher = user.teacher
+        courses = Course.objects.filter(teacher = teacher)
+        courses_data= CourseSerialozer(courses, many = True).data
+        return Response({'courses_data': courses_data})
