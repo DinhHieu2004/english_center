@@ -22,7 +22,6 @@ class LoginView(APIView):
         user = authenticate(username=username, password=password)
         if user is not None:
            token, _ = Token.objects.get_or_create(user=user)
-
           # Xác định user type
            if user.is_superuser:
             user_type = 'admin'

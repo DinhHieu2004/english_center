@@ -16,7 +16,7 @@ class TeacherInline(admin.StackedInline):
     verbose_name_plural = 'Teacher Information'
 
 class CustomUserAdmin(UserAdmin):
-    list_display = ('username', 'fullname', 'email', 'phone', 'is_student', 'is_teacher', 
+    list_display = ('id','username', 'fullname', 'email', 'phone', 'is_student', 'is_teacher', 
                    'is_active', 'is_staff', 'join_date')
     
     list_filter = ('is_student', 'is_teacher', 'is_staff', 'is_active', 'join_date')
@@ -88,14 +88,14 @@ class CustomUserAdmin(UserAdmin):
 # Đăng ký Student Admin
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ('user', 'level', 'has_taken_test')
+    list_display = ('id','user', 'level', 'has_taken_test')
     list_filter = ('level', 'has_taken_test')
     search_fields = ('user__username', 'user__fullname')
 
 # Đăng ký Teacher Admin
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
-    list_display = ('user', 'education_level')
+    list_display = ('id','user', 'education_level')
     list_filter = ('education_level',)
     search_fields = ('user__username', 'user__fullname')
 

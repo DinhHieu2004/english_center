@@ -28,19 +28,7 @@ $(document).ready(function () {
             }
         }
 
-<<<<<<< HEAD
-        if (userData.student_details && !userData.student_details.has_taken_test) {
-            const takeTestButton = document.getElementById("takeTestButton");
-            if (takeTestButton) {
-                takeTestButton.style.display = "inline-block";
-                takeTestButton.addEventListener('click', function () {
-                    window.location.href = 'entrance_test.html';
-                });
-            }
-        }
     }
-
-=======
     $('#fullName').text(userData.fullname);
     $('#email').text(userData.email);
 
@@ -76,7 +64,6 @@ $(document).ready(function () {
     //      document.getElementById("level").text("chưa xác định");
     //  }
     // Xử lý đăng xuất
->>>>>>> 58a6405b04bf3a14c6a26ac0a39ffcbc584cc49f
     $('#logoutBtn').click(function (event) {
         event.preventDefault();
         localStorage.removeItem('token');
@@ -119,7 +106,11 @@ $(document).ready(function () {
                         <p class="card-text">${course.description}</p>
                         <p><strong>Cấp độ:</strong> ${course.level.toUpperCase()}</p>
                         <p><strong>Ngày bắt đầu:</strong> ${new Date(course.start_date).toLocaleDateString()}</p>
-                        <a href="/course/${course.id}" class="btn btn-primary mt-2">Học ngay</a>
+                        <a href="course-detail.html?id=${course.id}" >
+                        <button class="btn btn-success look-course" data-course-id="${course.id}">
+                        Xem khóa học
+                    </button>
+                     <a>
                     </div>
                 </div>
             `;
@@ -145,9 +136,11 @@ $(document).ready(function () {
                     <p class="card-text">${course.description}</p>
 
                     <p><strong>Cấp độ:</strong> ${course.level.toUpperCase()}</p>
-                    <button class="btn btn-success register-course" data-course-id="${course.id}">
+                    <a href="course-detail.html?id=${course.id}" >
+                    <button class="btn btn-success look-course" data-course-id="${course.id}">
                         Xem khóa học
                     </button>
+                     <a>
                 </div>
             </div>
         `).join('');
@@ -158,38 +151,19 @@ $(document).ready(function () {
         `);
 
         // Đăng ký khóa học
-        $('.register-course').on('click', function() {
-            const courseId = $(this).data('course-id');
-          //  registerForCourse(courseId);
+        $('.look-course').on('click', function() {
+            const courseId = $(this).data('course-id'); // Lấy ID khóa học từ nút
+    window.location.href = `/course-detail.html?id=${courseId}`; // Chuyển đến trang chi tiết khóa học
+
         });
     }
 
-    // Đăng ký khóa học
-    function registerForCourse(courseId) {
-        $.ajax({
-          //  url: '/api/student/register-course/',
-            method: 'POST',
-            headers: {
-                'Authorization': `Token ${token}`,
-                'Content-Type': 'application/json'
-            },
-            data: JSON.stringify({ course_id: courseId }),
-            success: function() {
-                alert('Đăng ký khóa học thành công!');
-                fetchDashboardData();
-            },
-            error: function() {
-                alert('Đăng ký khóa học thất bại. Vui lòng thử lại.');
-            }
-        });
-    }
-  
+   
 
-    // Sự kiện kiểm tra trình độ
     $('#takeTestButton').on('click', function() {
         window.location.href = '/placement-test';
     });
 
-    // Khởi tạo
     fetchDashboardData();
+
 });
