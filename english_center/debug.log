@@ -1406,3 +1406,252 @@ N:\web_python\english_center\my_app\admin.py changed, reloading.
 N:\web_python\english_center\my_app\admin.py changed, reloading.
 Watching for file changes with StatReloader
 Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\teacher.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\coursevView.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Unauthorized: /api/login/
+Bad Request: /api/change-password/
+Bad Request: /api/change-password/
+N:\web_python\english_center\my_app\view\authViews.py changed, reloading.
+N:\web_python\english_center\my_app\view\authViews.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Not Found: /api/course/${courseId}/`
+Not Found: /favicon.ico
+N:\web_python\english_center\my_app\view\coursevView.py changed, reloading.
+N:\web_python\english_center\my_app\view\coursevView.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\studentView.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\models.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\migrations\0001_initial.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /api/teacher/dashboard/
+N:\web_python\english_center\my_app\view\authViews.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+Unauthorized: /api/teacher/dashboard/
+N:\web_python\english_center\my_app\migrations\0002_alter_question_level_alter_testresult_level.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Bad Request: /api/change-password/
+Bad Request: /api/change-password/
+N:\web_python\english_center\my_app\view\authViews.py changed, reloading.
+N:\web_python\english_center\my_app\view\authViews.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\coursevView.py changed, reloading.
+N:\web_python\english_center\my_app\view\coursevView.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\studentView.py changed, reloading.
+N:\web_python\english_center\my_app\view\studentView.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\studentView.py changed, reloading.
+N:\web_python\english_center\my_app\view\studentView.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader

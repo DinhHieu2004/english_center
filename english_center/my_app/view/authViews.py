@@ -79,7 +79,7 @@ class ChangePasswordView(APIView):
         user = request.user
         current_password = request.data.get('current_password')
         new_password = request.data.get('new_password')
-        cf_new_password = request.data.get('cf_password')
+        cf_new_password = request.data.get('cf_new_password')
 
         if not user.check_password(current_password):
            return Response({'message': 'current pass is not incorrect'},
