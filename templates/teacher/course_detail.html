@@ -20,11 +20,28 @@
 
         <!-- Danh sách sinh viên -->
         <h3 class="mt-4">Danh sách sinh viên</h3>
-        <div id="studentList" class="list-group mt-3"></div>
+        <div id="studentList" class="table-responsive mt-3">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Tên</th>
+                        <th>Email</th>
+                        <th>Ngày sinh</th>
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                    </tr>
+                </thead>
+                <tbody id="studentTableBody">
+                    <!-- Dữ liệu sinh viên sẽ được thêm vào đây bằng JavaScript -->
+                </tbody>
+            </table>
+        </div>
+        
+        
 
         <!-- Nút chuyển đến trang điểm danh -->
         <div class="mt-4">
-            <a href="/diem-danh" class="btn btn-primary">
+            <a href="attendance.html" class="btn btn-primary">
                 <i class="bi bi-check-circle"></i> Chuyển đến trang điểm danh
             </a>
         </div>
@@ -36,62 +53,125 @@
 
     <!-- Tải JavaScript từ file bên ngoài -->
     <script>
-        // Hàm lấy thông tin chi tiết lớp học
         $(document).ready(function() {
-            // Lấy courseId từ URL
-            const urlParams = new URLSearchParams(window.location.search);
-            const courseId = urlParams.get('id');
-            console.log(courseId);
-    
-            if (courseId) {
-                $.ajax({
-                    url: `http://127.0.0.1:8000/api/course/${courseId}/`,  
-                    method: 'GET',
-                    headers: {
-                        'Authorization': 'Token ' + localStorage.getItem('token'),
-                        'Content-Type': 'application/json'
-                    },
-                    success: function(courseDetails) {
-                        console.log(courseDetails);
-                        let course = courseDetails.course;
-                        let teacherId = course.teacher;
-    
-                        // Gửi yêu cầu lấy thông tin giáo viên
-                        $.ajax({
-                            url: `http://127.0.0.1:8000/api/teacher/${teacherId}/`,  // API để lấy thông tin giáo viên theo ID
-                            method: 'GET',
-                            headers: {
-                        'Authorization': 'Token ' + localStorage.getItem('token'),
-                        'Content-Type': 'application/json'
-                    },
-                            success: function(teacherResponse) {
-                                // Lấy tên giáo viên từ phản hồi
-                                let teacherName = teacherResponse.teacher_name;
-                                // Tạo HTML để hiển thị thông tin lớp học và giáo viên
-                                let courseDetailsHtml = `
-                                    <h3>Thông tin lớp học: ${course.name}</h3>
-                                    <p><strong>Miêu tả:</strong> ${course.description}</p>
-                                    <p><strong>Trình độ:</strong> ${course.level}</p>
-                                    <p><strong>Ngày bắt đầu:</strong> ${course.start_date}</p>
-                                    <p><strong>Giáo viên:</strong> ${teacherName}</p>
-                                `;
-    
-                                // Chèn thông tin vào trong phần tử có id 'courseDetail'
-                                $('#courseDetail').html(courseDetailsHtml);
-                            },
-                            error: function() {
-                                alert("Không thể lấy thông tin giáo viên");
-                            }
-                        });
-                    },
-                    error: function() {
-                        alert("Không thể lấy thông tin lớp học");
-                    }
+    // Lấy courseId từ URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('id');
+    console.log(courseId);
+
+    if (courseId) {
+        fetchCourseDetails(courseId);
+        
+    } else {
+        alert("Không có lớp học được tìm thấy.");
+    }
+});
+
+// Hàm lấy thông tin lớp học
+function fetchCourseDetails(courseId) {
+    $.ajax({
+        url: `http://127.0.0.1:8000/api/course/${courseId}/`,
+        method: 'GET',
+        headers: getAuthHeaders(),
+        success: function(courseDetails) {
+            console.log(courseDetails);
+            let course = courseDetails.course;
+            fetchTeacherDetails(course.teacher, course);
+            fetchCourseStudents(courseId);
+        },
+        error: function() {
+            alert("Không thể lấy thông tin lớp học");
+        }
+    });
+}
+// Hàm lấy danh sách học viên của lớp
+function fetchCourseStudents(courseId) {
+    $.ajax({
+        url: `http://127.0.0.1:8000/api/course/${courseId}/students/`,  // API lấy học viên
+        method: 'GET',
+        headers: getAuthHeaders(),
+        success: function(studentsResponse) {
+            $('#studentTableBody').html('');
+            console.log(studentsResponse);
+            if (studentsResponse.students.length > 0) {
+                studentsResponse.students.forEach(function(student) {
+                    let studentId = student.id; 
+                    console.log("Student ID: ", studentId);  
+                    fetchStudentDetails(studentId); 
                 });
             } else {
-                alert("Không có lớp học được tìm thấy.");
+                $('#studentList').html("<p>Không có học viên nào trong lớp.</p>");
             }
-        });
+        },
+        error: function() {
+            alert("Không thể lấy danh sách học viên. Vui lòng thử lại.");
+        }
+    });
+}
+// Hàm gọi API để lấy thông tin chi tiết học viên dựa trên ID
+function fetchStudentDetails(studentId) {
+    $.ajax({
+        url: `http://127.0.0.1:8000/api/student/${studentId}/`,  
+        method: 'GET',
+        headers: getAuthHeaders(),
+        success: function(studentDetails) {
+            console.log(studentDetails);
+            renderStudentDetails(studentDetails); 
+        },
+        error: function() {
+            alert("Không thể lấy thông tin học viên.");
+        }
+    });
+}
+function renderStudentDetails(student) {
+    const studentD = student.student
+    let studentRow = `
+                <tr>
+                    <td>${studentD.name}</td>
+                    <td>${studentD.email}</td>
+                    <td>${studentD.birth_date}</td>
+                    <td>${studentD.address}</td>
+                    <td>${studentD.phone}</td>
+                </tr>
+            `;
+    $('#studentTableBody').append(studentRow);
+}
+// Hàm lấy thông tin giáo viên
+function fetchTeacherDetails(teacherId, course) {
+    $.ajax({
+        url: `http://127.0.0.1:8000/api/teacher/${teacherId}/`,
+        method: 'GET',
+        headers: getAuthHeaders(),
+        success: function(teacherResponse) {
+            let teacherName = teacherResponse.teacher_name;
+            renderCourseDetails(course, teacherName);
+        },
+        error: function() {
+            alert("Không thể lấy thông tin giáo viên");
+        }
+    });
+}
+
+// Hàm hiển thị thông tin lớp học và giáo viên
+function renderCourseDetails(course, teacherName) {
+    let courseDetailsHtml = `
+        <h3>Thông tin lớp học: ${course.name}</h3>
+        <p><strong>Miêu tả:</strong> ${course.description}</p>
+        <p><strong>Trình độ:</strong> ${course.level}</p>
+        <p><strong>Ngày bắt đầu:</strong> ${course.start_date}</p>
+        <p><strong>Giáo viên:</strong> ${teacherName}</p>
+    `;
+    $('#courseDetail').html(courseDetailsHtml);
+}
+
+// Hàm tạo headers với token
+function getAuthHeaders() {
+    return {
+        'Authorization': 'Token ' + localStorage.getItem('token'),
+        'Content-Type': 'application/json'
+    };
+}
+
     </script>
     
 </body>
