@@ -34,28 +34,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Khi trang chi tiết tải
-        $(document).ready(function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const courseId = urlParams.get('id'); // Lấy ID khóa học từ URL
-
-            if (courseId) {
-                // Gọi API để lấy chi tiết khóa học
-                const apiUrl = `http://127.0.0.1:8000/api/course/${courseId}/`;
-                $.get(apiUrl, function (data) {
-                    // Hiển thị thông tin chi tiết khóa học
-                    $('#course-title').text(`Tên khóa học: ${data.name}`);
-                    $('#course-level').text(data.level.toUpperCase());
-                    $('#course-description').text(data.description);
-                    $('#course-teacher').text(data.teacher);
-                    $('#course-students').text(data.students);
-                }).fail(function () {
-                    alert('Không thể tải chi tiết khóa học.');
-                });
-            } else {
-                alert('Không tìm thấy khóa học!');
-            }
-        });
     </script>
 </body>
 </html>

@@ -2,8 +2,9 @@ from django.contrib import admin
 
 from .models import User, Question, FinalExam, PlacementTest, Student, Teacher,Course, CourseEnrollment, CourseSchedule, Answer, TestResult
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.hashers import make_password
-
+from django.contrib.auth.hashers import make_password, is_password_usable
+from django.contrib import messages
+from django.core.exceptions import ValidationError
 
 class StudentInline(admin.StackedInline):
     model = Student
@@ -59,8 +60,11 @@ class CustomUserAdmin(UserAdmin):
     inlines = [StudentInline, TeacherInline]
     
     def save_model(self, request, obj, form, change):
-        if not change:
-            obj.password = make_password(obj.password)
+        if not change or (change and form.cleaned_data.get('password1')):
+            password = form.cleaned_data.get('password1')
+            if password:
+                obj.password = make_password(password)
+        
         super().save_model(request, obj, form, change)
 
     actions = ['make_student', 'make_teacher', 'make_active', 'make_inactive']
@@ -92,6 +96,7 @@ class StudentAdmin(admin.ModelAdmin):
     list_filter = ('level', 'has_taken_test')
     search_fields = ('user__username', 'user__fullname')
 
+ 
 # Đăng ký Teacher Admin
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
@@ -100,7 +105,6 @@ class TeacherAdmin(admin.ModelAdmin):
     search_fields = ('user__username', 'user__fullname')
 
 admin.site.register(User, CustomUserAdmin)
-
 
 class QuestionInline(admin.StackedInline):
     model = Question

@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils import timezone 
 
 class User(AbstractUser):
+    id = models.AutoField(primary_key=True)  
     fullname =  models.CharField(max_length=30, null = False, blank=True)
     username =  models.CharField(max_length=20, null = False, blank=True, unique=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
@@ -29,6 +30,7 @@ class User(AbstractUser):
         blank=True,
         help_text='Specific permissions for this user.'
     )
+
 class Student(models.Model):
     LEVELS = (
         ('none', 'Chưa xác định'),
@@ -42,6 +44,10 @@ class Student(models.Model):
     level = models.CharField(max_length=10, choices=LEVELS, default='none')
     has_taken_test = models.BooleanField(default=False)  
 
+
+    def __str__(self):
+        return f"Student: {self.user.username} - Level: {self.level}"
+    
     def __str__(self):
         return f"Student: {self.user.username}"
     
