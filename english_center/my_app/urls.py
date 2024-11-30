@@ -3,7 +3,7 @@ from .view.authViews import LoginView,RegisterTeacher, RegisterStudent, ChangePa
 from  .view.examViews import PlacementTestView
 from  .view.coursevView import  CourseDetailView, CourseStudentsAPIView
 from .view.teacherView import TeacherView,TeacherDashboardView
-from .view.studentView import StudentDashboardView, StudentDetailView
+from .view.studentView import StudentDashboardView, StudentDetailView, studentEnrollmentView
 
 
 urlpatterns = [
@@ -18,6 +18,8 @@ urlpatterns = [
     path('change-password/', ChangePasswordView.as_view(), name='change-password'),
     path('student/<int:student_id>/', StudentDetailView.as_view(), name='student-detail'),
     path('course/<int:course_id>/students/', CourseStudentsAPIView.as_view(), name='course-students'),
+    path('enroll-course/', studentEnrollmentView.as_view(), name='enroll-course'),
+
 
 
 ]

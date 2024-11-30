@@ -9,6 +9,8 @@ $(document).ready(function () {
     if (userData) {
         $('#fullName').text(userData.fullname || 'Không rõ');
         $('#email').text(userData.email || 'Không rõ');
+        $('#studentName').text(userData.username);
+
 
         if (userData.student_details) {
             $('#level').text(
@@ -150,19 +152,14 @@ $(document).ready(function () {
             ${coursesList}
         `);
 
-        // Đăng ký khóa học
         $('.look-course').on('click', function() {
-            const courseId = $(this).data('course-id'); // Lấy ID khóa học từ nút
-    window.location.href = `/course-detail.html?id=${courseId}`; // Chuyển đến trang chi tiết khóa học
+            const courseId = $(this).data('course-id'); 
+            window.location.href = `/course-detail.html?id=${courseId}`; 
 
         });
     }
 
    
-
-    $('#takeTestButton').on('click', function() {
-        window.location.href = '/placement-test';
-    });
 
     fetchDashboardData();
 

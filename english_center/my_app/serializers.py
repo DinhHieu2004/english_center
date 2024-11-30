@@ -52,16 +52,19 @@ class TeacherSerializer(serializers.ModelSerializer):
         model = Teacher
         fields = ['education_level']
 
-
-class CourseSerialozer(serializers.ModelSerializer):
-    class Meta:
-        model = Course
-        fields = ['id','name', 'level', 'description', 'teacher', 'start_date', 'total_session']
-
 class CourseScheduleSerializer(serializers.ModelSerializer):
+    weekday_display = serializers.CharField(source='get_weekday_display', read_only=True)
+
     class Meta:
         model = CourseSchedule
-        fields = []    
+        fields = ['weekday_display', 'start_time']    
+
+class CourseSerialozer(serializers.ModelSerializer):
+    schedules = CourseScheduleSerializer(many = True)
+    class Meta:
+        model = Course
+        fields = ['id','name', 'level', 'description', 'teacher', 'start_date', 'total_session', 'schedules']
+
 
 #
 class QuestionSerializer(serializers.ModelSerializer):
