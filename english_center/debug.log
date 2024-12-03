@@ -1077,3 +1077,5 @@ Unauthorized: /api/course/1/
 Not Found: /
 Not Found: /favicon.ico
 Not Found: /
+Watching for file changes with StatReloader
+Not Found: /
