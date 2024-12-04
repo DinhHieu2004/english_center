@@ -72,7 +72,6 @@ class PlacementTestView(APIView):
 
                 logger.info(f"Processing {len(answers_data)} answers for student {student}")
 
-                # Xóa các câu trả lời cũ
                 old_answers = Answer.objects.filter(
                     student=student,
                     exam_type='placement',
@@ -115,18 +114,15 @@ class PlacementTestView(APIView):
                         logger.warning(f"Question {question_id} not found")
                         continue
 
-                # Lưu câu trả lời
                 if answers_to_create:
                     created_answers = Answer.objects.bulk_create(answers_to_create)
                     logger.info(f"Created {len(created_answers)} new answers")
 
-                # Tính điểm và xác định level
                 score = (correct_count / total_questions * 100) if total_questions > 0 else 0
                 level_after_test = self.determine_level(score)
 
                 logger.info(f"Student {student} scored {score}% and achieved level {level_after_test}")
 
-                # Lưu kết quả bài test placement vào TestResult
                 test_result = TestResult.objects.create(
                     student=student,
                     test_type='placement',
@@ -137,7 +133,6 @@ class PlacementTestView(APIView):
                 )
                 logger.info(f"Created test result: {test_result}")
 
-                # Cập nhật level cho student
                 student.level = level_after_test
                 student.has_taken_test = True
                 student.save()
@@ -167,11 +162,11 @@ class PlacementTestView(APIView):
             )
 
     def determine_level(self, score):
-        if score >= 85:
+        if score >= 90:
             return 'b2'
         elif score >= 70:
             return 'b1'
-        elif score >= 50:
+        elif score >= 35:
             return 'a2'
         else:
             return 'a1'

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam
+from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam, Attendance
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
@@ -52,16 +52,19 @@ class TeacherSerializer(serializers.ModelSerializer):
         model = Teacher
         fields = ['education_level']
 
-
-class CourseSerialozer(serializers.ModelSerializer):
-    class Meta:
-        model = Course
-        fields = ['id','name', 'level', 'description', 'teacher', 'start_date', 'total_session']
-
 class CourseScheduleSerializer(serializers.ModelSerializer):
+    weekday_display = serializers.CharField(source='get_weekday_display', read_only=True)
+
     class Meta:
         model = CourseSchedule
-        fields = []    
+        fields = ['weekday_display', 'start_time']    
+
+class CourseSerialozer(serializers.ModelSerializer):
+    schedules = CourseScheduleSerializer(many = True)
+    class Meta:
+        model = Course
+        fields = ['id','name', 'level', 'description', 'teacher', 'start_date', 'total_session', 'schedules']
+
 
 #
 class QuestionSerializer(serializers.ModelSerializer):
@@ -76,3 +79,11 @@ class PlacementTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlacementTest
         fields = ['id', 'title', 'description', 'duration', 'questions']
+
+class AttendanceSerializer(serializers.ModelSerializer):
+    student_name = serializers.CharField(source='student.name', read_only=True)
+    course_id = serializers.IntegerField(source='course.id', read_only=True)
+
+    class Meta:
+        model = Attendance
+        fields = ['id', 'student_name', 'course_id', 'status', 'date',]

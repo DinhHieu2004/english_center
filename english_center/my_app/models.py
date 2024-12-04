@@ -7,6 +7,7 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils import timezone 
 
 class User(AbstractUser):
+    id = models.AutoField(primary_key=True)  
     fullname =  models.CharField(max_length=30, null = False, blank=True)
     username =  models.CharField(max_length=20, null = False, blank=True, unique=True)
     phone = models.CharField(max_length=15, null=True, blank=True)
@@ -29,6 +30,7 @@ class User(AbstractUser):
         blank=True,
         help_text='Specific permissions for this user.'
     )
+
 class Student(models.Model):
     LEVELS = (
         ('none', 'Chưa xác định'),
@@ -42,6 +44,10 @@ class Student(models.Model):
     level = models.CharField(max_length=10, choices=LEVELS, default='none')
     has_taken_test = models.BooleanField(default=False)  
 
+
+    def __str__(self):
+        return f"Student: {self.user.username} - Level: {self.level}"
+    
     def __str__(self):
         return f"Student: {self.user.username}"
     
@@ -116,6 +122,24 @@ class CourseSchedule(models.Model):
 
     def __str__(self):
         return f"{self.course.name} - {self.get_weekday_display()} {self.start_time}"
+    def get_next_class_dates(self, start_date, total_sessions):
+        """
+        Hàm tính toán các ngày học từ ngày bắt đầu
+        :param start_date: Ngày bắt đầu khóa học
+        :param total_sessions: Tổng số buổi học
+        :return: Danh sách các ngày học
+        """
+        class_dates = []
+        current_date = start_date
+        
+        for _ in range(total_sessions):
+            # Tìm ngày trong tuần tiếp theo mà khớp với `weekday`
+            while current_date.weekday() != self.weekday:
+                current_date += timedelta(days=1)  # Tiến đến ngày trong tuần tiếp theo
+            class_dates.append(current_date)
+            current_date += timedelta(weeks=1)  # Chuyển sang tuần sau
+
+        return class_dates
 
 class CourseEnrollment(models.Model):
     student = models.ForeignKey('Student', on_delete=models.CASCADE)
@@ -219,20 +243,24 @@ class TestResult(models.Model):
         ordering = ['-created_at']
     
     def __str__(self):
-        return f"{self.student.user.username} - {self.test_type} - {self.score}% - {self.level}"    
-"""
+        return f"{self.student.user.username} - {self.test_type} - {self.score}% - {self.level}"  
+      
 class Attendance(models.Model):
     ATTENDANCE_STATUS = (
         ('present', 'Có mặt'),
         ('absent', 'Vắng mặt'),
-        ('late', 'Đi muộn')
     )
     
-    session = models.ForeignKey(CourseSession, on_delete=models.CASCADE)
-    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    student = models.ForeignKey('Student', on_delete=models.CASCADE)
     status = models.CharField(max_length=10, choices=ATTENDANCE_STATUS)
+    date = models.DateField()
     note = models.TextField(blank=True, null=True)
-    
-    class Meta:
-        unique_together = ('session', 'student')
-"""
+    created_at = models.DateTimeField(auto_now_add=True)  
+    updated_at = models.DateTimeField(auto_now=True)  
+
+    class Meta:  
+        ordering = ['date', 'course', 'student']
+
+    def __str__(self):
+        return f"{self.student} - {self.course.name} - {self.get_status_display()} ({self.date})"

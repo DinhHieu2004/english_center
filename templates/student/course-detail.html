@@ -8,6 +8,24 @@
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 </head>
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Hệ thống học trực tuyến</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span class="nav-link" id="studentName"></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
     <div class="container mt-5">
         <h1 class="text-center mb-4" id="course-name">Chi tiết khóa học</h1>
 
@@ -16,46 +34,19 @@
                 <h2 class="card-title" id="course-title">Tên khóa học:</h2>
             </div>
             <div class="card-body">
-                <p><strong>Cấp độ:</strong> <span id="course-level"></span></p>
-                <p><strong>Mô tả:</strong> <span id="course-description"></span></p>
-                <p><strong>Giáo viên:</strong> <span id="course-teacher"></span></p>
-                <p><strong>Tổng học viên:</strong> <span id="course-students"></span></p>
+                <div id="courseDetail" class="card mt-3">
 
-                <div class="text-center">
-                    <button class="btn btn-success">Đăng ký khóa học</button>
-                </div>
             </div>
         </div>
-
+        
         <div class="mt-4 text-center">
-            <a href="/dashboard" class="btn btn-secondary">Quay lại trang Dashboard</a>
+            <a  class="btn btn-success mb-3">Đăng kí khóa học</a>
+        </button>
         </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Khi trang chi tiết tải
-        $(document).ready(function () {
-            const urlParams = new URLSearchParams(window.location.search);
-            const courseId = urlParams.get('id'); // Lấy ID khóa học từ URL
-
-            if (courseId) {
-                // Gọi API để lấy chi tiết khóa học
-                const apiUrl = `http://127.0.0.1:8000/api/course/${courseId}/`;
-                $.get(apiUrl, function (data) {
-                    // Hiển thị thông tin chi tiết khóa học
-                    $('#course-title').text(`Tên khóa học: ${data.name}`);
-                    $('#course-level').text(data.level.toUpperCase());
-                    $('#course-description').text(data.description);
-                    $('#course-teacher').text(data.teacher);
-                    $('#course-students').text(data.students);
-                }).fail(function () {
-                    alert('Không thể tải chi tiết khóa học.');
-                });
-            } else {
-                alert('Không tìm thấy khóa học!');
-            }
-        });
+    <script src="/templates/assets/js/course-detail-st.js">
     </script>
 </body>
 </html>
