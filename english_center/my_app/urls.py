@@ -1,10 +1,12 @@
 from django.urls import path
 from .view.authViews import LoginView,RegisterTeacher, RegisterStudent, ChangePasswordView
 from  .view.examViews import PlacementTestView
+
 from  .view.coursevView import  CourseDetailView, CourseStudentsAPIView
 from .view.teacherView import TeacherView,TeacherDashboardView
 from .view.studentView import StudentDashboardView, studentEnrollmentView #, StudentDetailView
 from .view.attendance import AttendanceView, CourseScheduleListView
+
 
 
 urlpatterns = [
@@ -23,3 +25,4 @@ urlpatterns = [
     path('attendance/course/<int:course_id>/', AttendanceView.as_view(), name='attendance-by-course'),
     path('course/<int:course_id>/schedule/', CourseScheduleListView.as_view(), name='course-schedule-list'),
 ]
+
