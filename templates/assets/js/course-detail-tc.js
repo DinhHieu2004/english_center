@@ -125,6 +125,18 @@ function renderCourseDetails(course, teacherName) {
     `;
     $('#courseDetail').html(courseDetailsHtml);
 }
+$('.look-course').on('click', function(e) {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('id');
+    
+    if (courseId) {
+        window.location.href = `attendance.html?id=${courseId}`;
+    } else {
+        alert('Không tìm thấy thông tin khóa học!');
+    }
+
+});
 
 // Hàm tạo headers với token
 function getAuthHeaders() {

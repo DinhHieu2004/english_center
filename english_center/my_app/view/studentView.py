@@ -55,6 +55,7 @@ class StudentDetailView(APIView):
             'name': user.fullname,  
             'email': user.email,  
             'phone': user.phone,
+            'birth_date': user.date_of_birth,
             'address': user.address
         }
 
