@@ -52,18 +52,12 @@ function fetchCourseStudents(courseId) {
         success: function(studentsResponse) {
             $('#studentTableBody').html('');
             console.log(studentsResponse);
-            if (studentsResponse.students.length > 0) {
-                let studentPromises = studentsResponse.students.map(function(student) {
-                    let studentId = student.id; 
-                    console.log("Student ID: ", studentId);  
-                    return fetchStudentDetails(studentId);
+             if (studentsResponse.students.length > 0) {
+                studentsResponse.students.forEach(function(student) {
+                    studentNames.push(student.name);
+                    console.log(studentNames);
                 });
-
-                Promise.all(studentPromises).then(function() {
-                    renderStudents(studentNames);
-                }).catch(function(error) {
-                    console.error("Lỗi khi lấy dữ liệu học viên:", error);
-                });
+                renderStudents(studentNames); 
             } else {
                 $('#studentList').html("<p>Không có học viên nào trong lớp.</p>");
             }
@@ -74,24 +68,24 @@ function fetchCourseStudents(courseId) {
     });
 }
 
-function fetchStudentDetails(studentId) {
-    return new Promise(function(resolve, reject) {
-        $.ajax({
-            url: `http://127.0.0.1:8000/api/student/${studentId}/`,  
-            method: 'GET',
-            headers: getAuthHeaders(),
-            success: function(studentDetails) {
-                console.log(studentDetails.student);
-                studentNames.push(studentDetails.student); 
-                resolve();
-            },
-            error: function() {
-                alert("Không thể lấy thông tin học viên.");
-                reject(); 
-            }
-        });
-    });
-}
+// function fetchStudentDetails(studentId) {
+//     return new Promise(function(resolve, reject) {
+//         $.ajax({
+//             url: `http://127.0.0.1:8000/api/student/${studentId}/`,  
+//             method: 'GET',
+//             headers: getAuthHeaders(),
+//             success: function(studentDetails) {
+//                 console.log(studentDetails.student);
+//                 studentNames.push(studentDetails.student); 
+//                 resolve();
+//             },
+//             error: function() {
+//                 alert("Không thể lấy thông tin học viên.");
+//                 reject(); 
+//             }
+//         });
+//     });
+// }
             function getAuthHeaders() {
                 return {
                     'Authorization': 'Token ' + localStorage.getItem('token'),
@@ -101,7 +95,7 @@ function fetchStudentDetails(studentId) {
 
             // Hàm hiển thị sinh viên trong bảng
             function renderStudents(studentNames) {
-                studentNames.sort();
+                // studentNames.sort();
 
                 // Thêm cột ngày vào bảng
                 const thead = document.querySelector('#attendanceTable thead tr');
@@ -121,7 +115,7 @@ function fetchStudentDetails(studentId) {
                     row.appendChild(sttCell);
                     // Tên sinh viên
                     const nameCell = document.createElement('td');
-                    nameCell.textContent = student.name;
+                    nameCell.textContent = student;
                     row.appendChild(nameCell);
                     
                     // Cột ngày điểm danh

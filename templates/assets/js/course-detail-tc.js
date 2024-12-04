@@ -40,9 +40,7 @@ function fetchCourseStudents(courseId) {
             console.log(studentsResponse);
             if (studentsResponse.students.length > 0) {
                 studentsResponse.students.forEach(function(student) {
-                    let studentId = student.id; 
-                    console.log("Student ID: ", studentId);  
-                    fetchStudentDetails(studentId); 
+                    renderStudentDetails(student); 
                 });
             } else {
                 $('#studentList').html("<p>Không có học viên nào trong lớp.</p>");
@@ -54,22 +52,22 @@ function fetchCourseStudents(courseId) {
     });
 }
 // Hàm gọi API để lấy thông tin chi tiết học viên dựa trên ID
-function fetchStudentDetails(studentId) {
-    $.ajax({
-        url: `http://127.0.0.1:8000/api/student/${studentId}/`,  
-        method: 'GET',
-        headers: getAuthHeaders(),
-        success: function(studentDetails) {
-            console.log(studentDetails);
-            renderStudentDetails(studentDetails); 
-        },
-        error: function() {
-            alert("Không thể lấy thông tin học viên.");
-        }
-    });
-}
+// function fetchStudentDetails(studentId) {
+//     $.ajax({
+//         url: `http://127.0.0.1:8000/api/student/${studentId}/`,  
+//         method: 'GET',
+//         headers: getAuthHeaders(),
+//         success: function(studentDetails) {
+//             console.log(studentDetails);
+//             renderStudentDetails(studentDetails); 
+//         },
+//         error: function() {
+//             alert("Không thể lấy thông tin học viên.");
+//         }
+//     });
+// }
 function renderStudentDetails(student) {
-    const studentD = student.student
+    const studentD = student
     let studentRow = `
                 <tr>
                     <td>${studentD.name}</td>

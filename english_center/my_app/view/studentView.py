@@ -42,24 +42,24 @@ class StudentDashboardView(APIView):
         except ValueError:
             return None    
 '''
-class StudentDetailView(APIView):
-    permission_classes = [IsAuthenticated]
+# class StudentDetailView(APIView):
+#     permission_classes = [IsAuthenticated]
 
-    def get(self, request, student_id):
-        try:
-            student = Student.objects.get(id=student_id)
-            user = student.user
-        except Student.DoesNotExist:
-            raise NotFound(detail="Student not found")
-        student_data = {
-            'name': user.fullname,  
-            'email': user.email,  
-            'phone': user.phone,
-            'birth_date': user.date_of_birth,
-            'address': user.address
-        }
+#     def get(self, request, student_id):
+#         try:
+#             student = Student.objects.get(id=student_id)
+#             user = student.user
+#         except Student.DoesNotExist:
+#             raise NotFound(detail="Student not found")
+#         student_data = {
+#             'name': user.fullname,  
+#             'email': user.email,  
+#             'phone': user.phone,
+#             'birth_date': user.date_of_birth,
+#             'address': user.address
+#         }
 
-        return Response({'student': student_data}, status= status.HTTP_200_OK)    
+#         return Response({'student': student_data}, status= status.HTTP_200_OK)    
 
 class studentEnrollmentView(APIView):
     permission_classes = [IsAuthenticated]
