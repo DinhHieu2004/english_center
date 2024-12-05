@@ -246,16 +246,11 @@ class TestResult(models.Model):
         return f"{self.student.user.username} - {self.test_type} - {self.score}% - {self.level}"  
       
 class Attendance(models.Model):
-    ATTENDANCE_STATUS = (
-        ('present', 'Có mặt'),
-        ('absent', 'Vắng mặt'),
-    )
     
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
-    student = models.ForeignKey('Student', on_delete=models.CASCADE)
-    status = models.CharField(max_length=10, choices=ATTENDANCE_STATUS)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, null=True, blank=True)
     date = models.DateField()
-    note = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)  
     updated_at = models.DateTimeField(auto_now=True)  
 
@@ -263,4 +258,4 @@ class Attendance(models.Model):
         ordering = ['date', 'course', 'student']
 
     def __str__(self):
-        return f"{self.student} - {self.course.name} - {self.get_status_display()} ({self.date})"
+        return f"{self.student} - {self.course.name} -  {self.status} ({self.date})"

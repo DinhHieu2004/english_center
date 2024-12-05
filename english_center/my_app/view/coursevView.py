@@ -36,6 +36,7 @@ class CourseStudentsAPIView(APIView):
             user = student.user
 
             student_data = {
+                'id': student_id,
                 'name': user.fullname,
                 'email': user.email,
                 'phone': user.phone,

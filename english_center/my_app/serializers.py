@@ -87,3 +87,16 @@ class AttendanceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Attendance
         fields = ['id', 'student_name', 'course_id', 'status', 'date',]
+    
+        def create(self, validated_data):
+        # Khi tạo mới, có thể để status là null nếu không có giá trị
+            validated_data['status'] = validated_data.get('status', None)
+            return super().create(validated_data)
+
+        def update(self, instance, validated_data):
+            status = validated_data.get('status', None)
+            if status is None:
+                instance.status = None  
+            else:
+                instance.status = status
+            return super().update(instance, validated_data)

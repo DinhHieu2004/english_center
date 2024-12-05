@@ -54,10 +54,10 @@ function fetchCourseStudents(courseId) {
             console.log(studentsResponse);
              if (studentsResponse.students.length > 0) {
                 studentsResponse.students.forEach(function(student) {
-                    studentNames.push(student.name);
+                    studentNames.push(student);
                     console.log(studentNames);
                 });
-                renderStudents(studentNames); 
+                renderStudents(courseId, studentNames); 
             } else {
                 $('#studentList').html("<p>Không có học viên nào trong lớp.</p>");
             }
@@ -94,7 +94,7 @@ function fetchCourseStudents(courseId) {
             }
 
             // Hàm hiển thị sinh viên trong bảng
-            function renderStudents(studentNames) {
+            function renderStudents(courseId, studentNames) {
                 // studentNames.sort();
 
                 // Thêm cột ngày vào bảng
@@ -115,16 +115,28 @@ function fetchCourseStudents(courseId) {
                     row.appendChild(sttCell);
                     // Tên sinh viên
                     const nameCell = document.createElement('td');
-                    nameCell.textContent = student;
+                    nameCell.textContent = student.name;
                     row.appendChild(nameCell);
                     
                     // Cột ngày điểm danh
-                    classDates.forEach(() => {
+                    classDates.forEach((date) => {
+                        console.log(student.id);
                         const cell = document.createElement('td');
                         const input = document.createElement('input');
                         input.type = 'text';
                         input.classList.add('form-control');
-                        input.oninput = function() { checkStatus(this); }; // Gọi hàm khi thay đổi
+                        getAttendanceStatus(courseId, student.id, date, function(currentStatus) {
+                            if (currentStatus) {
+                                input.value = currentStatus;
+                            }
+                            checkStatus(input);
+            
+                            input.onblur = function() {
+                                checkStatus(this); 
+                                console.log(courseId, student.id, date, this.value);
+                                saveAttendance(courseId, student.id, date, this.value);
+                            };
+                        });
                         cell.appendChild(input);
                         row.appendChild(cell);
                     });
@@ -133,7 +145,48 @@ function fetchCourseStudents(courseId) {
                 });
                 attachInputNavigation()
             }
+            function getAttendanceStatus(courseId, student, date, callback) {
+                let status = "";
+                $.ajax({
+                    url: `http://127.0.0.1:8000/api/course/${courseId}/attendance/`, 
+                    method: 'GET',
+                    headers: getAuthHeaders(),
+                    data: {
+                        student: student,
+                        date: date
+                    },
+                    success: function(response) {
+                            status = response.status;
 
+                        callback(status);
+                    },
+                    error: function() {
+                        alert("Không thể lấy trạng thái điểm danh.");
+                    }
+                });
+            }
+            function saveAttendance(courseId, studentId, date, status) {
+                const data = {
+                    student_id: studentId,
+                    date: date,
+                    status: status
+                };
+                console.log("Dữ liệu gửi lên:", data);
+                $.ajax({
+                    url: `http://127.0.0.1:8000/api/course/${courseId}/attendance/`,
+                    method: 'POST',
+                    headers: getAuthHeaders(),
+                    contentType: 'application/json', 
+                    data: JSON.stringify(data),  
+                    success: function(response) {
+                        console.log('Điểm danh đã được lưu:', response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Lỗi khi lưu điểm danh:', error);
+                    }
+                });
+            }
+            
 // Hàm kiểm tra trạng thái nhập liệu
 function checkStatus(input) {
     if (input.value.toLowerCase() === "x") {
@@ -169,17 +222,17 @@ function attachInputNavigation() {
                 next = currentRow.next("tr").find("td").eq(currentColumnIndex).find("input[type='text']");
             }
         }
-        // Di chuyển sang trái (phím mũi tên trái)
-        else if (e.which === 37) {
-            if (currentColumnIndex > 0) {
-                next = current.closest("tr").find("td").eq(currentColumnIndex - 1).find("input[type='text']");
-            }
-        }
-        else if (e.which === 39) {
-            if (currentColumnIndex < current.closest("tr").find("td").length - 1) {
-                next = current.closest("tr").find("td").eq(currentColumnIndex + 1).find("input[type='text']");
-            }
-        }
+        // // Di chuyển sang trái (phím mũi tên trái)
+        // else if (e.which === 37) {
+        //     if (currentColumnIndex > 0) {
+        //         next = current.closest("tr").find("td").eq(currentColumnIndex - 1).find("input[type='text']");
+        //     }
+        // }
+        // else if (e.which === 39) {
+        //     if (currentColumnIndex < current.closest("tr").find("td").length - 1) {
+        //         next = current.closest("tr").find("td").eq(currentColumnIndex + 1).find("input[type='text']");
+        //     }
+        // }
 
         if (next && next.length > 0) {
             next.focus();

@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import User, Question, FinalExam, PlacementTest, Student, Teacher,Course, CourseEnrollment, CourseSchedule, Answer, TestResult
+from .models import User, Question, FinalExam, PlacementTest, Student, Teacher,Course, CourseEnrollment, CourseSchedule, Answer, TestResult, Attendance
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password, is_password_usable
 from django.contrib import messages
@@ -204,3 +204,17 @@ class CourseEnrollmentAdmin(admin.ModelAdmin):
 @admin.register(TestResult)
 class TestResultAdmin(admin.ModelAdmin):
     list_display =('student','test_type', 'score',  'level','total_questions','correct_answers')    
+
+@admin.register(Attendance)
+class AttendanceAdmin(admin.ModelAdmin):
+    # Hiển thị các trường trong danh sách quản lý
+    list_display = ('student', 'course', 'date', 'status', 'created_at', 'updated_at')
+    
+    # Thêm các bộ lọc (filter) để dễ dàng tìm kiếm
+    list_filter = ('status', 'course', 'date')
+    
+    search_fields = ('student__name', 'course__name')
+    list_editable = ('status',)
+    list_per_page = 20
+
+    ordering = ('-date',)
