@@ -4,6 +4,7 @@ from  .view.examViews import PlacementTestView
 from  .view.coursevView import  CourseDetailView, CourseStudentsAPIView
 from .view.teacherView import TeacherView,TeacherDashboardView
 from .view.studentView import StudentDashboardView, StudentDetailView, StudentEnrollmentView
+from .view.attendanceView import AttendanceList, CourseScheduleListView
 
 
 urlpatterns = [
@@ -19,5 +20,7 @@ urlpatterns = [
     path('student/<int:student_id>/', StudentDetailView.as_view(), name='student-detail'),
     path('course/<int:course_id>/students/', CourseStudentsAPIView.as_view(), name='course-students'),
     path('enroll-course/', StudentEnrollmentView.as_view(), name='enroll-course'),
+    path('course/<int:course_id>/attendance/', AttendanceList.as_view(), name='attendance-list'),
+    path('course/<int:course_id>/schedule/', CourseScheduleListView.as_view(), name='course-schedule-list'),
 
 ]

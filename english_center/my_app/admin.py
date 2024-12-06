@@ -1,6 +1,6 @@
 from django.contrib import admin
-
-from .models import User, Question, FinalExam, PlacementTest, Student, Teacher,Course, CourseEnrollment, CourseSchedule, TestResult, Answer, TestResult
+from django import forms
+from .models import User, Question, FinalExam, PlacementTest, Student, Teacher,Course, CourseEnrollment, CourseSchedule, TestResult, Answer, TestResult, Attendance
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
@@ -173,12 +173,44 @@ class CourseEnrollmentInline(admin.TabularInline):
     readonly_fields = ('enrollment_date',)
     fields = ('student', 'completed', 'final_test_passed')
 
+class AttendanceInline(admin.TabularInline):
+    model = Attendance
+    extra = 0
+    fields = ('student', 'date', 'status')
+    show_change_link = True
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        course_id = request.resolver_match.kwargs.get('object_id')
+        
+        if course_id:
+            if db_field.name == 'student':
+                kwargs['queryset'] = Student.objects.filter(courseenrollment__course_id=course_id)
+        
+            elif db_field.name == 'date':
+                try:
+                    course = Course.objects.get(id=course_id)
+                except Course.DoesNotExist:
+                    course = None
+            
+                if course:
+                    valid_dates = course.calculate_class_dates()
+                    valid_dates_display = [date.strftime("%Y-%m-%d") for date in valid_dates]
+                    kwargs['widget'] = forms.Select(choices=[(date, date) for date in valid_dates_display])
+
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
+
+    def get_queryset(self, request):
+        course_id = request.resolver_match.kwargs.get('object_id')
+        if course_id:
+            return Attendance.objects.filter(course_id=course_id)
+        return Attendance.objects.all()
+
+
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'level', 'teacher', 'price','start_date', 'total_session')
     list_filter = ('level', 'teacher',)
     search_fields = ('name',)
-    inlines = [CourseScheduleInline, CourseEnrollmentInline]
+    inlines = [CourseScheduleInline, CourseEnrollmentInline, AttendanceInline]
     
     fieldsets = (
         ('Thông tin khóa học', {
@@ -203,3 +235,13 @@ class CourseEnrollmentAdmin(admin.ModelAdmin):
 @admin.register(TestResult)
 class TestResultAdmin(admin.ModelAdmin):
     list_display =('student','test_type', 'score',  'level','total_questions','correct_answers')    
+
+@admin.register(Attendance)
+class AttendanceAdmin(admin.ModelAdmin):
+    list_display = ('student', 'course', 'date', 'status', 'created_at', 'updated_at')
+    list_filter = ('status', 'course', 'date') 
+    search_fields = ('student__name', 'course__name')
+    list_editable = ('status',) 
+    list_per_page = 20 
+    ordering = ('-date',) 
+    

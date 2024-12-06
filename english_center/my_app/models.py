@@ -1,6 +1,6 @@
 # models.py
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone 
 
@@ -98,8 +98,35 @@ class Course(models.Model):
             current_date += datetime.timedelta(days=1)
         return current_date - datetime.timedelta(days=1)
 
+    def calculate_class_dates(self):
+        """
+        Tính toán tất cả các ngày học cho khóa học
+        :return: Danh sách các ngày học
+        """
+        all_class_dates = []
+        num_schedules = len(self.schedules.all())
+        sessions_per_schedule = self.total_session // num_schedules
+        sessions_left = self.total_session % num_schedules
+        
+        # Sắp xếp các lịch học theo thứ tự
+        week_days_sorted = sorted(self.schedules.all(), key=lambda x: x.weekday)
+        
+        for schedule in week_days_sorted:
+            class_dates = schedule.get_next_class_dates(self.start_date, sessions_per_schedule)
+            
+            # Phân phối phần dư cho các lịch học
+            if sessions_left > 0:
+                class_dates.append(schedule.get_next_class_dates(self.start_date, 1)[-1])
+                sessions_left -= 1
+            
+            all_class_dates.extend(class_dates)
+        
+        all_class_dates.sort()
+        return all_class_dates
+    
     def __str__(self):
         return f"{self.name} - {self.get_level_display()}"
+
 
 class CourseSchedule(models.Model):
     WEEKDAYS = (
@@ -122,6 +149,24 @@ class CourseSchedule(models.Model):
 
     def __str__(self):
         return f"{self.course.name} - {self.get_weekday_display()} {self.start_time}"
+    
+    def get_next_class_dates(self, start_date, total_sessions):
+        """
+        Hàm tính toán các ngày học từ ngày bắt đầu
+        :param start_date: Ngày bắt đầu khóa học
+        :param total_sessions: Tổng số buổi học
+        :return: Danh sách các ngày học
+        """
+        class_dates = []
+        current_date = start_date
+        
+        for _ in range(total_sessions):
+            while current_date.weekday() != self.weekday:
+                current_date += timedelta(days=1)
+            class_dates.append(current_date)
+            current_date += timedelta(weeks=1)
+
+        return class_dates
 
 class CourseEnrollment(models.Model):
     student = models.ForeignKey('Student', on_delete=models.CASCADE)
@@ -226,20 +271,19 @@ class TestResult(models.Model):
         ordering = ['-created_at']
     
     def __str__(self):
-        return f"{self.student.user.username} - {self.test_type} - {self.score}% - {self.level}"    
-"""
+        return f"{self.student.user.username} - {self.test_type} - {self.score}% - {self.level}"  
+          
 class Attendance(models.Model):
-    ATTENDANCE_STATUS = (
-        ('present', 'Có mặt'),
-        ('absent', 'Vắng mặt'),
-        ('late', 'Đi muộn')
-    )
     
-    session = models.ForeignKey(CourseSession, on_delete=models.CASCADE)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    status = models.CharField(max_length=10, choices=ATTENDANCE_STATUS)
-    note = models.TextField(blank=True, null=True)
-    
-    class Meta:
-        unique_together = ('session', 'student')
-"""
+    status = models.CharField(max_length=10, null=True, blank=True)
+    date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)  
+    updated_at = models.DateTimeField(auto_now=True)  
+
+    class Meta:  
+        ordering = ['date', 'course', 'student']
+
+    def __str__(self):
+        return f"{self.student} - {self.course.name} -  {self.status} ({self.date})"

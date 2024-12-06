@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam
+from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam, Attendance
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
@@ -79,3 +79,23 @@ class PlacementTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlacementTest
         fields = ['id', 'title', 'description', 'duration', 'questions']
+
+class AttendanceSerializer(serializers.ModelSerializer):
+    student_name = serializers.CharField(source='student.name', read_only=True)
+    course_id = serializers.IntegerField(source='course.id', read_only=True)
+
+    class Meta:
+        model = Attendance
+        fields = ['id', 'student_name', 'course_id', 'status', 'date',]
+    
+        def create(self, validated_data):
+            validated_data['status'] = validated_data.get('status', None)
+            return super().create(validated_data)
+
+        def update(self, instance, validated_data):
+            status = validated_data.get('status', None)
+            if status is None:
+                instance.status = None  
+            else:
+                instance.status = status
+            return super().update(instance, validated_data)

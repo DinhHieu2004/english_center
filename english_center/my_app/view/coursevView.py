@@ -19,22 +19,32 @@ class CourseDetailView(APIView):
         return Response({'course': course_data, }, status= 200)            
 
 class CourseStudentsAPIView(APIView):
-    def get(self, request,course_id,*args,**kwargs):
+    def get(self, request, course_id, *args, **kwargs):
         try:
             course = Course.objects.get(pk=course_id)
         except Course.DoesNotExist:
             raise NotFound(detail="Course not found") 
 
-        students = course.students.all()
+        students = course.students.all().order_by('id') 
         if not students.exists():
             return Response({"message": "No students enrolled in this course."})
 
-        serializer = StudentSerializer(students, many=True)
-        students_with_ids = [
-            {**data, 'id': student.id} for student, data in zip(students, serializer.data)
-        ]
+        students_data = []
+        for student in students:
+            student_id = student.id
+            user = student.user
+
+            student_data = {
+                'id': student_id,
+                'name': user.fullname,
+                'email': user.email,
+                'phone': user.phone,
+                'birth_date': user.date_of_birth,
+                'address': user.address
+            }
+            students_data.append(student_data)
 
         return Response({
             'course': course.name,
-            'students': students_with_ids  
+            'students': students_data 
         })
