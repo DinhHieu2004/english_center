@@ -1,9 +1,7 @@
 # models.py
 from django.db import models
-from django.core.exceptions import ValidationError
-from django.db.models import Q
-from datetime import datetime, timedelta
-from django.contrib.auth.models import AbstractUser, BaseUserManager
+from datetime import datetime
+from django.contrib.auth.models import AbstractUser
 from django.utils import timezone 
 
 class User(AbstractUser):
@@ -40,6 +38,7 @@ class Student(models.Model):
         ('b2', 'B2')
     )
     
+    is_studying = models.BooleanField(default=False)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     level = models.CharField(max_length=10, choices=LEVELS, default='none')
     has_taken_test = models.BooleanField(default=False)  
@@ -80,6 +79,7 @@ class Course(models.Model):
     name = models.CharField(max_length=200)
     level = models.CharField(max_length=2, choices=LEVELS)
     description = models.TextField()
+    price = models.DecimalField(max_digits=10, decimal_places= 2)
     teacher = models.ForeignKey('Teacher', on_delete=models.SET_NULL, null=True, blank=True)
     students = models.ManyToManyField('Student', through='CourseEnrollment')
     start_date = models.DateField()
@@ -96,7 +96,7 @@ class Course(models.Model):
             if current_date.weekday() in class_days:
                 session_count += 1
             current_date += datetime.timedelta(days=1)
-        return current_date - datetime.timedelta(days=1)  # Ngày cuối cùng của buổi học
+        return current_date - datetime.timedelta(days=1)
 
     def __str__(self):
         return f"{self.name} - {self.get_level_display()}"
@@ -180,21 +180,22 @@ class Question(models.Model):
     final_exam = models.ForeignKey('FinalExam', on_delete=models.CASCADE, related_name='questions', null=True, blank=True)  
     text = models.TextField()
     audio_file = models.FileField(upload_to='audio/', blank=True, null=True)
-    choice_a = models.TextField(max_length=200, default=" ")
-    choice_b = models.CharField(max_length=200, default=" ")
-    choice_c = models.TextField(max_length=200, default=" ")
-    choice_d = models.TextField(max_length=200, default=" ")
+    choice_a = models.TextField(max_length=200, default=" ", blank=True, null=True)
+    choice_b = models.CharField(max_length=200, default=" " ,blank=True, null=True)
+    choice_c = models.TextField(max_length=200, default=" " ,blank=True, null=True)
+    choice_d = models.TextField(max_length=200, default=" ", blank=True, null=True)
     correct_answer = models.CharField(max_length=1, choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')], null=True)
     level = models.CharField(max_length=2, choices=LEVEL_CHOICES)
 
     def __str__(self):
         return f"{self.text} ({self.level})"
 
+
 class Answer(models.Model):
     student = models.ForeignKey(Student, on_delete=models.CASCADE, related_name='answers', null = True)
     question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name='answers')
     selected_answer = models.CharField(max_length=1, choices=[('A', 'A'), ('B', 'B'), ('C', 'C'), ('D', 'D')] , null = True,) 
-    is_correct = models.BooleanField(default=False)  # Kiểm tra đáp án đúng hay sai
+    is_correct = models.BooleanField(default=False) 
     exam_type = models.CharField(max_length=10, choices=[('final', 'Final Exam'), ('placement', 'Placement Test')], default='placement')
     
     def __str__(self):

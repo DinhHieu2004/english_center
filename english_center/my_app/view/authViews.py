@@ -51,6 +51,15 @@ class LoginView(APIView):
                 'message': 'Invalid credentials'
             }, status=status.HTTP_401_UNAUTHORIZED)
 
+class LogoutView(APIView):
+   permission_classes = [IsAuthenticated]
+
+   def post(self, request):
+      try:
+         request.user.auth_token.delete()
+         return Response ({'message ': 'logout is suscese'})
+      except Exception as e :
+         return Response (status= status.HTTP_400_BAD_REQUEST)
 
 class RegisterStudent(APIView):
     permission_classes = [AllowAny]  
@@ -95,6 +104,7 @@ class ChangePasswordView(APIView):
 
         return Response({'message': 'Password changed succsessfuly'}, status= status.HTTP_200_OK)
 
+"""
 class RegisterTeacher(APIView):
     permission_classes = [AllowAny]  
 
@@ -114,6 +124,6 @@ class RegisterTeacher(APIView):
         
         return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
+"""
 
 

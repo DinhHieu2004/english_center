@@ -1,6 +1,6 @@
 
 function getCSRFToken() {
-    var name = "csrftoken=";
+    //var name = "csrftoken=";
     var decodedCookie = decodeURIComponent(document.cookie);
     var ca = decodedCookie.split(';');
     for (var i = 0; i < ca.length; i++) {
@@ -70,7 +70,7 @@ $(document).ready(function() {
             contentType: 'application/json',
             data: JSON.stringify(formData),
             headers: {
-                'X-CSRFToken': getCookie('csrftoken')
+               // 'X-CSRFToken': getCookie('csrftoken')
             },
             success: function(response) {
                 alert('Đăng ký thành công!');

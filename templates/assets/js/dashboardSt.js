@@ -42,7 +42,6 @@ $(document).ready(function () {
         if (userLevel === "none") {
             $('#takeTestButton').show();
             $('#takeTestButton').click(function () {
-                // Điều hướng đến trang làm bài kiểm tra
                 window.location.href = 'entrance_test.html';
             });
         } else {
@@ -82,11 +81,13 @@ $(document).ready(function () {
                 'Authorization': `Token ${token}`
             },
             success: function(response) {
-                console.log(response)
-                if (response.current_data && response.current_data.length > 0) {
-                    displayCurrentCourses(response.current_data);
-                } else {
-                    displayAvailableCourses(response.avilable_courses);
+                is_register = Array.isArray(response.current_course) && response.current_course.length > 0;
+                console.log(is_register, typeof is_register)
+                localStorage.setItem('is_register', is_register)
+                if(is_register){
+                    displayCurrentCourses(response.current_course)
+                }else{
+                    displayAvailableCourses(response.available_courses)
                 }
             },
             error: function(xhr) {
@@ -95,7 +96,7 @@ $(document).ready(function () {
         });
     }
 
-    // Hiển thị khóa học hiện tại
+    //  khóa học hiện tại
     function displayCurrentCourses(courses) {
         const coursesContainer = $('#currentCourses');
         coursesContainer.empty();
@@ -119,7 +120,7 @@ $(document).ready(function () {
             coursesContainer.append(courseCard);
         });
     }
-    // Hiển thị khóa học có thể đăng ký
+    //  khóa học có thể đăng ký
     function displayAvailableCourses(courses) {
         const registerContainer = $('#registerCourses');
         registerContainer.empty();
@@ -159,8 +160,6 @@ $(document).ready(function () {
         });
     }
 
-   
-
     fetchDashboardData();
-
 });
+

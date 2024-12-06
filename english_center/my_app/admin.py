@@ -1,10 +1,10 @@
 from django.contrib import admin
 
-from .models import User, Question, FinalExam, PlacementTest, Student, Teacher,Course, CourseEnrollment, CourseSchedule, Answer, TestResult
+from .models import User, Question, FinalExam, PlacementTest, Student, Teacher,Course, CourseEnrollment, CourseSchedule, TestResult, Answer, TestResult
 from django.contrib.auth.admin import UserAdmin
-from django.contrib.auth.hashers import make_password, is_password_usable
+from django.contrib.auth.hashers import make_password
 from django.contrib import messages
-from django.core.exceptions import ValidationError
+ #from django.core.exceptions import ValidationError
 
 class StudentInline(admin.StackedInline):
     model = Student
@@ -89,15 +89,13 @@ class CustomUserAdmin(UserAdmin):
         queryset.update(is_active=False)
     make_inactive.short_description = "Mark selected users as inactive"
 
-# Đăng ký Student Admin
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
     list_display = ('id','user', 'level', 'has_taken_test')
-    list_filter = ('level', 'has_taken_test')
+    list_filter = ('level', 'has_taken_test','is_studying')
     search_fields = ('user__username', 'user__fullname')
 
  
-# Đăng ký Teacher Admin
 @admin.register(Teacher)
 class TeacherAdmin(admin.ModelAdmin):
     list_display = ('id','user', 'education_level')
@@ -135,7 +133,6 @@ class QuestionAdmin(admin.ModelAdmin):
     search_fields = ('text', 'choice_a', 'choice_b', 'choice_c', 'choice_d')
     
     def text_preview(self, obj):
-        # Hiển thị preview của text với độ dài tối đa 50 ký tự
         return obj.text[:50] + "..." if len(obj.text) > 50 else obj.text
     text_preview.short_description = 'Question Text'
 
@@ -151,6 +148,7 @@ class QuestionAdmin(admin.ModelAdmin):
         })
     )
 
+
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
     list_display = ('student', 'question_preview', 'selected_answer', 'is_correct', 'exam_type')
@@ -161,11 +159,12 @@ class AnswerAdmin(admin.ModelAdmin):
         return obj.question.text[:50] + "..." if len(obj.question.text) > 50 else obj.question.text
     question_preview.short_description = 'Question'
 
-# course
 
+
+# course
 class CourseScheduleInline(admin.TabularInline):
     model = CourseSchedule
-    extra = 1
+    extra = 1 
     fields = ('weekday', 'start_time')
 
 class CourseEnrollmentInline(admin.TabularInline):
@@ -176,14 +175,14 @@ class CourseEnrollmentInline(admin.TabularInline):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('name', 'level', 'teacher', 'start_date', 'total_session')
+    list_display = ('id', 'name', 'level', 'teacher', 'price','start_date', 'total_session')
     list_filter = ('level', 'teacher',)
     search_fields = ('name',)
     inlines = [CourseScheduleInline, CourseEnrollmentInline]
     
     fieldsets = (
         ('Thông tin khóa học', {
-            'fields': ('name', 'level', 'description', 'teacher')
+            'fields': ('name', 'level', 'description','price', 'teacher')
         }),
         ('Chi tiết khóa học', {
             'fields': ('start_date', 'total_session')

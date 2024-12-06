@@ -20,7 +20,6 @@ class PlacementTestView(APIView):
     permission_classes = [IsAuthenticated]  
     
     def get(self, request):
-
         try:
             test = PlacementTest.objects.first()
             if not test: 
