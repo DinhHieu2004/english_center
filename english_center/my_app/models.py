@@ -3,6 +3,10 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone 
+from django.utils.timezone import now
+from channels.layers import get_channel_layer
+from asgiref.sync import async_to_sync
+
 
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)  
@@ -243,3 +247,25 @@ class Attendance(models.Model):
     class Meta:
         unique_together = ('session', 'student')
 """
+
+class Notification(models.Model):
+    title = models.CharField(max_length=200)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='notifications')
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)  # Giáo viên gửi thông báo
+    message = models.TextField()
+    timestamp = models.DateTimeField(default=now)
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        # Gửi thông báo qua WebSocket
+        channel_layer = get_channel_layer()
+        async_to_sync(channel_layer.group_send)(
+            f"course_{self.course.id}",
+            {
+                'type': 'send_notification',
+                'message': self.message
+            }
+        )
+
+    def __str__(self):
+        return f"Notification for {self.course.name} by {self.teacher.user.username} at {self.timestamp}"

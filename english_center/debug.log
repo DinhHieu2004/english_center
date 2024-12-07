@@ -10291,3 +10291,188 @@ Student Student: dinhHieu - Level: none scored 50.0% and achieved level a2
 Created test result: dinhHieu - placement - 50.0% - a2
 Updated student level to a2
 Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\notification.py changed, reloading.
+Watching for file changes with StatReloader
+Internal Server Error: /api/send-notification
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\deprecation.py", line 131, in __call__
+    response = self.process_response(request, response)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 108, in process_response
+    return self.response_redirect_class(self.get_full_path_with_slash(request))
+                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\middleware\common.py", line 87, in get_full_path_with_slash
+    raise RuntimeError(
+RuntimeError: You called this URL via POST, but the URL doesn't end in a slash and you have APPEND_SLASH set. Django can't redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/api/send-notification/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.
+Unauthorized: /api/send-notification/
+Unauthorized: /api/send-notification/
+N:\web_python\english_center\my_app\view\examViews.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\notification.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/send-notification/
+Unauthorized: /api/send-notification/
+N:\web_python\english_center\my_app\view\notification.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\notification.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\urls.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/send-notification/
+Unauthorized: /api/send-notification/
+Bad Request: /api/send-notification/
+Bad Request: /api/send-notification/
+Bad Request: /api/send-notification/
+Not Found: /favicon.ico
+Internal Server Error: /api/send-notification/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\notification.py", line 33, in post
+    notification = Notification.objects.create(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\manager.py", line 87, in manager_method
+    return getattr(self.get_queryset(), name)(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\query.py", line 677, in create
+    obj = self.model(**kwargs)
+          ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\db\models\base.py", line 567, in __init__
+    raise TypeError(
+TypeError: Notification() got unexpected keyword arguments: 'content', 'sender'
+N:\web_python\english_center\my_app\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\notification.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\notification.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\consumers.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\services.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\notification.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\serializers.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\notification.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\routing.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\english_center\asgi.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /ws/notifications/6/
+N:\web_python\english_center\english_center\asgi.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\english_center\asgi.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /ws/notifications/6/
+Not Found: /ws/notifications/6/
+N:\web_python\english_center\my_app\consumers.py changed, reloading.
+Watching for file changes with StatReloader
+Using proactor: IocpProactor
+Using proactor: IocpProactor
+Watching for file changes with StatReloader
+Not Found: /notifications/send-notification/<6>/
+Not Found: /api/notifications/send-notification/<6>/
+Forbidden: /api/send-notification/6/
+Using proactor: IocpProactor
+Not Found: /ws/course/1/
+Not Found: /ws/course/5/
+N:\web_python\english_center\my_app\routing.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+N:\web_python\english_center\my_app\routing.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+N:\web_python\english_center\english_center\asgi.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+Watching for file changes with StatReloader
+Not Found: /ws/course/5/
+N:\web_python\english_center\my_app\view\notification.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+N:\web_python\english_center\english_center\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+Watching for file changes with StatReloader
+Not Found: /ws/course/5/
+Not Found: /ws/course/5/
+Watching for file changes with StatReloader
+Not Found: /ws/course/5/
+Watching for file changes with StatReloader
+N:\web_python\english_center\english_center\routing.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\routing.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\english_center\asgi.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\english_center\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Not Found: /ws/course/5/
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+Watching for file changes with StatReloader
+N:\web_python\english_center\english_center\settings.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\english_center\settings.py changed, reloading.
+Watching for file changes with StatReloader
+Unauthorized: /api/login/
+N:\web_python\english_center\notifications\consumers.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\notifications\routing.py changed, reloading.
+Watching for file changes with StatReloader
+N:\web_python\english_center\english_center\asgi.py changed, reloading.
+Watching for file changes with StatReloader
+Starting server at tcp:port=8000:interface=127.0.0.1
+HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+Configuring endpoint tcp:port=8000:interface=127.0.0.1
+Listening on TCP address 127.0.0.1:8000
+Starting server at tcp:port=8000:interface=127.0.0.1
+HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+Configuring endpoint tcp:port=8000:interface=127.0.0.1
+Listening on TCP address 127.0.0.1:8000
+Killed 0 pending application instances

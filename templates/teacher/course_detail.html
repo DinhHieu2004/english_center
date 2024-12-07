@@ -73,8 +73,46 @@
                 </tbody>
             </table>
         </div>
-        
-        
+        <div class="mt-4">
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#notificationModal">
+                <i class="bi bi-bell"></i> Quản lý thông báo
+            </button>
+        </div>
+        <div class="modal fade" id="notificationModal" tabindex="-1" aria-labelledby="notificationModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="notificationModalLabel">Quản lý thông báo</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Đóng"></button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Phần hiển thị thông báo cũ -->
+                        <h6>Danh sách thông báo cũ</h6>
+                        <div id="oldNotifications" class="mb-4">
+                            <ul class="list-group">
+                                <!-- Thông báo cũ sẽ được thêm bằng JavaScript -->
+                            </ul>
+                        </div>
+                        <hr>
+                        <!-- Form gửi thông báo mới -->
+                        <h6>Gửi thông báo mới</h6>
+                        <form id="newNotificationForm">
+                            <div class="mb-3">
+                                <label for="newNotificationTitle" class="form-label">Tiêu đề</label>
+                                <input type="text" class="form-control" id="newNotificationTitle" placeholder="Nhập tiêu đề thông báo" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="newNotificationContent" class="form-label">Nội dung</label>
+                                <textarea class="form-control" id="newNotificationContent" rows="4" placeholder="Nhập nội dung thông báo" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">
+                                <i class="bi bi-send"></i> Gửi
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <!-- Nút chuyển đến trang điểm danh -->
         <div class="mt-4">

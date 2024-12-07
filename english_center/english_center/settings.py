@@ -45,6 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'my_app.apps.MyAppConfig',
+    'notifications.apps.NotificationsConfig',
+
+
 
 ]
 
@@ -78,7 +81,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'english_center.wsgi.application'
 
 
@@ -164,5 +166,19 @@ LOGGING = {
             'level': 'DEBUG',
             'propagate': True,
         },
+    },
+}
+
+INSTALLED_APPS += [
+    'channels',
+]
+
+# Cấu hình Django Channels
+ASGI_APPLICATION = "english_center.asgi.application"
+
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
     },
 }

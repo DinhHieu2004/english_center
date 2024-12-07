@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.shortcuts import get_object_or_404
 from django.db.models import Count
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from ..models import PlacementTest, Question, Answer, TestResult, Student
 from ..serializers import PlacementTestSerializer, QuestionSerializer
 from django.db import transaction

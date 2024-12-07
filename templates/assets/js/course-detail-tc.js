@@ -126,10 +126,61 @@ function renderCourseDetails(course, teacherName) {
     $('#courseDetail').html(courseDetailsHtml);
 }
 
-// Hàm tạo headers với token
 function getAuthHeaders() {
     return {
         'Authorization': 'Token ' + localStorage.getItem('token'),
         'Content-Type': 'application/json'
     };
 }
+
+let notifications = [
+    { title: "Thông báo 1", content: "Nội dung thông báo 1", sender: "Giáo viên A", time: "2024-12-01 10:00" },
+    { title: "Thông báo 2", content: "Nội dung thông báo 2", sender: "Giáo viên B", time: "2024-12-03 15:00" },
+];
+
+function displayOldNotifications() {
+    const oldNotifications = document.getElementById("oldNotifications").querySelector("ul");
+    oldNotifications.innerHTML = "";
+
+    if (notifications.length === 0) {
+        oldNotifications.innerHTML = `<li class="list-group-item text-muted">Chưa có thông báo nào.</li>`;
+        return;
+    }
+
+    notifications.forEach((notification) => {
+        const li = document.createElement("li");
+        li.className = "list-group-item";
+        li.innerHTML = `
+            <strong>${notification.title}</strong> 
+            <p>${notification.content}</p>
+            <small class="text-muted">Gửi bởi: ${notification.sender} - Lúc: ${notification.time}</small>
+        `;
+        oldNotifications.appendChild(li);
+    });
+}
+
+document.getElementById("newNotificationForm").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const title = document.getElementById("newNotificationTitle").value.trim();
+    const content = document.getElementById("newNotificationContent").value.trim();
+
+    if (title && content) {
+        const newNotification = {
+            title: title,
+            content: content,
+            sender: "Giáo viên C", 
+            time: new Date().toLocaleString(),
+        };
+        notifications.unshift(newNotification); 
+
+        displayOldNotifications();
+
+        document.getElementById("newNotificationForm").reset();
+
+        alert("Thông báo đã được gửi thành công!");
+    }
+});
+
+// Hiển thị thông báo cũ khi modal mở
+document.getElementById("notificationModal").addEventListener("shown.bs.modal", displayOldNotifications);

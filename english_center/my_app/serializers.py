@@ -1,10 +1,25 @@
 from rest_framework import serializers
-from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam
+from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam, Notification
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 
 
+"""
+class NotificationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = ['id', 'title', 'course', 'teacher', 'message', 'timestamp']
+        read_only_fields = ['id', 'timestamp']  # id và timestamp là chỉ đọc
+"""
+
+class NotificationSerializer(serializers.ModelSerializer):
+    teacher_name = serializers.CharField(source='teacher.user.username', read_only=True)
+    course_name = serializers.CharField(source='course.name', read_only=True)
+    
+    class Meta:
+        model = Notification
+        fields = ['id', 'title', 'message', 'course_name', 'teacher_name', 'timestamp']
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
