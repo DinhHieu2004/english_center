@@ -76,3 +76,9 @@ class PlacementTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlacementTest
         fields = ['id', 'title', 'description', 'duration', 'questions']
+
+class FinalExamSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True, read_only = True)
+    class Meta:
+        model = FinalExam
+        fields = ['id', 'title', 'description', 'duration', 'questions']

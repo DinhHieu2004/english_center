@@ -1,6 +1,6 @@
 from django.urls import path
 from .view.authViews import LoginView,RegisterTeacher, RegisterStudent
-from  .view.examViews import PlacementTestView
+from  .view.examViews import PlacementTestView, FinalExamView
 from  .view.course import StudentDashboardView, CourseDetailView, TeacherDashboardView, CourseStudentsAPIView
 from .view.teacher import TeacherView
 from .view.students import StudentDetailView
@@ -17,5 +17,5 @@ urlpatterns = [
     path('student/<int:student_id>/', StudentDetailView.as_view(), name='student-detail'),
     path('teacher/dashboard/', TeacherDashboardView.as_view(), name='teacher_courses'),
     path('course/<int:course_id>/students/', CourseStudentsAPIView.as_view(), name='course-students'),
-
+    path('api/final-exam/<int:exam_id>/', FinalExamView.as_view(), name='final-exam'),
 ]

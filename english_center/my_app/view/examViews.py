@@ -6,8 +6,8 @@ from django.shortcuts import get_object_or_404
 from django.db.models import Count
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
-from ..models import PlacementTest, Question, Answer, TestResult, Student
-from ..serializers import PlacementTestSerializer, QuestionSerializer
+from ..models import PlacementTest, Question, Answer, TestResult, Student, FinalExam
+from ..serializers import PlacementTestSerializer, QuestionSerializer,FinalExamSerializer
 from django.db import transaction
 import logging
 
@@ -165,6 +165,97 @@ class PlacementTestView(APIView):
                 {"error": str(e)}, 
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+    def determine_level(self, score):
+        if score >= 85:
+            return 'b2'
+        elif score >= 70:
+            return 'b1'
+        elif score >= 50:
+            return 'a2'
+        else:
+            return 'a1'
+        
+class FinalExamView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, exam_id):
+        try:
+            exam = FinalExam.objects.get(id=exam_id)
+            serializer = FinalExamSerializer(exam)
+            return Response(serializer.data)
+        except FinalExam.DoesNotExist:
+            return Response({"error": "Không tìm thấy bài kiểm tra"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    def post(self, request, exam_id):
+        try:
+            if not request.user.is_authenticated:
+                return Response({"error": "Vui lòng đăng nhập để lưu kết quả bài kiểm tra"}, status=status.HTTP_401_UNAUTHORIZED)
+
+            student = Student.objects.get(user=request.user)
+            with transaction.atomic():
+                exam = FinalExam.objects.get(id=exam_id)
+                answers_data = request.data
+                if not isinstance(answers_data, list):
+                    return Response({"error": "Dữ liệu không hợp lệ"}, status=status.HTTP_400_BAD_REQUEST)
+
+                correct_count = 0
+                total_questions = exam.questions.count()
+                answers_to_create = []
+
+                for answer_data in answers_data:
+                    question_id = answer_data.get('question_id')
+                    selected_answer = answer_data.get('selected_answer')
+
+                    if not question_id or not selected_answer:
+                        continue
+
+                    question = exam.questions.get(id=question_id)
+                    is_correct = question.correct_answer == selected_answer
+                    if is_correct:
+                        correct_count += 1
+
+                    answer = Answer(
+                        student=student,
+                        question=question,
+                        selected_answer=selected_answer,
+                        is_correct=is_correct,
+                        exam_type='final'
+                    )
+                    answers_to_create.append(answer)
+
+                Answer.objects.bulk_create(answers_to_create)
+
+                score = (correct_count / total_questions * 100) if total_questions > 0 else 0
+                level_after_test = self.determine_level(score)
+
+                test_result = TestResult.objects.create(
+                    student=student,
+                    test_type='final',
+                    score=score,
+                    level=level_after_test,
+                    total_questions=total_questions,
+                    correct_answers=correct_count
+                )
+
+                student.level = level_after_test
+                student.has_taken_test = True
+                student.save()
+
+            return Response({
+                "correct_answers": correct_count,
+                "total_questions": total_questions,
+                "score": round(score, 2),
+                "level": level_after_test,
+                "message": "Đã lưu kết quả bài kiểm tra thành công"
+            })
+        except FinalExam.DoesNotExist:
+            return Response({"error": "Không tìm thấy bài kiểm tra"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     def determine_level(self, score):
         if score >= 85:
