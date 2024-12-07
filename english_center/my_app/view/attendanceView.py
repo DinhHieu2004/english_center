@@ -55,7 +55,6 @@ class AttendanceList(APIView):
 
         try:
             if statuss:
-        # Nếu có status, kiểm tra và tạo bản ghi hoặc cập nhật
                 attendance, created = Attendance.objects.get_or_create(
                 course_id=course_id, student_id=student_id, date=date
                 )
@@ -63,16 +62,11 @@ class AttendanceList(APIView):
                 attendance.save()
                 return Response({"message": "Attendance saved successfully."}, status=status.HTTP_200_OK)
             else:
-        # Nếu không có status, kiểm tra xem bản ghi có tồn tại hay không
                 attendance = Attendance.objects.filter(course_id=course_id, student_id=student_id, date=date)
         
                 if attendance.exists():
-            # Nếu bản ghi tồn tại, xóa bản ghi
                     attendance.delete()
-                    return Response({"message": "Attendance deleted successfully."}, status=status.HTTP_200_OK)
-                else:
-            # Nếu không có bản ghi nào, trả về lỗi
-                    return Response({"message": "Attendance not found to delete."}, status=status.HTTP_404_NOT_FOUND)
+                return Response({"message": "Attendance deleted successfully."}, status=status.HTTP_200_OK)
         except Exception:
             return Response({"error": "lõi"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         

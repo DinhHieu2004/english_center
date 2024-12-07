@@ -4,6 +4,8 @@ from .models import User, Question, FinalExam, PlacementTest, Student, Teacher,C
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password
 from django.contrib import messages
+import json
+from django.db.models import Count
  #from django.core.exceptions import ValidationError
 
 class StudentInline(admin.StackedInline):
@@ -244,4 +246,15 @@ class AttendanceAdmin(admin.ModelAdmin):
     list_editable = ('status',) 
     list_per_page = 20 
     ordering = ('-date',) 
+    def changelist_view(self, request, extra_context=None):
+        attendance_stats = Attendance.objects.values('status').annotate(total=Count('status'))
+
+        labels = [item['status'] for item in attendance_stats]
+        data = [item['total'] for item in attendance_stats]
+
+        extra_context = extra_context or {}
+        extra_context['labels'] = json.dumps(labels)  
+        extra_context['data'] = json.dumps(data) 
+
+        return super().changelist_view(request, extra_context=extra_context)
     
