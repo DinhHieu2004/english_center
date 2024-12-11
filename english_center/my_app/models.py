@@ -1,11 +1,13 @@
 # models.py
 from django.db import models
-from datetime import datetime
+from datetime import datetime, timedelta
 from django.contrib.auth.models import AbstractUser
 from django.utils import timezone 
 from django.utils.timezone import now
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
+from django.db.models import Sum, Count
+from dateutil.relativedelta import relativedelta
 
 
 class User(AbstractUser):
@@ -101,6 +103,45 @@ class Course(models.Model):
                 session_count += 1
             current_date += datetime.timedelta(days=1)
         return current_date - datetime.timedelta(days=1)
+    
+    def calculate_class_dates(self):
+        """
+        Tính toán tất cả các ngày học cho khóa học
+        :return: Danh sách các ngày học
+        """
+        all_class_dates = []
+        num_schedules = len(self.schedules.all())
+        sessions_per_schedule = self.total_session // num_schedules
+        sessions_left = self.total_session % num_schedules
+        
+        # Sắp xếp các lịch học theo thứ tự
+        week_days_sorted = sorted(self.schedules.all(), key=lambda x: x.weekday)
+        
+        for schedule in week_days_sorted:
+            class_dates = schedule.get_next_class_dates(self.start_date, sessions_per_schedule)
+            
+            # Phân phối phần dư cho các lịch học
+            if sessions_left > 0:
+                class_dates.append(schedule.get_next_class_dates(self.start_date, 1)[-1])
+                sessions_left -= 1
+            
+            all_class_dates.extend(class_dates)
+        
+        all_class_dates.sort()
+        return all_class_dates
+    
+    def __str__(self):
+        return f"{self.name} - {self.get_level_display()}"
+
+    def __str__(self):
+        return f"{self.name} - {self.get_level_display()}"
+    
+    def calculate_revenue(self):
+        student_count = self.students.count()
+        return student_count * self.price
+
+    def enrollment_count(self):
+        return self.students.count()
 
     def __str__(self):
         return f"{self.name} - {self.get_level_display()}"
@@ -126,7 +167,24 @@ class CourseSchedule(models.Model):
 
     def __str__(self):
         return f"{self.course.name} - {self.get_weekday_display()} {self.start_time}"
+    def get_next_class_dates(self, start_date, total_sessions):
+        """
+        Hàm tính toán các ngày học từ ngày bắt đầu
+        :param start_date: Ngày bắt đầu khóa học
+        :param total_sessions: Tổng số buổi học
+        :return: Danh sách các ngày học
+        """
+        class_dates = []
+        current_date = start_date
+        
+        for _ in range(total_sessions):
+            while current_date.weekday() != self.weekday:
+                current_date += timedelta(days=1)
+            class_dates.append(current_date)
+            current_date += timedelta(weeks=1)
 
+        return class_dates
+    
 class CourseEnrollment(models.Model):
     student = models.ForeignKey('Student', on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -247,25 +305,71 @@ class Attendance(models.Model):
     class Meta:
         unique_together = ('session', 'student')
 """
+          
+class Attendance(models.Model):
+    
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+    status = models.CharField(max_length=10, null=True, blank=True)
+    date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)  
+    updated_at = models.DateTimeField(auto_now=True)  
 
+    class Meta:  
+        ordering = ['date', 'course', 'student']
+
+    def __str__(self):
+        return f"{self.student} - {self.course.name} -  {self.status} ({self.date})"
 class Notification(models.Model):
     title = models.CharField(max_length=200)
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='notifications')
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE)  # Giáo viên gửi thông báo
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE) 
     message = models.TextField()
     timestamp = models.DateTimeField(default=now)
 
-    def save(self, *args, **kwargs):
-        super().save(*args, **kwargs)
-        # Gửi thông báo qua WebSocket
-        channel_layer = get_channel_layer()
-        async_to_sync(channel_layer.group_send)(
-            f"course_{self.course.id}",
-            {
-                'type': 'send_notification',
-                'message': self.message
-            }
-        )
-
     def __str__(self):
         return f"Notification for {self.course.name} by {self.teacher.user.username} at {self.timestamp}"
+    
+class Revenue(models.Model):
+    date = models.DateField(default=timezone.now)
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    total_revenue = models.DecimalField(max_digits=10, decimal_places=2)
+
+    def __str__(self):
+        return f"Revenue for {self.course.name} on {self.date}"
+
+    @classmethod
+    def update_revenue(cls):
+        """Cập nhật doanh thu mỗi ngày"""
+        today = timezone.now().date()
+        courses = Course.objects.all()
+        
+        for course in courses:
+            student_count = CourseEnrollment.objects.filter(course=course).count()
+            total_revenue = student_count * course.price
+            cls.objects.update_or_create(
+                date=today, 
+                course=course, 
+                defaults={'total_revenue': total_revenue},
+            )
+            
+class Statistics(models.Model):
+    STATISTICS_TYPES = [
+        ('revenue', 'Revenue'),          
+        ('student', 'Student'),        
+        ('teacher', 'Teacher'),          
+        ('course', 'Course'),         
+    ]
+
+    date = models.DateField(default=now)  
+    type = models.CharField(max_length=50, choices=STATISTICS_TYPES) 
+    data = models.JSONField()  
+
+    class Meta:
+        unique_together = ('date', 'type')  
+        ordering = ['-date', 'type']
+
+    def __str__(self):
+        return f"{self.get_type_display()} Statistics for {self.date}"
+    
+    

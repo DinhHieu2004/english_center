@@ -42,21 +42,23 @@ class TOEICTest {
     }
 
     sortAndDisplayQuestions() {
-        const listeningQuestions = this.questions.filter(q => q.audio_file);
-        const readingQuestions = this.questions.filter(q => !q.audio_file);
+        const local = "http://127.0.0.1:8000/api"
+        const listeningQuestions = this.questions.filter(q => q.audio_file_url);
+        const readingQuestions = this.questions.filter(q => !q.audio_file_url);
 
-        $('#listening-questions').html(this.generateQuestionsHTML(listeningQuestions, true));
+        $('#listening-questions').html(this.generateQuestionsHTML(listeningQuestions, true, local));
         $('#reading-questions').html(this.generateQuestionsHTML(readingQuestions, false));
     }
 
     generateQuestionsHTML(questions, isListening) {
+      
         return questions.map((question, index) => `
             <div class="question" data-id="${question.id}">
                 <p class="h5 mb-3">Câu ${index + 1}:</p>
                 <p>${question.text}</p>
                 ${isListening ? `
                     <audio controls class="mb-3">
-                        <source src="${question.audio_file}" type="audio/mpeg">
+                        <source src="${question.audio_file_url}" type="audio/mpeg">
                         Trình duyệt của bạn không hỗ trợ phát âm thanh.
                     </audio>
                 ` : ''}

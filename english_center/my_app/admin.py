@@ -1,10 +1,30 @@
 from django.contrib import admin
-
-from .models import User, Question, FinalExam, PlacementTest, Student, Teacher,Course, CourseEnrollment, CourseSchedule, TestResult, Answer, TestResult
+from django import forms
+from .models import (User, Question, FinalExam, PlacementTest, Student, Teacher,Course,
+                    CourseEnrollment, CourseSchedule,
+                    TestResult, Answer, TestResult,  Attendance, Notification 
+                   )
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password
+from django.db.models.functions import ExtractQuarter, ExtractYear
+from django.urls import path
+from django.db.models import Sum, Avg
+from django.template.response import TemplateResponse
+from django.utils.timezone import now
+from datetime import date
+from django.utils.safestring import mark_safe
+from django.shortcuts import render
 from django.contrib import messages
+from django.db.models import Count
  #from django.core.exceptions import ValidationError
+import json
+import base64
+from io import BytesIO
+from django.contrib import admin
+from .models import Revenue, Course, CourseEnrollment
+from django.utils import timezone
+import matplotlib.pyplot as plt
+import seaborn as sns
 
 class StudentInline(admin.StackedInline):
     model = Student
@@ -202,4 +222,108 @@ class CourseEnrollmentAdmin(admin.ModelAdmin):
 
 @admin.register(TestResult)
 class TestResultAdmin(admin.ModelAdmin):
-    list_display =('student','test_type', 'score',  'level','total_questions','correct_answers')    
+    list_display =('student','test_type', 'score',  'level','total_questions','correct_answers')  
+
+class AttendanceInline(admin.TabularInline):
+    model = Attendance
+    extra = 0
+    fields = ('student', 'date', 'status')
+    show_change_link = True
+    def formfield_for_dbfield(self, db_field, request, **kwargs):
+        course_id = request.resolver_match.kwargs.get('object_id')
+        
+        if course_id:
+            if db_field.name == 'student':
+                kwargs['queryset'] = Student.objects.filter(courseenrollment__course_id=course_id)
+        
+            elif db_field.name == 'date':
+                try:
+                    course = Course.objects.get(id=course_id)
+                except Course.DoesNotExist:
+                    course = None
+            
+                if course:
+                    valid_dates = course.calculate_class_dates()
+                    valid_dates_display = [date.strftime("%Y-%m-%d") for date in valid_dates]
+                    kwargs['widget'] = forms.Select(choices=[(date, date) for date in valid_dates_display])
+
+        return super().formfield_for_dbfield(db_field, request, **kwargs)
+
+    def get_queryset(self, request):
+        course_id = request.resolver_match.kwargs.get('object_id')
+        if course_id:
+            return Attendance.objects.filter(course_id=course_id)
+        return Attendance.objects.all()      
+
+@admin.register(Attendance)
+class AttendanceAdmin(admin.ModelAdmin):
+    list_display = ('student', 'course', 'date', 'status', 'created_at', 'updated_at')
+    list_filter = ('status', 'course', 'date') 
+    search_fields = ('student__name', 'course__name')
+    list_editable = ('status',) 
+    list_per_page = 20 
+    ordering = ('-date',) 
+    def changelist_view(self, request, extra_context=None):
+        attendance_stats = Attendance.objects.values('status').annotate(total=Count('status'))
+
+        labels = [item['status'] for item in attendance_stats]
+        data = [item['total'] for item in attendance_stats]
+
+        extra_context = extra_context or {}
+        extra_context['labels'] = json.dumps(labels)  
+        extra_context['data'] = json.dumps(data) 
+
+        return super().changelist_view(request, extra_context=extra_context)
+
+class NotificationAdmin(admin.ModelAdmin):
+    list_display =('id', 'title', 'course', 'teacher', 'message', 'timestamp')
+admin.site.register(Notification)    
+
+class RevenueAdmin(admin.ModelAdmin):
+    list_display = ('course', 'date', 'total_revenue')
+    change_list_template = "admin/my_app/statistics/chart_view.html" 
+
+    def get_queryset(self, request):
+        """Tự động cập nhật doanh thu mỗi khi truy cập vào Admin"""
+        # Cập nhật  thu trước khi trả về queryset
+        self.update_revenue()
+        return super().get_queryset(request)
+
+    def update_revenue(self):
+        """Cập nhật doanh thu tự động"""
+        today = timezone.now().date()
+        courses = Course.objects.all()
+
+        for course in courses:
+            student_count = CourseEnrollment.objects.filter(course=course).count()
+            total_revenue = student_count * course.price
+
+            Revenue.objects.update_or_create(
+                date=today, 
+                course=course, 
+                defaults={'total_revenue': total_revenue},
+            )
+
+    def changelist_view(self, request, extra_context=None):
+        stats = Revenue.objects.all()
+        courses = [stat.course.name for stat in stats]
+        revenues = [stat.total_revenue for stat in stats]
+
+        plt.figure(figsize=(10, 6))
+        sns.barplot(x=courses, y=revenues, palette='Blues_d')
+        plt.xlabel('Course')
+        plt.ylabel('Renuve')
+        plt.title('Revenue by Course')
+
+        img = BytesIO()
+        plt.savefig(img, format='png')
+        img.seek(0)
+        
+        chart_data = base64.b64encode(img.getvalue()).decode('utf-8')
+        
+        extra_context = extra_context or {}
+        extra_context['chart'] = chart_data
+
+        return super().changelist_view(request, extra_context=extra_context)
+
+admin.site.register(Revenue, RevenueAdmin)

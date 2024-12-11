@@ -1,10 +1,15 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
+
 from .view.authViews import LoginView, RegisterStudent, ChangePasswordView, LogoutView
 from  .view.examViews import PlacementTestView
 from  .view.coursevView import  CourseDetailView, CourseStudentsAPIView
 from .view.teacherView import TeacherView,TeacherDashboardView
 from .view.studentView import StudentDashboardView, StudentDetailView, StudentEnrollmentView
-from .view.notification import SendNotificationView
+from .view.notificationView import NotificationListView
+from .view.attendanceView import AttendanceList, CourseScheduleListView
+
 
 
 urlpatterns = [
@@ -20,6 +25,11 @@ urlpatterns = [
     path('student/<int:student_id>/', StudentDetailView.as_view(), name='student-detail'),
     path('course/<int:course_id>/students/', CourseStudentsAPIView.as_view(), name='course-students'),
     path('enroll-course/', StudentEnrollmentView.as_view(), name='enroll-course'),
-    path('send-notification/<int:course_id>/', SendNotificationView.as_view(), name='send-notification'),
+    path('notification/<int:course_id>/', NotificationListView.as_view(), name='send-notification'),
+    path('course/<int:course_id>/attendance/', AttendanceList.as_view(), name='attendance-list'),
+    path('course/<int:course_id>/schedule/', CourseScheduleListView.as_view(), name='course-schedule-list'),
 
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

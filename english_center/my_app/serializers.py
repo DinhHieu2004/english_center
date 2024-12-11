@@ -1,17 +1,9 @@
 from rest_framework import serializers
-from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam, Notification
+from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam, Notification,  Attendance
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
-
-
-"""
-class NotificationSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Notification
-        fields = ['id', 'title', 'course', 'teacher', 'message', 'timestamp']
-        read_only_fields = ['id', 'timestamp']  # id và timestamp là chỉ đọc
-"""
+from django.conf import settings
 
 class NotificationSerializer(serializers.ModelSerializer):
     teacher_name = serializers.CharField(source='teacher.user.username', read_only=True)
@@ -34,7 +26,6 @@ class LoginSerializer(serializers.Serializer):
         data['user'] = user
         return data
     
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -83,10 +74,19 @@ class CourseSerialozer(serializers.ModelSerializer):
 
 #
 class QuestionSerializer(serializers.ModelSerializer):
+    audio_file_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Question
-        fields =['id', 'text','audio_file', 'choice_a', 'choice_b', 'choice_c','choice_d']
+        fields = ['id', 'text', 'audio_file_url', 'choice_a', 'choice_b', 'choice_c', 'choice_d']
 
+    def get_audio_file_url(self, obj):
+        if obj.audio_file:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.audio_file.url.strip('/'))
+            return obj.audio_file.url
+        return None
 #
 class PlacementTestSerializer(serializers.ModelSerializer):
     questions  = QuestionSerializer(many = True, read_only = True)
@@ -94,3 +94,24 @@ class PlacementTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlacementTest
         fields = ['id', 'title', 'description', 'duration', 'questions']
+
+
+class AttendanceSerializer(serializers.ModelSerializer):
+    student_name = serializers.CharField(source='student.name', read_only=True)
+    course_id = serializers.IntegerField(source='course.id', read_only=True)
+
+    class Meta:
+        model = Attendance
+        fields = ['id', 'student_name', 'course_id', 'status', 'date',]
+    
+        def create(self, validated_data):
+            validated_data['status'] = validated_data.get('status', None)
+            return super().create(validated_data)
+
+        def update(self, instance, validated_data):
+            status = validated_data.get('status', None)
+            if status is None:
+                instance.status = None  
+            else:
+                instance.status = status
+            return super().update(instance, validated_data)        

@@ -25,6 +25,8 @@ class PlacementTestView(APIView):
             if not test: 
                 return Response({"error" : "chưa có bài test đầu vào"}, status = status.HTTP_404_NOT_FOUND)
 
+            #questions = Question.objects.all()
+            #serializer = QuestionSerializer(questions, many=True, context={'request': request})
             serializer = PlacementTestSerializer(test)
             return Response(serializer.data)
         except Exception as e:
@@ -80,7 +82,6 @@ class PlacementTestView(APIView):
                 old_answers.delete()
                 logger.info(f"Deleted {old_answers_count} old answers")
 
-                # Tạo các câu trả lời mới
                 correct_count = 0
                 total_questions = test.questions.count()
                 answers_to_create = []

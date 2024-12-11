@@ -7,11 +7,30 @@
 
     if (courseId) {
         fetchCourseDetails(courseId, is_register);
+        connectToWebSocket(courseId)
         
     } else {
         alert("Không có lớp học được tìm thấy.");
     }
 });
+function connectToWebSocket(courseId) {
+    const socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${courseId}/`);
+
+    socket.onopen = function () {
+        console.log("WebSocket connection established.");
+    };
+
+    socket.onmessage = function (e) {
+        const data = JSON.parse(e.data);
+        console.log("Received notification:", data);
+
+    };
+
+    socket.onclose = function () {
+        console.log("WebSocket connection closed.");
+    };
+}
+
 
 function getAuthHeaders() {
     return {
@@ -19,6 +38,7 @@ function getAuthHeaders() {
         'Content-Type': 'application/json'
     };
 }
+
 
 function fetchCourseDetails(courseId, is_register) {
     $.ajax({
@@ -120,7 +140,6 @@ function enrollCourse(courseId) {
             alert("Đăng ký khóa học thành công!");
             $('#paymentModal').modal('hide');
             
-            // reload lại gioa diện.
             localStorage.setItem('is_register', 'true');
             const paymentButton = document.querySelector('#payButton');
             if (paymentButton) {

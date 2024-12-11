@@ -1,38 +1,46 @@
-/* Thiết lập chiều cao và chiều rộng cố định cho bảng */
+.form-control{
+    padding: 0;
+    border-radius: 0;
+    border: none;
+}
+.table>:not(caption)>*>* {
+    padding: 0;
+}
 table {
-    table-layout: fixed; /* Đảm bảo các ô có kích thước cố định */
+    table-layout: fixed; 
     width: 100%;
-    border: 1px solid #ddd; /* Thêm viền cho bảng */
-    border-collapse: collapse; /* Làm cho các viền ô không bị chồng lên nhau */
+    border: 1px solid #ddd;
+    border-collapse: collapse;
 }
 th, td {
-    border: 1px solid #ddd; /* Thêm viền cho các ô */
-    padding: 8px;
+    border: 1px solid #ddd;
+    padding: 0px;
     text-align: center;
+    margin: 0;
 }
-th:first-child, td:first-child {
-    width: 200px; /* Kích thước cố định cho cột học viên */
-    position: -webkit-sticky; /* Duy trì cột học viên cố định trên Safari */
+th:first-child, td:first-child, th:nth-child(2), td:nth-child(2) {
+    width: 30px; 
+    position: -webkit-sticky; 
     position: sticky;
     left: 0;
-    background-color: #fff; /* Đảm bảo nền của cột học viên là trắng */
+    background-color: #fff; 
     z-index: 2;
 }
+th:nth-child(2), td:nth-child(2){
+    width: 200px;
+}
 
-/* Chỉ cột điểm danh có chiều rộng và chiều cao cố định */
-th:nth-child(n+2), td:nth-child(n+2) {
+th:nth-child(n+3), td:nth-child(n+3) {
     max-width: 200px;
-    width: 160px;
+    width: 100px;
 }
 
-/* Thiết lập chiều cao cố định và cuộn cho bảng */
 .table-responsive {
-    max-height: 400px; /* Bạn có thể thay đổi giá trị này tùy ý */
+    max-height: 400px;
     overflow-y: auto;
-    overflow-x: auto; /* Cho phép cuộn ngang khi bảng có thêm cột */
+    overflow-x: auto; 
 }
-
-.status-input {
+input {
     width: 100%;
     text-align: center;
     border: none;

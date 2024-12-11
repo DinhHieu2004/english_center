@@ -1,0 +1,9 @@
+<!-- myapp/templates/admin/revenue_changelist.html -->
+{% extends "admin/change_list.html" %}
+
+{% block content %}
+    <h1>Revenue Statistics</h1>
+    <img src="data:image/png;base64,{{ chart }}" />
+    <br><br>
+    {{ block.super }}
+{% endblock %}
