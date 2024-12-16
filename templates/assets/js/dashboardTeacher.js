@@ -25,7 +25,6 @@ $(document).ready(function () {
             $('#joinDate').text('Chưa có thông tin');
         }
     }
-    // Hiển thị danh sách lớp học
     $.ajax({
         url: `http://127.0.0.1:8000/api/teacher/dashboard/`,
         method: 'GET',
@@ -60,12 +59,10 @@ $(document).ready(function () {
             $('#classList').html('<p>Không thể lấy danh sách lớp học. Vui lòng thử lại sau.</p>');
         }
     });
-    // Xử lý sự kiện khi người dùng nhấn nút Xem chi tiết
     $('#classList').on('click', '.look-course', function () {
         const courseId = $(this).data('id');
         window.location.href = `../teacher/course_detail.html?id=${courseId}`;
     });
-    // Xử lý đăng xuất
     $('#logoutBtn').click(function (event) {
         event.preventDefault();
         localStorage.removeItem('token');

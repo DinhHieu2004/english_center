@@ -9,7 +9,7 @@ $(document).ready(function () {
     if (userData) {
         $('#fullName').text(userData.fullname || 'Không rõ');
         $('#email').text(userData.email || 'Không rõ');
-        $('#studentName').text(userData.username);
+        $('#studentName').text(userData.fullname);
 
 
         if (userData.student_details) {

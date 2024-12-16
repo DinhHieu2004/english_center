@@ -21,6 +21,7 @@ function fetchCourseDetails(courseId) {
         success: function(courseDetails) {
             console.log(courseDetails);
             let course = courseDetails.course;
+            localStorage.setItem('id_teacher', course.teacher)
             fetchTeacherDetails(course.teacher, course);
             fetchCourseStudents(courseId);
         },
@@ -122,12 +123,13 @@ $('.look-course').on('click', function(e) {
 
 });
 
-// Hàm tạo headers với token
 function getAuthHeaders() {
     return {
         'Authorization': 'Token ' + localStorage.getItem('token'),
         'Content-Type': 'application/json'
     };
 }
+
+
 
 

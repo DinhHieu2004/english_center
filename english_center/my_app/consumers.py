@@ -35,7 +35,6 @@ class NotificationConsumer(AsyncWebsocketConsumer):
     @database_sync_to_async 
     def create_notification(self, title, message, sender_id, course_id):
         try:
-            # Giữ thao tác đồng bộ ở đây
             teacher = Teacher.objects.get(id=sender_id)
             course = Course.objects.get(id=course_id)
             
@@ -53,20 +52,18 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             print(traceback.format_exc())
             return False
   
-    async def receive(self, text_data):
+    """async def receive(self, text_data):
         try:
-            print(f"Received data: {text_data}")
             text_data_json = json.loads(text_data)
-            title = text_data_json['title']
-            message = text_data_json['content']
-            sender = text_data_json['sender']
-            time = text_data_json['time']
+            title = text_data_json.get('title')
+            message = text_data_json.get('content')
+            sender = text_data_json.get('sender')
+            time = text_data_json.get('time')
 
-            # save
             success = await self.create_notification(
-                title=title, 
-                message=message, 
-                sender_id=sender, 
+                title=title,
+                message=message,
+                sender_id=sender,
                 course_id=self.course_id
             )
 
@@ -81,12 +78,42 @@ class NotificationConsumer(AsyncWebsocketConsumer):
                         'time': time,
                     }
                 )
-                print("Notification sent to group successfully")
+                print("Data has been sent to the group WebSocket")
             else:
-                print("Failed to save notification")
+                print("Unable to save message to database")
 
+        except json.JSONDecodeError:
+            print("Error: The received data is not valid JSON")
         except Exception as e:
-            print(f"Receive error: {str(e)}")
+            print(f"Error processing received data: {str(e)}")
+            print(traceback.format_exc())"""
+    
+    async def receive(self, text_data):
+        try:
+            print(f"Data received: {text_data}")
+            text_data_json = json.loads(text_data)
+            title = text_data_json.get('title')
+            message = text_data_json.get('content')
+            sender = text_data_json.get('sender')
+            time = text_data_json.get('time')
+
+           
+            await self.channel_layer.group_send(
+                    self.room_group_name,
+                    {
+                        'type': 'send_notification',
+                        'title': title,
+                        'content': message,
+                        'sender': sender,
+                        'time': time,
+                    }
+                )
+            print("Data has been sent to the group WebSocket")
+           
+        except json.JSONDecodeError:
+            print("Error: The received data is not valid JSON")
+        except Exception as e:
+            print(f"Error processing received data: {str(e)}")
             print(traceback.format_exc())
 
     async def send_notification(self, event):
@@ -97,9 +124,47 @@ class NotificationConsumer(AsyncWebsocketConsumer):
                 'sender': event['sender'],
                 'time': event['time'],
             }))
-            print("Notification sent to WebSocket successfully")
+            print("sucssess")
         except Exception as e:
-            print(f"Send error: {str(e)}")
+            print(f"Error sending notification: {str(e)}")
             print(traceback.format_exc())
+    """async def send_notification(self, event):
+        try:
+           
+                await self.send(text_data=json.dumps({
+                    'title': event['title'],
+                    'content': event['content'],
+                    'sender': event['sender'],
+                    'time': event['time'],
+                }))
+                print("sucsses")
+            
+        except Exception as e:
+            print(f"Lỗi khi gửi thông báo: {str(e)}")
+            print(traceback.format_exc())"""
+
+    """async def send_notification(self, event):
+        try:
+            success = await self.create_notification(
+                title=event['title'],
+                message=event['content'],
+                sender_id=event['sender'],
+                course_id=self.course_id
+            )
+
+            if success:
+                await self.send(text_data=json.dumps({
+                    'title': event['title'],
+                    'content': event['content'],
+                    'sender': event['sender'],
+                    'time': event['time'],
+                }))
+                print("sucsses")
+            else:
+                print("Unable to save message to database")
+        except Exception as e:
+            print(f"LError sending notification: {str(e)}")
+            print(traceback.format_exc())"""
 
       # daphne -b 0.0.0.0 -p 8000 english_center.asgi:application  
+      # uvicorn english_center.asgi:application --host 0.0.0.0 --port 8000 --reload  

@@ -192,4 +192,16 @@ CHANNEL_LAYERS = {
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-django.setup()
+UVICORN_CONFIG = {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "ws": "auto",
+    "ws_ping_interval": 20, 
+    "ws_ping_timeout": 20
+}
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = '22130082@st.hcmuaf.edu.vn'
+EMAIL_HOST_PASSWORD = 'slvd aijo wbmq nbxy'

@@ -11,7 +11,6 @@
     <div class="container mt-5">
         <h1>Quản lý thông báo (Giáo viên)</h1>
 
-        <!-- Form gửi thông báo mới -->
         <div class="mt-4">
             <h3>Gửi thông báo mới</h3>
             <form id="newNotificationForm">
@@ -29,11 +28,9 @@
             </form>
         </div>
 
-        <!-- Danh sách thông báo đã gửi -->
         <div class="mt-5">
             <h3>Danh sách thông báo</h3>
             <ul id="notificationList" class="list-group">
-                <!-- Các thông báo sẽ được thêm bằng JavaScript -->
             </ul>
         </div>
     </div>
@@ -44,8 +41,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const notificationList = document.getElementById("notificationList");
     const notificationForm = document.getElementById("newNotificationForm");
 
-    // Kết nối WebSocket
-    const courseId = 5; // ID của khóa học
+    const courseId = 5; 
     const socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${courseId}/`);
 
     socket.onopen = () => {
@@ -56,7 +52,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = JSON.parse(event.data);
         const { title, content, sender, time } = data;
 
-        // Thêm thông báo mới vào danh sách
         const notificationItem = document.createElement("li");
         notificationItem.classList.add("list-group-item");
         notificationItem.innerHTML = `
@@ -72,14 +67,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const title = document.getElementById("newNotificationTitle").value;
         const content = document.getElementById("newNotificationContent").value;
-        const sender = 5; // Bạn có thể thay đổi thông tin này nếu cần
+        const sender = 5; 
         const time = new Date().toISOString().slice(0, 19).replace("T", " ");
 
-        // Gửi thông báo qua WebSocket
         const message = { title, content, sender, time };
         socket.send(JSON.stringify(message));
 
-        // Xóa form sau khi gửi
         notificationForm.reset();
     });
 

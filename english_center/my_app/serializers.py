@@ -4,6 +4,12 @@ from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
 from django.conf import settings
+from django.contrib.auth.forms import PasswordResetForm
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
+
+
 
 class NotificationSerializer(serializers.ModelSerializer):
     teacher_name = serializers.CharField(source='teacher.user.username', read_only=True)
@@ -115,3 +121,35 @@ class AttendanceSerializer(serializers.ModelSerializer):
             else:
                 instance.status = status
             return super().update(instance, validated_data)        
+        
+#reset-password
+class PasswordResetRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def validate_email(self, value):
+        if not User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Email not exits.")
+        return value
+    
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    uid = serializers.CharField()
+    token = serializers.CharField()
+    new_password = serializers.CharField(min_length=8)
+
+    def validate(self, data):
+        try:
+            uid = force_str(urlsafe_base64_decode(data['uid']))
+            user = User.objects.get(pk=uid)
+        except (User.DoesNotExist, ValueError, TypeError):
+            raise serializers.ValidationError("Invalid UID")
+
+        if not PasswordResetTokenGenerator().check_token(user, data['token']):
+            raise serializers.ValidationError("Token invalid.")
+
+        return data
+
+    def save(self):
+        uid = force_str(urlsafe_base64_decode(self.validated_data['uid']))
+        user = User.objects.get(pk=uid)
+        user.set_password(self.validated_data['new_password'])
+        user.save()

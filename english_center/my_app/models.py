@@ -340,7 +340,6 @@ class Revenue(models.Model):
 
     @classmethod
     def update_revenue(cls):
-        """Cập nhật doanh thu mỗi ngày"""
         today = timezone.now().date()
         courses = Course.objects.all()
         

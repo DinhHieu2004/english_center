@@ -4,6 +4,8 @@
 <head>
     <title>Student Dashboard</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -21,6 +23,9 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#" id="logoutBtn">Đăng xuất</a>
                     </li>
+                    <li class="nav-item">
+                    <a href="#" class="text-decoration-none nav-link" data-bs-toggle="modal" data-bs-target="#ChangePassModal">Đổi mật khẩu</a>                    
+                </li>
                 </ul>
             </div>
         </div>
@@ -71,13 +76,45 @@
                 </div>
             </div>
         </div>
+        <button class="btn btn-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng nhập</button>
 
+
+    <div class="modal fade" id="ChangePassModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Đổi mật khẩu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changePassForm">
+                        <div class="mb-3">
+                            <label class="form-label">Mật khẩu cũ</label>
+                            <input type="password" id="oldPassword" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nhập mật khẩu mới</label>
+                            <input type="password" id="newPassword" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Nhập lại mật khẩu mới</label>
+                            <input type="password" id="cfNewPassword" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Lưu thay đổi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
+    </div>
+    
+    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="/templates/assets/js/dashboardSt.js">
-      
-    </script>
+    <script src="/templates/assets/js/dashboardSt.js"> </script>
+    <script src="/templates/assets/js/changePass.js"> </script>
+
 </body>
 
 </html>

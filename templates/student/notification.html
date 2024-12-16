@@ -10,11 +10,9 @@
     <div class="container mt-5">
         <h1>Thông báo lớp học (Học viên)</h1>
 
-        <!-- Danh sách thông báo nhận được -->
         <div class="mt-4">
             <h3>Danh sách thông báo</h3>
             <ul id="notificationList" class="list-group">
-                <!-- Các thông báo sẽ được thêm bằng JavaScript -->
             </ul>
         </div>
     </div>
@@ -24,8 +22,7 @@
         document.addEventListener("DOMContentLoaded", () => {
     const notificationList = document.getElementById("notificationList");
 
-    // Kết nối WebSocket
-    const courseId = 5; // ID của khóa học
+    const courseId = 5; 
     const socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${courseId}/`);
 
     socket.onopen = () => {
@@ -36,7 +33,6 @@
         const data = JSON.parse(event.data);
         const { title, content, sender, time } = data;
 
-        // Thêm thông báo mới vào danh sách
         const notificationItem = document.createElement("li");
         notificationItem.classList.add("list-group-item");
         notificationItem.innerHTML = `

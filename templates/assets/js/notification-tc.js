@@ -1,9 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     const notificationList = document.getElementById("notificationList");
     const notificationForm = document.getElementById("newNotificationForm");
-
-    // Kết nối WebSocket
-    const courseId = 5; // ID của khóa học
+    
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('id');
+    const teacherId = localStorage.getItem('id_teacher');
     const socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${courseId}/`);
 
     socket.onopen = () => {
@@ -14,7 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const data = JSON.parse(event.data);
         const { title, content, sender, time } = data;
 
-        // Thêm thông báo mới vào danh sách
         const notificationItem = document.createElement("li");
         notificationItem.classList.add("list-group-item");
         notificationItem.innerHTML = `
@@ -30,14 +30,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const title = document.getElementById("newNotificationTitle").value;
         const content = document.getElementById("newNotificationContent").value;
-        const sender = 5; // Bạn có thể thay đổi thông tin này nếu cần
+        const sender = localStorage.getItem('id_teacher');
         const time = new Date().toISOString().slice(0, 19).replace("T", " ");
 
-        // Gửi thông báo qua WebSocket
         const message = { title, content, sender, time };
         socket.send(JSON.stringify(message));
 
-        // Xóa form sau khi gửi
+        const notificationItem = document.createElement("li");
+        notificationItem.classList.add("list-group-item");
+        notificationItem.innerHTML = `
+            <strong>${title}</strong><br>
+            <small>Người gửi: ${sender} | Thời gian: ${time}</small><br>
+            ${content}
+        `;
+        const oldNotificationsList = document.querySelector("#oldNotifications ul");
+        oldNotificationsList.appendChild(notificationItem);
+        
         notificationForm.reset();
     });
 

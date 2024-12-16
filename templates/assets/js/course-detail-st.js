@@ -3,33 +3,17 @@
     const courseId = urlParams.get('id'); 
     const is_register = localStorage.getItem('is_register') === 'true'; 
     console.log(is_register, typeof is_register)
+    console.log(document.getElementById('confirmPaymentBtn'));
+
 
 
     if (courseId) {
         fetchCourseDetails(courseId, is_register);
-        connectToWebSocket(courseId)
         
     } else {
         alert("Không có lớp học được tìm thấy.");
     }
 });
-function connectToWebSocket(courseId) {
-    const socket = new WebSocket(`ws://127.0.0.1:8000/ws/notifications/${courseId}/`);
-
-    socket.onopen = function () {
-        console.log("WebSocket connection established.");
-    };
-
-    socket.onmessage = function (e) {
-        const data = JSON.parse(e.data);
-        console.log("Received notification:", data);
-
-    };
-
-    socket.onclose = function () {
-        console.log("WebSocket connection closed.");
-    };
-}
 
 
 function getAuthHeaders() {
@@ -96,7 +80,8 @@ function renderCourseDetails(course, teacherName, is_register) {
     $('#courseDetail').html(courseDetailsHtml);
 
     if (!is_register) {
-        $('#payButton').on('click', function () {
+        $('#payButton').on('click', function (e) {
+            e.preventDefault();
             openPaymentModal(course);
         });
     }
@@ -123,7 +108,8 @@ function openPaymentModal(course) {
     $('#modalCoursePrice').text(course.price);
     $('#paymentModal').modal('show');
 
-    $('#confirmPaymentBtn').off('click').on('click', function () {
+    $('#confirmPaymentBtn').off('click').on('click', function (e) {
+        e.preventDefault();
         enrollCourse(course.id);
     });
 }

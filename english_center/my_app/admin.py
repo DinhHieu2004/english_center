@@ -2,7 +2,7 @@ from django.contrib import admin
 from django import forms
 from .models import (User, Question, FinalExam, PlacementTest, Student, Teacher,Course,
                     CourseEnrollment, CourseSchedule,
-                    TestResult, Answer, TestResult,  Attendance, Notification 
+                    Answer, TestResult,  Attendance, Notification 
                    )
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password
