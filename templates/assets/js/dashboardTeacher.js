@@ -26,6 +26,7 @@ $(document).ready(function () {
         }
     }
     // Hiển thị danh sách lớp học
+    let teacherId = null;
     $.ajax({
         url: `http://127.0.0.1:8000/api/teacher/dashboard/`,
         method: 'GET',
@@ -33,7 +34,9 @@ $(document).ready(function () {
             'Authorization': 'Token ' + token, 
             'Content-Type': 'application/json'
         },
-        success: function(response) {  
+        success: function(response) { 
+            console.log(response)
+            teacherId = response.teacher_id
             if (response.courses_data && response.courses_data.length > 0) {
                 let classListHtml = '';
                 response.courses_data.forEach(course => {
@@ -64,6 +67,15 @@ $(document).ready(function () {
     $('#classList').on('click', '.look-course', function () {
         const courseId = $(this).data('id');
         window.location.href = `../teacher/course_detail.html?id=${courseId}`;
+    });
+    $('.viewScheduleButton').on('click', function () {
+        if (teacherId) {
+            // Chuyển hướng đến trang thời khóa biểu với teacherId trong URL
+            window.location.href = `../teacher/teacher_schedule.html?id=${teacherId}`;
+        } else {
+            // Nếu teacherId không có giá trị hợp lệ, hiển thị thông báo lỗi
+            alert("Không tìm thấy thông tin giáo viên.");
+        }
     });
     // Xử lý đăng xuất
     $('#logoutBtn').click(function (event) {

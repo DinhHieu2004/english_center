@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+import django
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,6 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'my_app.apps.MyAppConfig',
 
+
+
 ]
 
 CORS_ALLOW_ALL_ORIGINS = True
@@ -52,7 +57,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',  
+    #'django.middleware.csrf.CsrfViewMiddleware',  
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -60,11 +65,10 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'english_center.urls'
 
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR), 'my_app','templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,7 +80,6 @@ TEMPLATES = [
         },
     },
 ]
-
 WSGI_APPLICATION = 'english_center.wsgi.application'
 
 
@@ -109,13 +112,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+"""
 CSRF_COOKIE_SECURE = False
 CSRF_TRUSTED_ORIGINS = [
     'http://127.0.0.1:8000/api/register/student/',    
 ]
+
+CSRF_USE_SESSIONS = False  # Store CSRF token in cookie instead of session
+CSRF_COOKIE_HTTPONLY = False
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
-
+"""
 LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = 'UTC'
@@ -127,7 +134,6 @@ USE_TZ = True
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication', 
-        'rest_framework.authentication.SessionAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -161,3 +167,41 @@ LOGGING = {
         },
     },
 }
+
+INSTALLED_APPS += [
+    'channels',
+]
+
+# Cấu hình Django Channels
+ASGI_APPLICATION = "english_center.asgi.application"
+
+"""CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}"""
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+UVICORN_CONFIG = {
+    "host": "0.0.0.0",
+    "port": 8000,
+    "ws": "auto",
+    "ws_ping_interval": 20, 
+    "ws_ping_timeout": 20
+}
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''

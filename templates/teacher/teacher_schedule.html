@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lịch dạy của giảng viên</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .schedule-table th, .schedule-table td {
+            text-align: center;
+            padding: 15px;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .schedule-table th {
+            background-color: #B5292F;
+            color: white;
+        }
+        .schedule-table td {
+            background-color: #f8f9fa;
+        }
+        .day-column {
+            width: 14%;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container">
+            <a class="navbar-brand" href="#">Hệ thống học trực tuyến</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span class="nav-link" id="teacherName" style="color: #fff;"></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" id="logoutBtn">Đăng xuất</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <nav aria-label="breadcrumb" class="bg-light py-2">
+        <div class="container">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="dashboard.html">Thông tin</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Thời khóa biểu</li>
+            </ol>
+        </div>
+    </nav>
+    <div class="container mt-5">
+        <h2 class="text-center">Lịch dạy của giảng viên</h2>
+
+        <!-- Chọn tuần từ ngày đến ngày -->
+        <div class="form-group">
+            <label for="week-selector">Chọn tuần:</label>
+            <input type="week" id="week-selector" />
+            <button onclick="loadScheduleForWeek()" class="btn btn-primary mt-3">Tải lịch dạy</button>
+        </div>
+        <div id="week-range">
+            <!-- Thông tin sẽ được chèn vào đây -->
+        </div>
+        <table class="table schedule-table">
+            <thead>
+                <tr>
+                    <th class="day-column">Thứ 2</th>
+                    <th class="day-column">Thứ 3</th>
+                    <th class="day-column">Thứ 4</th>
+                    <th class="day-column">Thứ 5</th>
+                    <th class="day-column">Thứ 6</th>
+                    <th class="day-column">Thứ 7</th>
+                    <th class="day-column">Chủ Nhật</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Thời khóa biểu sẽ được hiển thị ở đây -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const teacherId = urlParams.get('id');
+
+            if (teacherId) {
+                loadScheduleForWeek();
+
+                $('#loadSchedule').click(function() {
+                    loadScheduleForWeek();
+                });
+            } else {
+                alert("Không có lớp học được tìm thấy.");
+            }
+        });
+
+        function loadScheduleForWeek() {
+            const teacherId = new URLSearchParams(window.location.search).get('id');
+            const weekValue = $('#week-selector').val(); 
+            let startDate, endDate;
+
+
+            if (!weekValue) {
+            const today = new Date();
+            const firstDayOfWeek = new Date(today.setDate(today.getDate() - today.getDay() + 1));
+            const lastDayOfWeek = new Date(today.setDate(firstDayOfWeek.getDate() + 6));
+            const formatDate = (date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+                return `${year}-${month}-${day}`;
+            };
+
+            startDate = formatDate(firstDayOfWeek);
+            endDate = formatDate(lastDayOfWeek);
+        } else {
+            const year = parseInt(weekValue.split('-W')[0], 10);
+            const week = parseInt(weekValue.split('-W')[1], 10);
+            const firstDayOfYear = new Date(year, 0, 1);
+            const daysOffset = (week - 1) * 7;
+
+            const firstDayOfWeek = new Date(firstDayOfYear.setDate(firstDayOfYear.getDate() + daysOffset - firstDayOfYear.getDay() + 1));
+            const lastDayOfWeek = new Date(firstDayOfWeek);
+            lastDayOfWeek.setDate(firstDayOfWeek.getDate() + 6);
+
+            const formatDate = (date) => {
+                const year = date.getFullYear();
+                const month = String(date.getMonth() + 1).padStart(2, '0');
+                const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+            };
+
+            startDate = formatDate(firstDayOfWeek);
+            endDate = formatDate(lastDayOfWeek);
+        }
+        const weekStart = new Date(startDate);
+        const weekEnd = new Date(endDate);
+        document.getElementById('week-range').innerText = `Tuần: ${startDate} - ${endDate}`;
+            $.ajax({
+                url: `http://127.0.0.1:8000/api/teacher/${teacherId}/schedule/`,
+                method: 'GET',
+                headers: getAuthHeaders(),
+                success: function(data) {
+                    console.log('Dữ liệu trả về từ API:', data);
+
+                    const tableBody = $('table.schedule-table tbody');
+                    const daysOfWeek = ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Chủ Nhật'];
+
+                    const schedule = {
+                        'Thứ 2': [],
+                        'Thứ 3': [],
+                        'Thứ 4': [],
+                        'Thứ 5': [],
+                        'Thứ 6': [],
+                        'Thứ 7': [],
+                        'Chủ Nhật': []
+                    };
+
+                    Object.keys(data).forEach(function(day) {
+                        const daySchedule = data[day];
+                        const filteredClasses = filterClassesForWeek(daySchedule, weekStart, weekEnd);
+                        filteredClasses.forEach(function(item) {
+                            const classInfo = `${item.course_name} (${item.start_time})`;
+                            schedule[day].push(classInfo);
+                        });
+                    });
+
+                    let rows = '<tr>';
+                    daysOfWeek.forEach(function(day) {
+                        const daySchedule = schedule[day] || [];
+                        const scheduleText = daySchedule.length > 0 ? daySchedule.join('<br>') : 'Không có lịch dạy';
+                        rows += `<td>${scheduleText}</td>`;
+                    });
+                    rows += '</tr>';
+                    tableBody.html(rows);
+                },
+                error: function(error) {
+                    console.log('Lỗi khi lấy dữ liệu:', error);
+                }
+            });
+        }
+
+        function filterClassesForWeek(classes, weekStart, weekEnd) {
+            return classes.filter(function(item) {
+                const classDate = new Date(item.class_date);
+                return classDate >= weekStart && classDate <= weekEnd;
+            });
+        }
+
+        function getAuthHeaders() {
+            return {
+                'Authorization': 'Token ' + localStorage.getItem('token'),
+                'Content-Type': 'application/json'
+            };
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

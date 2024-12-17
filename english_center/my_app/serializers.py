@@ -1,10 +1,23 @@
 from rest_framework import serializers
-from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam, Attendance
+from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam, Notification,  Attendance, StudySession
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
+from django.conf import settings
+from django.contrib.auth.forms import PasswordResetForm
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.contrib.auth.tokens import PasswordResetTokenGenerator
 
 
+
+class NotificationSerializer(serializers.ModelSerializer):
+    teacher_name = serializers.CharField(source='teacher.user.username', read_only=True)
+    course_name = serializers.CharField(source='course.name', read_only=True)
+    
+    class Meta:
+        model = Notification
+        fields = ['id', 'title', 'message', 'course_name', 'teacher_name', 'timestamp']
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
@@ -19,7 +32,6 @@ class LoginSerializer(serializers.Serializer):
         data['user'] = user
         return data
     
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -51,27 +63,41 @@ class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
         model = Teacher
         fields = ['education_level']
+class StudySessionSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = StudySession
+        fields = ['id','name', 'start_time', 'end_time']
 
 class CourseScheduleSerializer(serializers.ModelSerializer):
     weekday_display = serializers.CharField(source='get_weekday_display', read_only=True)
-
+    session = serializers.StringRelatedField()
+    
     class Meta:
         model = CourseSchedule
-        fields = ['weekday_display', 'start_time']    
+        fields = ['weekday_display', 'session']    
 
 class CourseSerialozer(serializers.ModelSerializer):
     schedules = CourseScheduleSerializer(many = True)
     class Meta:
         model = Course
-        fields = ['id','name', 'level', 'description', 'teacher', 'start_date', 'total_session', 'schedules']
+        fields = ['id','name', 'level', 'description','price', 'teacher', 'start_date', 'total_session', 'schedules']
 
 
 #
 class QuestionSerializer(serializers.ModelSerializer):
+    audio_file_url = serializers.SerializerMethodField()
+
     class Meta:
         model = Question
-        fields =['id', 'text','audio_file', 'choice_a', 'choice_b', 'choice_c','choice_d']
+        fields = ['id', 'text', 'audio_file_url', 'choice_a', 'choice_b', 'choice_c', 'choice_d']
 
+    def get_audio_file_url(self, obj):
+        if obj.audio_file:
+            request = self.context.get('request')
+            if request:
+                return request.build_absolute_uri(obj.audio_file.url.strip('/'))
+            return obj.audio_file.url
+        return None
 #
 class PlacementTestSerializer(serializers.ModelSerializer):
     questions  = QuestionSerializer(many = True, read_only = True)
@@ -79,6 +105,7 @@ class PlacementTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlacementTest
         fields = ['id', 'title', 'description', 'duration', 'questions']
+
 
 class AttendanceSerializer(serializers.ModelSerializer):
     student_name = serializers.CharField(source='student.name', read_only=True)
@@ -89,7 +116,6 @@ class AttendanceSerializer(serializers.ModelSerializer):
         fields = ['id', 'student_name', 'course_id', 'status', 'date',]
     
         def create(self, validated_data):
-        # Khi tạo mới, có thể để status là null nếu không có giá trị
             validated_data['status'] = validated_data.get('status', None)
             return super().create(validated_data)
 
@@ -99,4 +125,36 @@ class AttendanceSerializer(serializers.ModelSerializer):
                 instance.status = None  
             else:
                 instance.status = status
-            return super().update(instance, validated_data)
+            return super().update(instance, validated_data)        
+        
+#reset-password
+class PasswordResetRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def validate_email(self, value):
+        if not User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Email not exits.")
+        return value
+    
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    uid = serializers.CharField()
+    token = serializers.CharField()
+    new_password = serializers.CharField(min_length=8)
+
+    def validate(self, data):
+        try:
+            uid = force_str(urlsafe_base64_decode(data['uid']))
+            user = User.objects.get(pk=uid)
+        except (User.DoesNotExist, ValueError, TypeError):
+            raise serializers.ValidationError("Invalid UID")
+
+        if not PasswordResetTokenGenerator().check_token(user, data['token']):
+            raise serializers.ValidationError("Token invalid.")
+
+        return data
+
+    def save(self):
+        uid = force_str(urlsafe_base64_decode(self.validated_data['uid']))
+        user = User.objects.get(pk=uid)
+        user.set_password(self.validated_data['new_password'])
+        user.save()

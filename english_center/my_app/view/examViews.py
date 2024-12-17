@@ -5,7 +5,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from django.shortcuts import get_object_or_404
 from django.db.models import Count
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.permissions import IsAuthenticated
 from ..models import PlacementTest, Question, Answer, TestResult, Student
 from ..serializers import PlacementTestSerializer, QuestionSerializer
 from django.db import transaction
@@ -20,12 +20,13 @@ class PlacementTestView(APIView):
     permission_classes = [IsAuthenticated]  
     
     def get(self, request):
-
         try:
             test = PlacementTest.objects.first()
             if not test: 
                 return Response({"error" : "chưa có bài test đầu vào"}, status = status.HTTP_404_NOT_FOUND)
 
+            #questions = Question.objects.all()
+            #serializer = QuestionSerializer(questions, many=True, context={'request': request})
             serializer = PlacementTestSerializer(test)
             return Response(serializer.data)
         except Exception as e:
@@ -81,7 +82,6 @@ class PlacementTestView(APIView):
                 old_answers.delete()
                 logger.info(f"Deleted {old_answers_count} old answers")
 
-                # Tạo các câu trả lời mới
                 correct_count = 0
                 total_questions = test.questions.count()
                 answers_to_create = []

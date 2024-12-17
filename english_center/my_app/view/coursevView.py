@@ -4,7 +4,6 @@ from rest_framework.permissions import IsAuthenticated
 from ..serializers import  CourseSerialozer, StudentSerializer
 from ..models import Course
 from rest_framework.exceptions import NotFound
-# from .studentView import StudentDetailView 
 
 
 class CourseDetailView(APIView):
@@ -17,7 +16,7 @@ class CourseDetailView(APIView):
             raise NotFound(detail="Course not found")
 
         course_data =CourseSerialozer(course).data
-        return Response({'course': course_data}, status= 200)            
+        return Response({'course': course_data, }, status= 200)            
 
 class CourseStudentsAPIView(APIView):
     def get(self, request, course_id, *args, **kwargs):

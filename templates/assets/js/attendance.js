@@ -166,6 +166,7 @@ function fetchCourseStudents(courseId) {
                 });
             }
             function saveAttendance(courseId, studentId, date, status) {
+                
                 const data = {
                     student_id: studentId,
                     date: date,
@@ -240,3 +241,11 @@ function attachInputNavigation() {
         }
     });
 }
+$(document).ready(function () {
+    $('.look-course').on('click', function (e) {
+        e.preventDefault();
+        const urlParams = new URLSearchParams(window.location.search);
+        const courseId = urlParams.get('id');
+        window.location.href = `course_detail.html?id=${courseId}`;
+    });
+});

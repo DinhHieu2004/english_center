@@ -75,6 +75,7 @@ function renderStudentDetails(student) {
                     <td>${studentD.birth_date}</td>
                     <td>${studentD.address}</td>
                     <td>${studentD.phone}</td>
+                    <td>${studentD.complete}%</td>
                 </tr>
             `;
     $('#studentTableBody').append(studentRow);
@@ -104,7 +105,7 @@ function renderCourseDetails(course, teacherName) {
                 ${course.schedules.map(schedule => `
                     <li>
                         <strong>Thứ:</strong> ${schedule.weekday_display}, 
-                        <strong>Giờ bắt đầu:</strong> ${schedule.start_time}
+                        <strong>Giờ bắt đầu:</strong> ${schedule.session}
                     </li>
                 `).join('')}
             </ul>

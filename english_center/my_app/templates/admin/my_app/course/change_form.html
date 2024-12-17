@@ -1,0 +1,48 @@
+{% extends "admin/change_form.html" %}
+{% block content %}
+    <h1>Thống kê điểm danh</h1>
+    <canvas id="attendanceChart" width="400" height="100"></canvas>
+
+    {{ block.super }}
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const labels = JSON.parse('{{ labels|escapejs }}');
+        const data = JSON.parse('{{ data|escapejs }}');
+
+        if (labels.length > 0 && data.length > 0) {
+            const ctx = document.getElementById('attendanceChart').getContext('2d');
+            const attendanceChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Số lần điểm danh',
+                        data: data,
+                        backgroundColor: [
+                            'rgba(75, 192, 192, 0.2)', 
+                            'rgba(255, 99, 132, 0.2)', 
+                            'rgba(54, 162, 235, 0.2)', 
+                            'rgba(153, 102, 255, 0.2)' 
+                        ],
+                        borderColor: [
+                            'rgba(75, 192, 192, 1)', 
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)', 
+                            'rgba(153, 102, 255, 1)' 
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+{% endblock %}
