@@ -304,7 +304,8 @@ class Attendance(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)  
     updated_at = models.DateTimeField(auto_now=True)  
 
-    class Meta:  
+    class Meta:
+        unique_together = ['course', 'student', 'date']
         ordering = ['date', 'course', 'student']
 
     def __str__(self):
