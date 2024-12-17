@@ -16,7 +16,7 @@ class TOEICTest {
   async initTest() {
     try {
       const response = await $.ajax({
-        url: "http://127.0.0.1:8000/api/final-test/",
+        url: "http://127.0.0.1:8000/api/final-exam/1/",
         method: "GET",
         headers: {
           Authorization: "Token " + localStorage.getItem("token"),
@@ -64,7 +64,7 @@ class TOEICTest {
                   isListening
                     ? `
                     <audio controls class="mb-3">
-                        <source src="${question.audio_file}" type="audio/mpeg">
+                      <source src="http://127.0.0.1:8000/media/audio/de-thi-b1-tieng-anh-nghe-part-3.mp3" type="audio/mpeg">
                         Trình duyệt của bạn không hỗ trợ phát âm thanh.
                     </audio>
                 `
@@ -130,7 +130,7 @@ class TOEICTest {
 
     try {
       const response = await $.ajax({
-        url: "http://127.0.0.1:8000/api/final-test/",
+        url: "http://127.0.0.1:8000/api/final-exam/1/",
         method: "POST",
         headers: {
           Authorization: "Token " + localStorage.getItem("token"),
