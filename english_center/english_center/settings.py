@@ -204,4 +204,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = '22130082@st.hcmuaf.edu.vn'
-EMAIL_HOST_PASSWORD = 'slvd aijo wbmq nbxy'
+EMAIL_HOST_PASSWORD = ''
