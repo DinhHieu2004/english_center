@@ -140,21 +140,21 @@ class PasswordResetRequestView(APIView):
             email = serializer.validated_data['email']
             user = User.objects.get(email=email)
 
-            # Tạo token và uid
+            #  token and uid
             token = PasswordResetTokenGenerator().make_token(user)
             uid = urlsafe_base64_encode(force_bytes(user.pk))
 
-            # Tạo link reset mật khẩu
+            #link
             reset_link = f"//http://127.0.0.1:8000/api/password-reset-confirm/{uid}/{token}/"
 
-            # Gửi email
+            # send email
             send_mail(
-                subject="Đặt lại mật khẩu",
-                message=f"Nhấn vào đây để đặt lại mật khẩu: {reset_link}",
+                subject="rresset password",
+                message=f"enter into here : {reset_link}",
                 from_email= "22130082",
                 recipient_list=[email],
             )
-            return Response({"message": "Link reset mật khẩu đã được gửi đến email."}, status=status.HTTP_200_OK)
+            return Response({"message": "link reset sent to mail."}, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 def password_reset_form(request, uidb64, token):
@@ -167,18 +167,18 @@ def password_reset_form(request, uidb64, token):
 
         if new_password != confirm_password:
             return render(request, 'admin/my_app/reset-password/reset_pass.html', {
-                'error_message': "Mật khẩu không khớp. Vui lòng thử lại."
+                'error_message': "pass no samp."
             })
 
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
             user = User.objects.get(pk=uid)
         except (User.DoesNotExist, ValueError, TypeError):
-            return HttpResponse("Liên kết không hợp lệ.", status=400)
+            return HttpResponse("link invalid.", status=400)
 
         if not PasswordResetTokenGenerator().check_token(user, token):
-            return HttpResponse("Token không hợp lệ hoặc đã hết hạn.", status=400)
+            return HttpResponse("Token invalid.", status=400)
 
         user.set_password(new_password)
         user.save()
-        return HttpResponse("Mật khẩu đã được thay đổi thành công.")
+        return HttpResponse("reset pass sucsses.")

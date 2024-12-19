@@ -8,7 +8,7 @@ from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password
 from django.db.models.functions import ExtractQuarter, ExtractYear
 from django.urls import path
-from django.db.models import Sum, Avg
+from django.db.models import Avg, Count, F, ExpressionWrapper, FloatField, Sum
 from django.template.response import TemplateResponse
 from django.utils.timezone import now
 from datetime import date
@@ -16,7 +16,8 @@ from django.utils.safestring import mark_safe
 from django.shortcuts import render
 from django.contrib import messages
 from django.db.models import Count
- #from django.core.exceptions import ValidationError
+import plotly.express as px
+import plotly.io as pio 
 import json
 import base64
 from io import BytesIO
@@ -25,6 +26,8 @@ from .models import Revenue, Course, CourseEnrollment
 from django.utils import timezone
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.graph_objects as go
+
 
 class StudentInline(admin.StackedInline):
     model = Student
@@ -220,9 +223,102 @@ class CourseEnrollmentAdmin(admin.ModelAdmin):
     list_filter = ('course', 'completed', 'final_test_passed')
     search_fields = ('student__user__username', 'course__name')
 
-@admin.register(TestResult)
+
 class TestResultAdmin(admin.ModelAdmin):
-    list_display =('student','test_type', 'score',  'level','total_questions','correct_answers')  
+    list_display = ('student', 'test_type', 'score', 'level', 'created_at')
+
+    list_per_page = 10
+    change_list_template = "admin/my_app/statistics/resultTest.html"
+
+
+    def changelist_view(self, request, extra_context=None):
+        queryset = TestResult.objects.all()
+
+        
+        test_type_counts = queryset.values('test_type').annotate(total=Count('id'))
+
+        avg_scores_by_test_type = queryset.values('test_type').annotate(avg_score=Avg('score'))
+
+        avg_correct_rate_by_test_type = queryset.values('test_type').annotate(
+            avg_correct_rate=Avg(ExpressionWrapper(
+                F('correct_answers') * 100.0 / F('total_questions'), 
+                output_field=FloatField()
+            ))
+        )
+
+        level_counts = queryset.values('level').annotate(total=Count('id'))
+
+        avg_scores_and_correct_by_level = queryset.values('level').annotate(
+            avg_score=Avg('score'),
+            avg_correct_rate=Avg(ExpressionWrapper(
+                F('correct_answers') * 100.0 / F('total_questions'), 
+                output_field=FloatField()
+            ))
+        )
+
+      
+        fig1 = px.bar(
+            test_type_counts, 
+            x='test_type', 
+            y='total', 
+            title='Number of tests by type',
+            labels={'test_type', 'total'}
+        )
+
+        fig2 = px.bar(
+            avg_scores_by_test_type, 
+            x='test_type', 
+            y='avg_score', 
+            title='Average score by test type',
+            labels={'test_type': 'Test type', 'avg_score': 'Average score'}
+        )
+
+        fig3 = px.bar(
+            avg_correct_rate_by_test_type, 
+            x='test_type', 
+            y='avg_correct_rate', 
+            title='Average correct answer rate by test type',
+            labels={'test_type', 'avg_correct_rate (%)'}
+        )
+
+        fig4 = px.bar(
+            level_counts, 
+            x='level', 
+            y='total', 
+            title='Number of tests by level',
+            labels={'level', 'total'}
+        )
+
+        fig5 = px.bar(
+            avg_scores_and_correct_by_level, 
+            x='level', 
+            y=['avg_score', 'avg_correct_rate'], 
+            title='Average Score and Average Correct Percentage by Level',
+            labels={'level', 'value'}
+        )
+
+        chart_html1 = pio.to_html(fig1, full_html=False)
+        chart_html2 = pio.to_html(fig2, full_html=False)
+        chart_html3 = pio.to_html(fig3, full_html=False)
+        chart_html4 = pio.to_html(fig4, full_html=False)
+        chart_html5 = pio.to_html(fig5, full_html=False)
+
+
+        extra_context = extra_context or {}
+        extra_context['chart1'] = chart_html1
+        extra_context['chart2'] = chart_html2
+        extra_context['chart3'] = chart_html3
+        extra_context['chart4'] = chart_html4
+        extra_context['chart5'] = chart_html5
+
+        return super().changelist_view(request, extra_context=extra_context)
+
+    class Media:
+        css = {
+            'all': ('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',)
+        }
+
+admin.site.register(TestResult, TestResultAdmin)
 
 class AttendanceInline(admin.TabularInline):
     model = Attendance
@@ -284,13 +380,12 @@ class RevenueAdmin(admin.ModelAdmin):
     change_list_template = "admin/my_app/statistics/chart_view.html" 
 
     def get_queryset(self, request):
-        """Tự động cập nhật doanh thu mỗi khi truy cập vào Admin"""
-        # Cập nhật  thu trước khi trả về queryset
+        """auto ipdate when acccess admin"""
         self.update_revenue()
         return super().get_queryset(request)
 
     def update_revenue(self):
-        """Cập nhật doanh thu tự động"""
+        """auto update"""
         today = timezone.now().date()
         courses = Course.objects.all()
 
@@ -325,5 +420,8 @@ class RevenueAdmin(admin.ModelAdmin):
         extra_context['chart'] = chart_data
 
         return super().changelist_view(request, extra_context=extra_context)
+    
 
 admin.site.register(Revenue, RevenueAdmin)
+
+
