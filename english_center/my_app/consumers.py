@@ -140,7 +140,7 @@ class NotificationConsumer(AsyncWebsocketConsumer):
                 print("sucsses")
             
         except Exception as e:
-            print(f"Lỗi khi gửi thông báo: {str(e)}")
+            print(f"error sending notification: {str(e)}")
             print(traceback.format_exc())"""
 
     """async def send_notification(self, event):

@@ -16235,3 +16235,534 @@ Bad Request: /api/course/5/attendance/
 Bad Request: /api/course/5/attendance/
 F:\vsCode\pyWeb\english_center\english_center\my_app\view\attendance.py changed, reloading.
 Watching for file changes with StatReloader
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/student/dashboard/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Unauthorized: /api/course/5/
+Unauthorized: /api/course/5/
+Unauthorized: /api/course/5/
+Unauthorized: /api/course/5/
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Starting server at tcp:port=8000:interface=0.0.0.0
+HTTP/2 support not enabled (install the http2 and tls Twisted extras)
+Configuring endpoint tcp:port=8000:interface=0.0.0.0
+Listening on TCP address 0.0.0.0:8000
+Upgraded connection ['127.0.0.1', 56016] to WebSocket
+HTTP b'GET' request for ['127.0.0.1', 56017]
+WebSocket ['127.0.0.1', 56016] open and established
+WebSocket ['127.0.0.1', 56016] accepted by application
+HTTP 200 response started for ['127.0.0.1', 56017]
+HTTP close for ['127.0.0.1', 56017]
+HTTP response complete for ['127.0.0.1', 56017]
+HTTP b'GET' request for ['127.0.0.1', 56017]
+HTTP b'GET' request for ['127.0.0.1', 56022]
+HTTP 200 response started for ['127.0.0.1', 56017]
+HTTP close for ['127.0.0.1', 56017]
+HTTP response complete for ['127.0.0.1', 56017]
+HTTP 200 response started for ['127.0.0.1', 56022]
+HTTP close for ['127.0.0.1', 56022]
+HTTP response complete for ['127.0.0.1', 56022]
+WebSocket closed for ['127.0.0.1', 56016]
+Upgraded connection ['127.0.0.1', 56025] to WebSocket
+HTTP b'GET' request for ['127.0.0.1', 56022]
+WebSocket ['127.0.0.1', 56025] open and established
+WebSocket ['127.0.0.1', 56025] accepted by application
+HTTP 200 response started for ['127.0.0.1', 56022]
+HTTP close for ['127.0.0.1', 56022]
+HTTP response complete for ['127.0.0.1', 56022]
+HTTP b'GET' request for ['127.0.0.1', 56022]
+HTTP b'GET' request for ['127.0.0.1', 56017]
+HTTP 200 response started for ['127.0.0.1', 56022]
+HTTP close for ['127.0.0.1', 56022]
+HTTP response complete for ['127.0.0.1', 56022]
+HTTP 200 response started for ['127.0.0.1', 56017]
+HTTP close for ['127.0.0.1', 56017]
+HTTP response complete for ['127.0.0.1', 56017]
+WebSocket closed for ['127.0.0.1', 56025]
+Upgraded connection ['127.0.0.1', 56034] to WebSocket
+HTTP b'GET' request for ['127.0.0.1', 56017]
+WebSocket ['127.0.0.1', 56034] open and established
+WebSocket ['127.0.0.1', 56034] accepted by application
+HTTP 200 response started for ['127.0.0.1', 56017]
+HTTP close for ['127.0.0.1', 56017]
+HTTP response complete for ['127.0.0.1', 56017]
+HTTP b'GET' request for ['127.0.0.1', 56017]
+HTTP b'GET' request for ['127.0.0.1', 56022]
+HTTP 200 response started for ['127.0.0.1', 56017]
+HTTP close for ['127.0.0.1', 56017]
+HTTP response complete for ['127.0.0.1', 56017]
+HTTP 200 response started for ['127.0.0.1', 56022]
+HTTP close for ['127.0.0.1', 56022]
+HTTP response complete for ['127.0.0.1', 56022]
+WebSocket incoming frame on ['127.0.0.1', 56034]
+Sent WebSocket packet to client for ['127.0.0.1', 56034]
+WebSocket closed for ['127.0.0.1', 56034]
+Upgraded connection ['127.0.0.1', 56054] to WebSocket
+HTTP b'GET' request for ['127.0.0.1', 56022]
+WebSocket ['127.0.0.1', 56054] open and established
+WebSocket ['127.0.0.1', 56054] accepted by application
+HTTP 200 response started for ['127.0.0.1', 56022]
+HTTP close for ['127.0.0.1', 56022]
+HTTP response complete for ['127.0.0.1', 56022]
+HTTP b'GET' request for ['127.0.0.1', 56022]
+HTTP b'GET' request for ['127.0.0.1', 56017]
+HTTP 200 response started for ['127.0.0.1', 56022]
+HTTP close for ['127.0.0.1', 56022]
+HTTP response complete for ['127.0.0.1', 56022]
+HTTP 200 response started for ['127.0.0.1', 56017]
+HTTP close for ['127.0.0.1', 56017]
+HTTP response complete for ['127.0.0.1', 56017]
+WebSocket closed for ['127.0.0.1', 56054]
+HTTP b'GET' request for ['127.0.0.1', 56017]
+Upgraded connection ['127.0.0.1', 56065] to WebSocket
+WebSocket ['127.0.0.1', 56065] open and established
+WebSocket ['127.0.0.1', 56065] accepted by application
+HTTP 200 response started for ['127.0.0.1', 56017]
+HTTP close for ['127.0.0.1', 56017]
+HTTP response complete for ['127.0.0.1', 56017]
+HTTP b'GET' request for ['127.0.0.1', 56017]
+HTTP b'GET' request for ['127.0.0.1', 56022]
+HTTP 200 response started for ['127.0.0.1', 56017]
+HTTP close for ['127.0.0.1', 56017]
+HTTP response complete for ['127.0.0.1', 56017]
+HTTP 200 response started for ['127.0.0.1', 56022]
+HTTP close for ['127.0.0.1', 56022]
+HTTP response complete for ['127.0.0.1', 56022]
+WebSocket closed for ['127.0.0.1', 56065]
+HTTP b'GET' request for ['127.0.0.1', 56022]
+Upgraded connection ['127.0.0.1', 56069] to WebSocket
+WebSocket ['127.0.0.1', 56069] open and established
+WebSocket ['127.0.0.1', 56069] accepted by application
+HTTP 200 response started for ['127.0.0.1', 56022]
+HTTP close for ['127.0.0.1', 56022]
+HTTP response complete for ['127.0.0.1', 56022]
+HTTP b'GET' request for ['127.0.0.1', 56022]
+HTTP b'GET' request for ['127.0.0.1', 56017]
+HTTP 200 response started for ['127.0.0.1', 56022]
+HTTP close for ['127.0.0.1', 56022]
+HTTP response complete for ['127.0.0.1', 56022]
+HTTP 200 response started for ['127.0.0.1', 56017]
+HTTP close for ['127.0.0.1', 56017]
+HTTP response complete for ['127.0.0.1', 56017]
+WebSocket incoming frame on ['127.0.0.1', 56069]
+Sent WebSocket packet to client for ['127.0.0.1', 56069]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+HTTP b'GET' request for ['127.0.0.1', 56085]
+HTTP 200 response started for ['127.0.0.1', 56085]
+HTTP close for ['127.0.0.1', 56085]
+HTTP response complete for ['127.0.0.1', 56085]
+Upgraded connection ['127.0.0.1', 56182] to WebSocket
+WebSocket ['127.0.0.1', 56182] open and established
+WebSocket ['127.0.0.1', 56182] accepted by application
+WebSocket incoming frame on ['127.0.0.1', 56182]
+Sent WebSocket packet to client for ['127.0.0.1', 56182]
+Sent WebSocket packet to client for ['127.0.0.1', 56069]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+WebSocket incoming frame on ['127.0.0.1', 56182]
+Sent WebSocket packet to client for ['127.0.0.1', 56182]
+Sent WebSocket packet to client for ['127.0.0.1', 56069]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+WebSocket incoming frame on ['127.0.0.1', 56182]
+Sent WebSocket packet to client for ['127.0.0.1', 56182]
+Sent WebSocket packet to client for ['127.0.0.1', 56069]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+HTTP b'GET' request for ['127.0.0.1', 56236]
+HTTP 200 response started for ['127.0.0.1', 56236]
+HTTP close for ['127.0.0.1', 56236]
+HTTP response complete for ['127.0.0.1', 56236]
+Killed 2 pending application instances
+WebSocket closed for ['127.0.0.1', 56069]
+WebSocket closed for ['127.0.0.1', 56182]
