@@ -3,7 +3,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from ..serializers import StudentSerializer, CourseSerialozer
-from ..models import Course, Student, CourseEnrollment
+from ..models import Course, Student, CourseEnrollment, Attendance
 from rest_framework.exceptions import NotFound
 from rest_framework import status
 from django.shortcuts import get_object_or_404
@@ -18,10 +18,12 @@ class StudentDashboardView(APIView):
             return Response({'error': 'user is not student'}, status= status.HTTP_400_BAD_REQUEST)
         
         student = user.student
-        current_course = Course.objects.filter(students = student)
-        if current_course.exists():
-            course_data= CourseSerialozer(current_course, many = True).data
+        current_course = Course.objects.filter(students = student).first()
+        if current_course:
+            course_data= CourseSerialozer(current_course).data
+            complete = Attendance.calculate_completion(student, current_course)
             return Response({
+                'complete': complete,
                 'current_course': course_data,
                 'available_cources': []
             })

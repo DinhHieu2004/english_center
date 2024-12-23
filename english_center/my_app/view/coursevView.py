@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from ..serializers import  CourseSerialozer, StudentSerializer
-from ..models import Course
+from ..models import Course, Attendance
 from rest_framework.exceptions import NotFound
 
 
@@ -40,10 +40,11 @@ class CourseStudentsAPIView(APIView):
                 'email': user.email,
                 'phone': user.phone,
                 'birth_date': user.date_of_birth,
-                'address': user.address
+                'address': user.address,
+                'complete': Attendance.calculate_completion(student, course)
             }
             students_data.append(student_data)
-
+        students_data = sorted(students_data, key=lambda x: x['name'])
         return Response({
             'course': course.name,
             'students': students_data 

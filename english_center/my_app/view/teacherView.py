@@ -1,11 +1,13 @@
 from collections import defaultdict
+import datetime
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
-from ..serializers import TeacherSerializer, CourseSerialozer, CourseScheduleSerializer
-from ..models import Course, Teacher, CourseSchedule
+from ..serializers import TeacherSerializer, CourseSerialozer, CourseScheduleSerializer, StudySessionSerializer
+from ..models import Course, Teacher, CourseSchedule, StudySession
 from rest_framework.exceptions import NotFound
 from rest_framework import status
+from datetime import timedelta
 
 # views.py
 class TeacherView(APIView):
@@ -40,41 +42,54 @@ class TeacherScheduleView(APIView):
     serializer_class = CourseScheduleSerializer
     permission_classes = [IsAuthenticated]
 
-    def get_teacher_schedule(self, teacher_id):
-        """
-        Hàm tính toán lịch học của giáo viên
-        """
+    def get_teacher_schedule(self, teacher_id, start_date, end_date):
         try:
             teacher = Teacher.objects.get(id=teacher_id)
         except Teacher.DoesNotExist:
             return None
         
         courses = teacher.course_set.all()
-        schedule = defaultdict(list)
+        sessions = StudySession.objects.all()
+        serializer = StudySessionSerializer(sessions, many=True) 
+        num_session = sessions.count()
 
+        schedule = defaultdict(lambda: {i: None for i in range(1, num_session+ 1)})
+        
         for course in courses:
-            for schedule_item in course.schedules.all():
+            for schedule_item in course.schedules.all().order_by('session'):
                 class_dates = course.calculate_class_dates()
                 for class_date in class_dates:
-                    if class_date.weekday() == schedule_item.weekday:
+                    start_date_date = start_date.date()
+                    end_date_date = end_date.date()   
+                    
+                    if start_date_date <= class_date <= end_date_date and class_date.weekday() == schedule_item.weekday:
                         session_str = str(schedule_item.session) if schedule_item.session else "No session assigned"
-                        schedule[schedule_item.get_weekday_display()].append({
+                        
+                        schedule[class_date.weekday() + 1][schedule_item.session_id] = {
                             'course_name': course.name,
                             'start_time': session_str,
                             'class_date': class_date
-                    })
+                        }
 
-        # Sắp xếp lịch học theo giờ
-        for weekday in schedule:
-            schedule[weekday].sort(key=lambda x: x['start_time'])
-        
-        return schedule
+        return {
+        'teacher_schedule': schedule,
+        'all_sessions': serializer.data
+    }
 
     def get(self, request, teacher_id):
-        """
-        API Endpoint trả về lịch dạy của giáo viên
-        """
-        teacher_schedule = self.get_teacher_schedule(teacher_id)
+        week_start_str = request.query_params.get('start_date')
+        week_end_str = request.query_params.get('end_date')
+
+        if not week_start_str or not week_end_str:
+            return Response({'error': 'Missing start_date or end_date in query parameters'}, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            start_date = datetime.datetime.strptime(week_start_str, '%Y-%m-%d')
+            end_date = datetime.datetime.strptime(week_end_str, '%Y-%m-%d')
+        except ValueError:
+            return Response({'error': 'Invalid date format. Expected format: YYYY-MM-DD'}, status=status.HTTP_400_BAD_REQUEST)
+
+        teacher_schedule = self.get_teacher_schedule(teacher_id, start_date, end_date)
         
         if teacher_schedule is None:
             return Response({'error': 'Teacher not found'}, status=status.HTTP_404_NOT_FOUND)

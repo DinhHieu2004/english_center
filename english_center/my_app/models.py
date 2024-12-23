@@ -123,8 +123,8 @@ class Course(models.Model):
         while session_count < self.total_session:
             if current_date.weekday() in class_days:
                 session_count += 1
-            current_date += datetime.timedelta(days=1)
-        return current_date - datetime.timedelta(days=1)
+            current_date += timedelta(days=1)
+        return current_date - timedelta(days=1)
     
     def calculate_class_dates(self):
        
@@ -234,10 +234,14 @@ class CourseSchedule(models.Model):
             ).exclude(pk=self.pk) 
 
             if conflicts.exists():
-                conflict_courses = ', '.join([conf.course.name for conf in conflicts])
-                raise ValidationError(
-                    f"Giáo viên {teacher} đã dạy các khóa học sau trong cùng thời gian: {conflict_courses}"
-                )
+                for conf in conflicts:
+                    end_date = conf.course.calculate_end_date()
+                    if end_date and end_date < self.course.start_date:
+                        continue
+                    conflict_courses = ', '.join([conf.course.name for conf in conflicts])
+                    raise ValidationError(
+                        f"Giáo viên {teacher} đã dạy các khóa học sau trong cùng thời gian: {conflict_courses}"
+                    )
     def __str__(self):
         return f"{self.course.name} - {self.get_weekday_display()} {self.session}"
     
@@ -369,7 +373,7 @@ class Attendance(models.Model):
         student=student, course=course).filter(Q(status="x") | Q(status="cp")).count()
 
         completion_percentage = (attendances / total_sessions) * 100
-        return completion_percentage
+        return round(completion_percentage, 2)
     
 class Notification(models.Model):
     title = models.CharField(max_length=200)

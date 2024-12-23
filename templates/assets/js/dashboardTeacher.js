@@ -80,9 +80,10 @@ $(document).ready(function () {
     // Xử lý đăng xuất
     $('#logoutBtn').click(function (event) {
         event.preventDefault();
-        localStorage.removeItem('token');
-        localStorage.removeItem('userType');
-        localStorage.removeItem('userData'); 
+        // localStorage.removeItem('token');
+        // localStorage.removeItem('userType');
+        // localStorage.removeItem('userData');
+        localStorage.clear();
         window.location.href = '../base.html';
     });
     

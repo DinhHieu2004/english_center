@@ -194,77 +194,19 @@ class CourseEnrollmentInline(admin.TabularInline):
     extra = 0
     readonly_fields = ('enrollment_date',)
     fields = ('student', 'completed', 'final_test_passed')
-
-class AttendanceInline(admin.TabularInline):
-    model = Attendance
-    extra = 0
-    fields = ('student', 'date', 'status')
-    show_change_link = True
-    def formfield_for_dbfield(self, db_field, request, **kwargs):
-        course_id = request.resolver_match.kwargs.get('object_id')
-        
-        if course_id:
-            if db_field.name == 'student':
-                kwargs['queryset'] = Student.objects.filter(courseenrollment__course_id=course_id)
-        
-            elif db_field.name == 'date':
-                try:
-                    course = Course.objects.get(id=course_id)
-                except Course.DoesNotExist:
-                    course = None
-            
-                if course:
-                    valid_dates = course.calculate_class_dates()
-                    valid_dates_display = [date.strftime("%Y-%m-%d") for date in valid_dates]
-                    kwargs['widget'] = forms.Select(choices=[(date, date) for date in valid_dates_display])
-
-        return super().formfield_for_dbfield(db_field, request, **kwargs)
-
-    def get_queryset(self, request):
-        course_id = request.resolver_match.kwargs.get('object_id')
-        if course_id:
-            return Attendance.objects.filter(course_id=course_id)
-        return Attendance.objects.all()      
+    
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'level', 'teacher', 'price','start_date', 'total_session','discounted_price')
     list_filter = ('level', 'teacher',)
     search_fields = ('name',)
-    inlines = [CourseScheduleInline, CourseEnrollmentInline, AttendanceInline]
-    class Media:
-        js = ('my_app/js/admin_inline_pagination.js',)
-        css = {
-            'all': ('my_app/css/custom_admin.css',)
-        }
+    inlines = [CourseScheduleInline, CourseEnrollmentInline]
 
     def discounted_price(self, obj):
         return obj.calculate_discounted_price()
     discounted_price.short_description = 'Discounted Price'    
 
-
-    def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
-        course = self.get_object(request, object_id)
-
-        labels = []
-        data = []
-
-        if course:
-            attendance = course.attendance_set.all()
-            attendance_statuses = attendance.values_list('status', flat=True)
-            from collections import Counter
-            status_counts = Counter(attendance_statuses)
-        
-            labels = list(status_counts.keys())
-            data = list(status_counts.values())
-        print("Labels:", labels)
-        print("Data:", data)
-
-        extra_context = extra_context or {}
-        extra_context['labels'] = json.dumps(labels)
-        extra_context['data'] = json.dumps(data)  
-
-        return super().changeform_view(request, object_id, form_url, extra_context)
     fieldsets = (
         ('Thông tin khóa học', {
             'fields': ('name', 'level', 'description','price', 'teacher')
@@ -389,22 +331,11 @@ admin.site.register(TestResult, TestResultAdmin)
 @admin.register(Attendance)
 class AttendanceAdmin(admin.ModelAdmin):
     list_display = ('student', 'course', 'date', 'status', 'created_at', 'updated_at')
-    list_filter = ('status', 'course', 'date') 
-    search_fields = ('student__name', 'course__name')
+    list_filter = ('status', 'course', 'date', 'student') 
+    search_fields = ('student__id', 'course__id', 'date')
     list_editable = ('status',) 
     list_per_page = 20 
     ordering = ('-date',) 
-    def changelist_view(self, request, extra_context=None):
-        attendance_stats = Attendance.objects.values('status').annotate(total=Count('status'))
-
-        labels = [item['status'] for item in attendance_stats]
-        data = [item['total'] for item in attendance_stats]
-
-        extra_context = extra_context or {}
-        extra_context['labels'] = json.dumps(labels)  
-        extra_context['data'] = json.dumps(data) 
-
-        return super().changelist_view(request, extra_context=extra_context)
 
 class NotificationAdmin(admin.ModelAdmin):
     list_display =('id', 'title', 'course', 'teacher', 'message', 'timestamp')

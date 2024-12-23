@@ -81,11 +81,11 @@ $(document).ready(function () {
                 'Authorization': `Token ${token}`
             },
             success: function(response) {
-                is_register = Array.isArray(response.current_course) && response.current_course.length > 0;
+                const is_register = response.current_course != null;
                 console.log(is_register, typeof is_register)
                 localStorage.setItem('is_register', is_register)
                 if(is_register){
-                    displayCurrentCourses(response.current_course)
+                    displayCurrentCourses(response.current_course, response.complete)
                 }else{
                     displayAvailableCourses(response.available_courses)
                 }
@@ -97,11 +97,10 @@ $(document).ready(function () {
     }
 
     //  khóa học hiện tại
-    function displayCurrentCourses(courses) {
+    function displayCurrentCourses(course, complete) {
         const coursesContainer = $('#currentCourses');
         coursesContainer.empty();
     
-        courses.forEach(course => {
             const courseCard = `
                 <div class="card mb-2">
                     <div class="card-body">
@@ -118,7 +117,10 @@ $(document).ready(function () {
                 </div>
             `;
             coursesContainer.append(courseCard);
-        });
+        const progressBar = $('#courseProgress');
+        const courseNameElement = $('.courseName');
+        courseNameElement.text("Khóa học " + course.level.toUpperCase());
+        progressBar.css('width', `${complete}%`).attr('aria-valuenow', complete).text(`${complete}%`);
     }
     function displayAvailableCourses(courses) {
         const registerContainer = $('#registerCourses');

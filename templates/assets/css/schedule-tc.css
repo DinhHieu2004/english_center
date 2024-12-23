@@ -1,0 +1,21 @@
+
+        .schedule-table th, .schedule-table td {
+            text-align: center;
+            padding: 15px;
+            border: 1px solid #ddd;
+            width: 50px;
+        }
+        .schedule-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .schedule-table th {
+            background-color: #B5292F;
+            color: white;
+        }
+        .schedule-table td {
+            background-color: #f8f9fa;
+        }
+        .day-column {
+            width: 14%;
+        }
