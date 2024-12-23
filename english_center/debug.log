@@ -60855,3 +60855,91 @@ Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.j
 Not Found: /ws/notifications/5/
 Not Found: /ws/notifications/5/
 Not Found: /ws/notifications/5/
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+Unauthorized: /api/login/
+Bad Request: /api/password-reset/
+Bad Request: /api/password-reset-confirm/Mzk/cihgrf-cf356f6fd01c696036ffdcdd27cfd60e/
+N:\web_python\english_center\my_app\view\authViews.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+Bad Request: /api/password-reset-confirm/Mzk/cihitr-564a4344c66c2dbd8741470bc7a40079/
+N:\web_python\english_center\my_app\view\authViews.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\authViews.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\view\authViews.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+Bad Request: /api/password-reset-confirm/Mzk/cihja4-3528a0cbcc1237f7d11979a8a9ff38df/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+Not Found: /ws/notifications/5/
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Method Not Allowed: /api/login/
+Not Found: /static/rest_framework/css/bootstrap.min.css
+Not Found: /static/rest_framework/css/default.css
+Not Found: /static/rest_framework/css/bootstrap-tweaks.css
+Not Found: /static/rest_framework/css/prettify.css
+Not Found: /static/rest_framework/js/jquery-3.7.1.min.js
+Not Found: /static/rest_framework/js/csrf.js
+Not Found: /static/rest_framework/js/ajax-form.js
+Not Found: /static/rest_framework/js/bootstrap.min.js
+Not Found: /static/rest_framework/js/prettify-min.js
+Not Found: /static/rest_framework/js/default.js
+Not Found: /static/rest_framework/js/load-ajax-form.js

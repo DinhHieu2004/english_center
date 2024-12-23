@@ -139,6 +139,7 @@ class PasswordResetRequestView(APIView):
         if serializer.is_valid():
             email = serializer.validated_data['email']
             user = User.objects.get(email=email)
+            print(user)
 
             #  token and uid
             token = PasswordResetTokenGenerator().make_token(user)
@@ -162,8 +163,11 @@ def password_reset_form(request, uidb64, token):
         return render(request, 'admin/my_app/reset-password/reset_pass.html')
 
     if request.method == 'POST':
-        new_password = request.POST.get('new_password')
+        new_password = request.POST.get('password')
         confirm_password = request.POST.get('confirm_password')
+        print(new_password)
+        print(confirm_password)
+
 
         if new_password != confirm_password:
             return render(request, 'admin/my_app/reset-password/reset_pass.html', {
@@ -173,12 +177,14 @@ def password_reset_form(request, uidb64, token):
         try:
             uid = urlsafe_base64_decode(uidb64).decode()
             user = User.objects.get(pk=uid)
+            print(user)
         except (User.DoesNotExist, ValueError, TypeError):
             return HttpResponse("link invalid.", status=400)
 
         if not PasswordResetTokenGenerator().check_token(user, token):
             return HttpResponse("Token invalid.", status=400)
 
-        user.set_password(new_password)
+        #user.set_password(new_password)
+        print(user.set_password(new_password))
         user.save()
         return HttpResponse("reset pass sucsses.")

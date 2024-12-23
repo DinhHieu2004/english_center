@@ -40,17 +40,42 @@
         button:hover {
             background-color: #218838;
         }
+        .error {
+            color: red;
+            font-size: 14px;
+            margin-top: 10px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h2>Reset Your Password</h2>
-        <form method="POST">
+        <form id="resetForm" method="POST">
             {% csrf_token %}
-            <input type="password" name="password" placeholder="Enter new password" required>
-            <input type="password" name="confirm_password" placeholder="Confirm new password" required>
+            <input type="password" id="password" name="password" placeholder="Enter new password" required>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm new password" required>
             <button type="submit">Reset Password</button>
+            <p id="error_message" class="error"></p>
         </form>
     </div>
+
+    <script>
+        const form = document.getElementById('resetForm');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm_password');
+        const errorMessage = document.getElementById('error_message');
+
+        form.addEventListener('submit', function (event) {
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            if (password !== confirmPassword) {
+                event.preventDefault();
+                errorMessage.textContent = "Passwords do not match. Please try again.";
+            } else {
+                errorMessage.textContent = ""; 
+            }
+        });
+    </script>
 </body>
 </html>
