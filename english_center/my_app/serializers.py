@@ -8,6 +8,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from datetime import date
 
 
 
@@ -78,11 +79,22 @@ class CourseScheduleSerializer(serializers.ModelSerializer):
 
 class CourseSerialozer(serializers.ModelSerializer):
     schedules = CourseScheduleSerializer(many = True)
+    discounted_price = serializers.SerializerMethodField() 
+    is_discounted = serializers.SerializerMethodField()
+
     class Meta:
         model = Course
-        fields = ['id','name', 'level', 'description','price', 'teacher', 'start_date', 'total_session', 'schedules']
+        fields = ['id','name', 'level', 'description','price','is_discounted','discounted_price', 'teacher', 'start_date', 'total_session', 'schedules']
 
-
+    def get_is_discounted(self, obj):
+        current_discounts = obj.discounts.filter(
+            start_date__lte=date.today(),
+            end_date__gte=date.today()
+        )
+        return current_discounts.exists()
+    def get_discounted_price(self, obj):
+      
+        return obj.calculate_discounted_price()
 #
 class QuestionSerializer(serializers.ModelSerializer):
     audio_file_url = serializers.SerializerMethodField()

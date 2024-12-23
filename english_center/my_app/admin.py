@@ -2,7 +2,7 @@ from django.contrib import admin
 from django import forms
 from .models import (User, Question, FinalExam, PlacementTest, Student, Teacher,Course,
                     CourseEnrollment, CourseSchedule,
-                    Answer, TestResult,  Attendance, Notification , StudySession
+                    Answer, TestResult,  Attendance, Notification , StudySession, Discount
                    )
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password
@@ -228,7 +228,7 @@ class AttendanceInline(admin.TabularInline):
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'level', 'teacher', 'price','start_date', 'total_session')
+    list_display = ('id', 'name', 'level', 'teacher', 'price','start_date', 'total_session','discounted_price')
     list_filter = ('level', 'teacher',)
     search_fields = ('name',)
     inlines = [CourseScheduleInline, CourseEnrollmentInline, AttendanceInline]
@@ -237,6 +237,12 @@ class CourseAdmin(admin.ModelAdmin):
         css = {
             'all': ('my_app/css/custom_admin.css',)
         }
+
+    def discounted_price(self, obj):
+        return obj.calculate_discounted_price()
+    discounted_price.short_description = 'Discounted Price'    
+
+
     def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
         course = self.get_object(request, object_id)
 
@@ -278,6 +284,11 @@ class CourseEnrollmentAdmin(admin.ModelAdmin):
     list_display = ('student', 'course', 'enrollment_date', 'completed', 'final_test_passed')
     list_filter = ('course', 'completed', 'final_test_passed')
     search_fields = ('student__user__username', 'course__name')
+
+@admin.register(Discount)
+class DiscountAdmin(admin.ModelAdmin):
+    list_display = ('name', 'discount_type', 'value', 'start_date', 'end_date', 'is_valid')
+    filter_horizontal = ('courses',)  
 
 @admin.register(TestResult)
 class TestResultAdmin(admin.ModelAdmin):

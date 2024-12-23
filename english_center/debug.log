@@ -17354,3 +17354,836 @@ Traceback (most recent call last):
   File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\smtplib.py", line 876, in sendmail
     raise SMTPSenderRefused(code, resp, from_addr)
 smtplib.SMTPSenderRefused: (530, b'5.7.0 Authentication Required. For more information, go to\n5.7.0  https://support.google.com/mail/?p=WantAuthError d9443c01a7336-219dc9d94c4sm63180185ad.115 - gsmtp', '22130082')
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Not Found: /static/admin/css/login.css
+Not Found: /static/admin/img/icon-no.svg
+Not Found: /static/admin/img/icon-no.svg
+Not Found: /static/admin/img/icon-no.svg
+Not Found: /static/my_app/css/custom_admin.css
+Not Found: /static/my_app/js/admin_inline_pagination.js
+Not Found: /static/my_app/css/custom_admin.css
+Not Found: /static/my_app/css/custom_admin.css
+Not Found: /static/my_app/js/admin_inline_pagination.js
+Not Found: /static/my_app/css/custom_admin.css
+Not Found: /static/my_app/css/custom_admin.css
+Not Found: /static/my_app/js/admin_inline_pagination.js
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+Unauthorized: /api/login/
+Unauthorized: /api/login/
+User attempting to submit test: hieuhieu
+Found student: Student: hieuhieu - Level: none
+Processing 5 answers for student Student: hieuhieu - Level: none
+Deleted 0 old answers
+Created 5 new answers
+Student Student: hieuhieu - Level: none scored 20.0% and achieved level a1
+Created test result: hieuhieu - placement - 20.0% - a1
+Updated student level to a1
+Unauthorized: /api/student/dashboard/
+Unauthorized: /api/login/
+Not Found: /api/login/student/dashboard/
+N:\web_python\english_center\my_app\models.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\admin.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\admin.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\serializers.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+Internal Server Error: /api/student/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\studentView.py", line 30, in get
+    available_courses =CourseSerialozer(next_level_courses, many =True).data
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `discounted_price` is not valid for model `Course` in `my_app.serializers.CourseSerialozer`.
+Internal Server Error: /api/student/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\studentView.py", line 30, in get
+    available_courses =CourseSerialozer(next_level_courses, many =True).data
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `discounted_price` is not valid for model `Course` in `my_app.serializers.CourseSerialozer`.
+Internal Server Error: /api/student/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\studentView.py", line 30, in get
+    available_courses =CourseSerialozer(next_level_courses, many =True).data
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `discounted_price` is not valid for model `Course` in `my_app.serializers.CourseSerialozer`.
+Internal Server Error: /api/student/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\studentView.py", line 30, in get
+    available_courses =CourseSerialozer(next_level_courses, many =True).data
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `discounted_price` is not valid for model `Course` in `my_app.serializers.CourseSerialozer`.
+Internal Server Error: /api/student/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\studentView.py", line 30, in get
+    available_courses =CourseSerialozer(next_level_courses, many =True).data
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `discounted_price` is not valid for model `Course` in `my_app.serializers.CourseSerialozer`.
+Internal Server Error: /api/student/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\studentView.py", line 30, in get
+    available_courses =CourseSerialozer(next_level_courses, many =True).data
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `discounted_price` is not valid for model `Course` in `my_app.serializers.CourseSerialozer`.
+Internal Server Error: /api/student/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\studentView.py", line 30, in get
+    available_courses =CourseSerialozer(next_level_courses, many =True).data
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `discounted_price` is not valid for model `Course` in `my_app.serializers.CourseSerialozer`.
+Internal Server Error: /api/student/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\studentView.py", line 30, in get
+    available_courses =CourseSerialozer(next_level_courses, many =True).data
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `discounted_price` is not valid for model `Course` in `my_app.serializers.CourseSerialozer`.
+Internal Server Error: /api/student/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\studentView.py", line 30, in get
+    available_courses =CourseSerialozer(next_level_courses, many =True).data
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `discounted_price` is not valid for model `Course` in `my_app.serializers.CourseSerialozer`.
+Internal Server Error: /api/student/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\studentView.py", line 30, in get
+    available_courses =CourseSerialozer(next_level_courses, many =True).data
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `discounted_price` is not valid for model `Course` in `my_app.serializers.CourseSerialozer`.
+N:\web_python\english_center\my_app\serializers.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\models.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\models.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\models.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\serializers.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+Internal Server Error: /api/student/dashboard/
+Traceback (most recent call last):
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\exception.py", line 55, in inner
+    response = get_response(request)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\core\handlers\base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\decorators\csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\views\generic\base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 509, in dispatch
+    response = self.handle_exception(exc)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 469, in handle_exception
+    self.raise_uncaught_exception(exc)
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 480, in raise_uncaught_exception
+    raise exc
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\views.py", line 506, in dispatch
+    response = handler(request, *args, **kwargs)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "N:\web_python\english_center\my_app\view\studentView.py", line 30, in get
+    available_courses =CourseSerialozer(next_level_courses, many =True).data
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 795, in data
+    ret = super().data
+          ^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 249, in data
+    self._data = self.to_representation(self.instance)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 714, in to_representation
+    self.child.to_representation(item) for item in iterable
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 523, in to_representation
+    for field in fields:
+                 ^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 384, in _readable_fields
+    for field in self.fields.values():
+                 ^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\django\utils\functional.py", line 47, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+                                         ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 372, in fields
+    for key, value in self.get_fields().items():
+                      ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1103, in get_fields
+    field_class, field_kwargs = self.build_field(
+                                ^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1249, in build_field
+    return self.build_unknown_field(field_name, model_class)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\rest_framework\serializers.py", line 1367, in build_unknown_field
+    raise ImproperlyConfigured(
+django.core.exceptions.ImproperlyConfigured: Field name `is_discounted` is not valid for model `Course` in `my_app.serializers.CourseSerialozer`.
+N:\web_python\english_center\my_app\serializers.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+Unauthorized: /api/course/5/
+N:\web_python\english_center\my_app\models.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\models.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\models.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+N:\web_python\english_center\my_app\models.py changed, reloading.
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader

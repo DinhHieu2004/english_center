@@ -57,24 +57,41 @@ function renderCourseDetails(course, teacherName, is_register) {
     } else {
         schedulesHtml = `<p>Không có lịch học nào được thiết lập.</p>`;
     }
+
+    let discountText='';
+    let discounted_price='';
+    if (course.is_discounted) {
+        discountText = `<p class="card-text text-danger"><strong>Đang giảm giá!</strong></p>`;
+        discounted_price =` <p><strong>Giá đã giảm:</strong> ${course.discounted_price}.00 VND</p>`
+    }
     
      let paymentButton ='';
      if(is_register){
         paymentButton = `<p style="color: green;">Bạn đã đăng ký khóa học này.</p>`;
+
+        watchButton =`<div class="container mt-4 text-center">
+            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#notificationModal">
+            <i class="bi bi-bell"></i> Xem thông báo lớp học
+            </button>
+            </div>`
      }else{
         paymentButton = `<button class="btn btn-primary" id="payButton">Đăng kí khóa học này</button>`;
      }
+     
 
     let courseDetailsHtml = `
         <h3>Thông tin lớp học: ${course.name}</h3>
         <p><strong>Miêu tả:</strong> ${course.description}</p>
         <p><strong>Trình độ:</strong> ${course.level}</p>
-        <p><strong>Giá:</strong> ${course.price} VND</p>
+        <p><strong>Giá gốc:</strong> ${course.price} VND</p>
+        ${discountText}
+        ${discounted_price}
         <p><strong>Ngày bắt đầu:</strong> ${course.start_date}</p>
         <p><strong>Giáo viên:</strong> ${teacherName}</p>
       
         ${schedulesHtml}
         ${paymentButton}
+        ${watchButton}
 
     `;
     $('#courseDetail').html(courseDetailsHtml);
@@ -105,7 +122,7 @@ function fetchTeacherDetails(teacherId, course, is_register) {
 
 function openPaymentModal(course) {
     $('#modalCourseName').text(course.name);
-    $('#modalCoursePrice').text(course.price);
+    $('#modalCoursePrice').text(course.discounted_price);
     $('#paymentModal').modal('show');
 
     $('#confirmPaymentBtn').off('click').on('click', function (e) {

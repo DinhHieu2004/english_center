@@ -120,7 +120,6 @@ $(document).ready(function () {
             coursesContainer.append(courseCard);
         });
     }
-    //  khóa học có thể đăng ký
     function displayAvailableCourses(courses) {
         const registerContainer = $('#registerCourses');
         registerContainer.empty();
@@ -130,24 +129,33 @@ $(document).ready(function () {
             return;
         }
 
-        const coursesList = courses.map(course => `
-            <div class="card mb-2">
-                <div class="card-body">
-                    <p class="card-text"> Mã khóa học :${course.id}</p>
-
-                    <p class="card-text">${course.name}</p>
-                    <p class="card-text">${course.description}</p>
-
-                    <p><strong>Cấp độ:</strong> ${course.level.toUpperCase()}</p>
-                    <a href="course-detail.html?id=${course.id}" >
-                    <button class="btn btn-success look-course" data-course-id="${course.id}">
-                        Xem khóa học
-                    </button>
-                     <a>
+        const  coursesList = courses.map(course => {
+            let discountText = '';
+            if (course.is_discounted) {
+                discountText = `<p class="card-text text-danger"><strong>Đang giảm giá!</strong></p>`;
+            }
+    
+            return `
+                <div class="card mb-2">
+                    <div class="card-body">
+                        <p class="card-text"> Mã khóa học :${course.id}</p>
+    
+                        <p class="card-text">${course.name}</p>
+                        <p class="card-text">${course.description}</p>
+    
+                        <p><strong>Cấp độ:</strong> ${course.level.toUpperCase()}</p>
+    
+                        ${discountText}
+    
+                        <a href="course-detail.html?id=${course.id}" >
+                            <button class="btn btn-success look-course" data-course-id="${course.id}">
+                                Xem khóa học
+                            </button>
+                        </a>
+                    </div>
                 </div>
-            </div>
-        `).join('');
-
+            `;
+        }).join('');
         registerContainer.html(`
             <h6>Các khóa học có thể đăng ký:</h6>
             ${coursesList}
