@@ -60971,3 +60971,16 @@ interactive is False
 platform is win32
 CACHEDIR=C:\Users\Laptop 199x\.matplotlib
 Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
