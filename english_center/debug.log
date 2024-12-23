@@ -60943,3 +60943,25 @@ Not Found: /static/rest_framework/js/bootstrap.min.js
 Not Found: /static/rest_framework/js/prettify-min.js
 Not Found: /static/rest_framework/js/default.js
 Not Found: /static/rest_framework/js/load-ajax-form.js
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
+Watching for file changes with StatReloader
+Method Not Allowed: /api/login/
+Bad Request: /api/login/
+Method Not Allowed: /api/login/
+matplotlib data path: C:\Users\Laptop 199x\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\Laptop 199x\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\Laptop 199x\.matplotlib
+Using fontManager instance from C:\Users\Laptop 199x\.matplotlib\fontlist-v390.json
