@@ -88,7 +88,7 @@ function fetchCourseStudents(courseId) {
 // }
             function getAuthHeaders() {
                 return {
-                    'Authorization': 'Token ' + localStorage.getItem('token'),
+'Authorization': 'Token ' + localStorage.getItem('token'),
                     'Content-Type': 'application/json'
                 };
             }
@@ -131,7 +131,8 @@ function fetchCourseStudents(courseId) {
                             }
                             checkStatus(input);
             
-                            input.onblur = function() {
+                            input.onblur = function(event) {
+                                event.preventDefault(); 
                                 checkStatus(this); 
                                 console.log(courseId, student.id, date, this.value);
                                 saveAttendance(courseId, student.id, date, this.value);
@@ -151,7 +152,7 @@ function fetchCourseStudents(courseId) {
                     url: `http://127.0.0.1:8000/api/course/${courseId}/attendance/`, 
                     method: 'GET',
                     headers: getAuthHeaders(),
-                    data: {
+data: {
                         student: student,
                         date: date
                     },
@@ -226,7 +227,7 @@ function attachInputNavigation() {
         // // Di chuyển sang trái (phím mũi tên trái)
         // else if (e.which === 37) {
         //     if (currentColumnIndex > 0) {
-        //         next = current.closest("tr").find("td").eq(currentColumnIndex - 1).find("input[type='text']");
+//         next = current.closest("tr").find("td").eq(currentColumnIndex - 1).find("input[type='text']");
         //     }
         // }
         // else if (e.which === 39) {
