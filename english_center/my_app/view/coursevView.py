@@ -2,8 +2,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from ..serializers import  CourseSerialozer, StudentSerializer
-from ..models import Course
+from ..models import Course, Student, Attendance
 from rest_framework.exceptions import NotFound
+from rest_framework.decorators import api_view
 
 
 class CourseDetailView(APIView):
@@ -48,3 +49,33 @@ class CourseStudentsAPIView(APIView):
             'course': course.name,
             'students': students_data 
         })
+    
+def calculate_completion(student, course):
+    total_sessions = course.total_session
+    if total_sessions == 0:
+        return 0
+    attendances = Attendance.objects.filter(
+        student=student, course=course
+    ).filter(Q(status="x") | Q(status="cp")).count()
+
+    completion_percentage = (attendances / total_sessions) * 100
+    return completion_percentage
+
+@api_view(['GET'])
+def get_completion_percentage(request):
+    student_id = request.query_params.get('student_id')
+    course_id = request.query_params.get('course_id')
+
+    if not student_id or not course_id:
+        return Response({"error": "Missing student_id or course_id"}, status=400)
+
+    try:
+        student = Student.objects.get(id=student_id)
+        course = Course.objects.get(id=course_id)
+    except Student.DoesNotExist:
+        return Response({"error": "Student not found"}, status=404)
+    except Course.DoesNotExist:
+        return Response({"error": "Course not found"}, status=404)
+
+    completion_percentage = calculate_completion(student, course)
+    return Response({"completion_percentage": completion_percentage})

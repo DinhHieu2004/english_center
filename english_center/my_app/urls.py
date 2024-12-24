@@ -1,12 +1,13 @@
 from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework.authtoken.views import obtain_auth_token
 
 from .view.authViews import LoginView, RegisterStudent, ChangePasswordView, LogoutView,PasswordResetRequestView, password_reset_form
-from  .view.examViews import PlacementTestView
-from  .view.coursevView import  CourseDetailView, CourseStudentsAPIView
+from  .view.examViews import PlacementTestView, FinalExamView
+from  .view.coursevView import  CourseDetailView, CourseStudentsAPIView, get_completion_percentage
 from .view.teacherView import TeacherView,TeacherDashboardView, TeacherScheduleView
-from .view.studentView import StudentDashboardView, StudentDetailView, StudentEnrollmentView
+from .view.studentView import CourseCompletionView, StudentDashboardView, StudentDetailView, StudentEnrollmentView
 from .view.notificationView import NotificationListView
 from .view.attendanceView import AttendanceList, CourseScheduleListView
 
@@ -31,6 +32,10 @@ urlpatterns = [
     path('teacher/<int:teacher_id>/schedule/', TeacherScheduleView.as_view(), name='teacher-schedule'),
     path('password-reset/', PasswordResetRequestView.as_view(), name='password_reset'),
     path('password-reset-confirm/<str:uidb64>/<str:token>/', password_reset_form, name='password_reset_confirm'),
+    path('final-exam/<int:exam_id>/', FinalExamView.as_view(), name='final-exam'),
+    path('api/token-auth/', obtain_auth_token, name='token_auth'),
+    path('completion-percentage/', get_completion_percentage, name='completion_percentage'),
+    
 
 ]
 if settings.DEBUG:

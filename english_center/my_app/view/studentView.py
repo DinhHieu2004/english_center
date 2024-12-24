@@ -3,10 +3,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from ..serializers import StudentSerializer, CourseSerialozer
-from ..models import Course, Student, CourseEnrollment
+from ..models import Attendance, Course, Student, CourseEnrollment
 from rest_framework.exceptions import NotFound
 from rest_framework import status
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 
 
 class StudentDashboardView(APIView):
@@ -93,3 +94,40 @@ class StudentEnrollmentView(APIView):
 
         except Exception as e:
             return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)            
+        
+
+class CourseCompletionView(APIView):
+    permission_classes = [IsAuthenticated]
+    
+    def get(self, request, course_id):
+        try:
+            student = request.user.student
+            course = Course.objects.get(id=course_id)
+            
+            # Tính tổng số buổi học
+            total_sessions = course.total_session
+            if total_sessions == 0:
+                return Response({
+                    'completion_percentage': 0
+                })
+            
+            # Đếm số buổi học viên đã tham gia
+            attended_sessions = Attendance.objects.filter(
+                student=student,
+                course=course
+            ).filter(
+                Q(status="x") | Q(status="cp")
+            ).count()
+            # Tính phần trăm hoàn thành
+            completion_percentage = (attended_sessions / total_sessions) * 100
+            
+            return Response({
+                'completion_percentage': round(completion_percentage, 1)
+            })
+            
+        except Course.DoesNotExist:
+            raise NotFound("Không tìm thấy khóa học")
+        except Exception as e:
+            return Response({
+                'error': str(e)
+            }, status=400)

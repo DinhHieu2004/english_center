@@ -1,4 +1,5 @@
 import pytest
+import requests
 from rest_framework import status
 from rest_framework.test import APIClient
 from django.contrib.auth import get_user_model
@@ -106,3 +107,6 @@ def test_register_teacher_missing_user(api_client):
     # Kiểm tra mã trạng thái lỗi và thông báo lỗi
     assert response.status_code == status.HTTP_400_BAD_REQUEST
     assert 'user' in response.data  # Kiểm tra lỗi thiếu dữ liệu user
+
+
+
