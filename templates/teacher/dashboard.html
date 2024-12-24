@@ -4,6 +4,7 @@
 <head>
     <title>Teacher Dashboard</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -36,9 +37,16 @@
                     <div class="card-body">
                         <h5 class="card-title">Thông tin giáo viên</h5>
                         <p><strong>Họ tên:</strong> <span id="fullName"></span></p>
+                        <p><strong>Ngày sinh:</strong> <span id="birthDay"></span></p>
                         <p><strong>Email:</strong> <span id="email"></span></p>
+                        <p><strong>SĐT:</strong> <span id="sdt"></span></p>
                         <p><strong>Ngày tham gia:</strong> <span id="joinDate"></span></p>
+                        <p><strong>Trình độ:</strong> <span id="level"></span></p>
                         <button class="btn btn-primary viewScheduleButton">Xem thời khóa biểu</button>
+                        <!-- <button class="btn btn-secondary mt-2" data-bs-toggle="modal" data-bs-target="#editInfoModal">
+                            Chỉnh sửa thông tin
+                        </button> -->
+                        
                     </div>
                 </div>
             </div>
@@ -51,41 +59,77 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
+    
+    <div class="modal fade" id="ChangePassModal" tabindex="-1">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="changePasswordModalLabel">Đổi Mật Khẩu</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                    <h5 class="modal-title">Đổi mật khẩu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <form id="changePasswordForm">
-                        <div class="form-group">
-                            <label for="currentPassword">Mật khẩu hiện tại</label>
-                            <input type="password" class="form-control" id="currentPassword" required>
+                    <form id="changePassForm">
+                        <div class="mb-3">
+                            <label class="form-label">Mật khẩu cũ</label>
+                            <input type="password" id="oldPassword" class="form-control" required>
                         </div>
-                        <div class="form-group">
-                            <label for="newPassword">Mật khẩu mới</label>
-                            <input type="password" class="form-control" id="newPassword" required>
+                        <div class="mb-3">
+                            <label class="form-label">Nhập mật khẩu mới</label>
+                            <input type="password" id="newPassword" class="form-control" required>
                         </div>
-                        <div class="form-group">
-                            <label for="confirmPassword">Xác nhận mật khẩu mới</label>
-                            <input type="password" class="form-control" id="confirmPassword" required>
+                        <div class="mb-3">
+                            <label class="form-label">Nhập lại mật khẩu mới</label>
+                            <input type="password" id="cfNewPassword" class="form-control" required>
                         </div>
-                        <div id="error-message" class="text-danger" style="display: none;"></div>
-                        <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                        <button type="submit" class="btn btn-primary w-100">Lưu thay đổi</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+<!-- Modal Chỉnh sửa thông tin -->
+<div class="modal fade" id="editInfoModal" tabindex="-1" aria-labelledby="editInfoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editInfoModalLabel">Chỉnh sửa thông tin</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="editInfoForm">
+                    <div class="mb-3">
+                        <label for="editFullName" class="form-label">Họ tên</label>
+                        <input type="text" class="form-control" id="editFullName" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="editEmail" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editPhone" class="form-label">Số điện thoại</label>
+                        <input type="text" class="form-control" id="editPhone" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editBirthday" class="form-label">Ngày sinh</label>
+                        <input type="date" class="form-control" id="editBirthday" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="editAddress" class="form-label">Địa chỉ</label>
+                        <input type="text" class="form-control" id="editAddress" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Lưu thay đổi</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
     
+</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="/templates/assets/js/dashboardTeacher.js"></script>
+    <script src="/templates/assets/js/changePass.js"> </script>
 </body>
 
 </html>
