@@ -1,4 +1,4 @@
- $(document).ready(function () {
+$(document).ready(function () {
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get('id'); 
     const is_register = localStorage.getItem('is_register') === 'true'; 
@@ -66,6 +66,7 @@ function renderCourseDetails(course, teacherName, is_register) {
     }
     
      let paymentButton ='';
+     let watchButton ='';
      if(is_register){
         paymentButton = `<p style="color: green;">Bạn đã đăng ký khóa học này.</p>`;
 
