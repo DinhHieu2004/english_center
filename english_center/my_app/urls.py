@@ -3,7 +3,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from .view.authViews import LoginView, RegisterStudent, ChangePasswordView, LogoutView,PasswordResetRequestView, password_reset_form
-from  .view.examViews import PlacementTestView
+from  .view.examViews import FinalExamView, PlacementTestView
 from  .view.coursevView import  CourseDetailView, CourseStudentsAPIView
 from .view.teacherView import TeacherView,TeacherDashboardView, TeacherScheduleView
 from .view.studentView import StudentDashboardView, StudentDetailView, StudentEnrollmentView
@@ -31,7 +31,7 @@ urlpatterns = [
     path('teacher/<int:teacher_id>/schedule/', TeacherScheduleView.as_view(), name='teacher-schedule'),
     path('password-reset/', PasswordResetRequestView.as_view(), name='password_reset'),
     path('password-reset-confirm/<str:uidb64>/<str:token>/', password_reset_form, name='password_reset_confirm'),
-
+    path('final-exam/<int:exam_id>/', FinalExamView.as_view(), name='final-exam'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
