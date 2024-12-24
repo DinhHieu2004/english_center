@@ -2,21 +2,20 @@ from django.contrib import admin
 from django import forms
 from .models import (User, Question, FinalExam, PlacementTest, Student, Teacher,Course,
                     CourseEnrollment, CourseSchedule,
-                    Answer, TestResult,  Attendance, Notification , StudySession
+                    Answer, TestResult,  Attendance, Notification , StudySession, Discount
                    )
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password
 from django.db.models.functions import ExtractQuarter, ExtractYear
 from django.urls import path
-from django.db.models import Sum, Avg
-from django.template.response import TemplateResponse
-from django.utils.timezone import now
+from django.db.models import Avg, Count, F, ExpressionWrapper, FloatField, Sum
 from datetime import date
 from django.utils.safestring import mark_safe
 from django.shortcuts import render
 from django.contrib import messages
 from django.db.models import Count
- #from django.core.exceptions import ValidationError
+import plotly.express as px
+import plotly.io as pio 
 import json
 import base64
 from io import BytesIO
@@ -25,6 +24,7 @@ from .models import Revenue, Course, CourseEnrollment
 from django.utils import timezone
 import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.graph_objects as go
 
 class StudentInline(admin.StackedInline):
     model = Student
@@ -194,71 +194,19 @@ class CourseEnrollmentInline(admin.TabularInline):
     extra = 0
     readonly_fields = ('enrollment_date',)
     fields = ('student', 'completed', 'final_test_passed')
-
-class AttendanceInline(admin.TabularInline):
-    model = Attendance
-    extra = 0
-    fields = ('student', 'date', 'status')
-    show_change_link = True
-    def formfield_for_dbfield(self, db_field, request, **kwargs):
-        course_id = request.resolver_match.kwargs.get('object_id')
-        
-        if course_id:
-            if db_field.name == 'student':
-                kwargs['queryset'] = Student.objects.filter(courseenrollment__course_id=course_id)
-        
-            elif db_field.name == 'date':
-                try:
-                    course = Course.objects.get(id=course_id)
-                except Course.DoesNotExist:
-                    course = None
-            
-                if course:
-                    valid_dates = course.calculate_class_dates()
-                    valid_dates_display = [date.strftime("%Y-%m-%d") for date in valid_dates]
-                    kwargs['widget'] = forms.Select(choices=[(date, date) for date in valid_dates_display])
-
-        return super().formfield_for_dbfield(db_field, request, **kwargs)
-
-    def get_queryset(self, request):
-        course_id = request.resolver_match.kwargs.get('object_id')
-        if course_id:
-            return Attendance.objects.filter(course_id=course_id)
-        return Attendance.objects.all()      
+    
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'level', 'teacher', 'price','start_date', 'total_session')
+    list_display = ('id', 'name', 'level', 'teacher', 'price','start_date', 'total_session','discounted_price')
     list_filter = ('level', 'teacher',)
     search_fields = ('name',)
-    inlines = [CourseScheduleInline, CourseEnrollmentInline, AttendanceInline]
-    class Media:
-        js = ('my_app/js/admin_inline_pagination.js',)
-        css = {
-            'all': ('my_app/css/custom_admin.css',)
-        }
-    def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
-        course = self.get_object(request, object_id)
+    inlines = [CourseScheduleInline, CourseEnrollmentInline]
 
-        labels = []
-        data = []
+    def discounted_price(self, obj):
+        return obj.calculate_discounted_price()
+    discounted_price.short_description = 'Discounted Price'    
 
-        if course:
-            attendance = course.attendance_set.all()
-            attendance_statuses = attendance.values_list('status', flat=True)
-            from collections import Counter
-            status_counts = Counter(attendance_statuses)
-        
-            labels = list(status_counts.keys())
-            data = list(status_counts.values())
-        print("Labels:", labels)
-        print("Data:", data)
-
-        extra_context = extra_context or {}
-        extra_context['labels'] = json.dumps(labels)
-        extra_context['data'] = json.dumps(data)  
-
-        return super().changeform_view(request, object_id, form_url, extra_context)
     fieldsets = (
         ('Thông tin khóa học', {
             'fields': ('name', 'level', 'description','price', 'teacher')
@@ -279,41 +227,127 @@ class CourseEnrollmentAdmin(admin.ModelAdmin):
     list_filter = ('course', 'completed', 'final_test_passed')
     search_fields = ('student__user__username', 'course__name')
 
-@admin.register(TestResult)
+@admin.register(Discount)
+class DiscountAdmin(admin.ModelAdmin):
+    list_display = ('name', 'discount_type', 'value', 'start_date', 'end_date', 'is_valid')
+    filter_horizontal = ('courses',)  
+
 class TestResultAdmin(admin.ModelAdmin):
-    list_display =('student','test_type', 'score',  'level','total_questions','correct_answers')  
+    list_display = ('student', 'test_type', 'score', 'level', 'created_at')
+
+    list_per_page = 10
+    change_list_template = "admin/my_app/statistics/resultTest.html"
+
+
+    def changelist_view(self, request, extra_context=None):
+        queryset = TestResult.objects.all()
+
+        
+        test_type_counts = queryset.values('test_type').annotate(total=Count('id'))
+
+        avg_scores_by_test_type = queryset.values('test_type').annotate(avg_score=Avg('score'))
+
+        avg_correct_rate_by_test_type = queryset.values('test_type').annotate(
+            avg_correct_rate=Avg(ExpressionWrapper(
+                F('correct_answers') * 100.0 / F('total_questions'), 
+                output_field=FloatField()
+            ))
+        )
+
+        level_counts = queryset.values('level').annotate(total=Count('id'))
+
+        avg_scores_and_correct_by_level = queryset.values('level').annotate(
+            avg_score=Avg('score'),
+            avg_correct_rate=Avg(ExpressionWrapper(
+                F('correct_answers') * 100.0 / F('total_questions'), 
+                output_field=FloatField()
+            ))
+        )
+
+      
+        fig1 = px.bar(
+            test_type_counts, 
+            x='test_type', 
+            y='total', 
+            title='Number of tests by type',
+            labels={'test_type', 'total'}
+        )
+
+        fig2 = px.bar(
+            avg_scores_by_test_type, 
+            x='test_type', 
+            y='avg_score', 
+            title='Average score by test type',
+            labels={'test_type': 'Test type', 'avg_score': 'Average score'}
+        )
+
+        fig3 = px.bar(
+            avg_correct_rate_by_test_type, 
+            x='test_type', 
+            y='avg_correct_rate', 
+            title='Average correct answer rate by test type',
+            labels={'test_type', 'avg_correct_rate (%)'}
+        )
+
+        fig4 = px.bar(
+            level_counts, 
+            x='level', 
+            y='total', 
+            title='Number of tests by level',
+            labels={'level', 'total'}
+        )
+
+        fig5 = px.bar(
+            avg_scores_and_correct_by_level, 
+            x='level', 
+            y=['avg_score', 'avg_correct_rate'], 
+            title='Average Score and Average Correct Percentage by Level',
+            labels={'level', 'value'}
+        )
+
+        chart_html1 = pio.to_html(fig1, full_html=False)
+        chart_html2 = pio.to_html(fig2, full_html=False)
+        chart_html3 = pio.to_html(fig3, full_html=False)
+        chart_html4 = pio.to_html(fig4, full_html=False)
+        chart_html5 = pio.to_html(fig5, full_html=False)
+
+
+        extra_context = extra_context or {}
+        extra_context['chart1'] = chart_html1
+        extra_context['chart2'] = chart_html2
+        extra_context['chart3'] = chart_html3
+        extra_context['chart4'] = chart_html4
+        extra_context['chart5'] = chart_html5
+
+        return super().changelist_view(request, extra_context=extra_context)
+
+    class Media:
+        css = {
+            'all': ('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',)
+        }
+
+admin.site.register(TestResult, TestResultAdmin)
 
 @admin.register(Attendance)
 class AttendanceAdmin(admin.ModelAdmin):
     list_display = ('student', 'course', 'date', 'status', 'created_at', 'updated_at')
-    list_filter = ('status', 'course', 'date') 
-    search_fields = ('student__name', 'course__name')
+    list_filter = ('status', 'course', 'date', 'student') 
+    search_fields = ('student__id', 'course__id', 'date')
     list_editable = ('status',) 
     list_per_page = 20 
     ordering = ('-date',) 
-    def changelist_view(self, request, extra_context=None):
-        attendance_stats = Attendance.objects.values('status').annotate(total=Count('status'))
-
-        labels = [item['status'] for item in attendance_stats]
-        data = [item['total'] for item in attendance_stats]
-
-        extra_context = extra_context or {}
-        extra_context['labels'] = json.dumps(labels)  
-        extra_context['data'] = json.dumps(data) 
-
-        return super().changelist_view(request, extra_context=extra_context)
 
 class NotificationAdmin(admin.ModelAdmin):
     list_display =('id', 'title', 'course', 'teacher', 'message', 'timestamp')
 admin.site.register(Notification)    
 
 class RevenueAdmin(admin.ModelAdmin):
+    list_per_page = 10
     list_display = ('course', 'date', 'total_revenue')
     change_list_template = "admin/my_app/statistics/chart_view.html" 
 
     def get_queryset(self, request):
         """Tự động cập nhật doanh thu mỗi khi truy cập vào Admin"""
-        # Cập nhật  thu trước khi trả về queryset
         self.update_revenue()
         return super().get_queryset(request)
 

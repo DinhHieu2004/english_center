@@ -2,7 +2,11 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from ..serializers import  CourseSerialozer, StudentSerializer
+<<<<<<< HEAD
 from ..models import Course, Student, Attendance
+=======
+from ..models import Course, Attendance
+>>>>>>> 0a61a83ec1b61ff91c86eed1b7b112411d5a2c00
 from rest_framework.exceptions import NotFound
 from rest_framework.decorators import api_view
 
@@ -41,10 +45,11 @@ class CourseStudentsAPIView(APIView):
                 'email': user.email,
                 'phone': user.phone,
                 'birth_date': user.date_of_birth,
-                'address': user.address
+                'address': user.address,
+                'complete': Attendance.calculate_completion(student, course)
             }
             students_data.append(student_data)
-
+        students_data = sorted(students_data, key=lambda x: x['name'])
         return Response({
             'course': course.name,
             'students': students_data 

@@ -116,7 +116,7 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             print(f"Error processing received data: {str(e)}")
             print(traceback.format_exc())
 
-    async def send_notification(self, event):
+    """async def send_notification(self, event):
         try:
             await self.send(text_data=json.dumps({
                 'title': event['title'],
@@ -127,7 +127,7 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             print("sucssess")
         except Exception as e:
             print(f"Error sending notification: {str(e)}")
-            print(traceback.format_exc())
+            print(traceback.format_exc())"""
     """async def send_notification(self, event):
         try:
            
@@ -143,7 +143,7 @@ class NotificationConsumer(AsyncWebsocketConsumer):
             print(f"Lỗi khi gửi thông báo: {str(e)}")
             print(traceback.format_exc())"""
 
-    """async def send_notification(self, event):
+    async def send_notification(self, event):
         try:
             success = await self.create_notification(
                 title=event['title'],
@@ -164,7 +164,7 @@ class NotificationConsumer(AsyncWebsocketConsumer):
                 print("Unable to save message to database")
         except Exception as e:
             print(f"LError sending notification: {str(e)}")
-            print(traceback.format_exc())"""
+            print(traceback.format_exc())
 
       # daphne -b 0.0.0.0 -p 8000 english_center.asgi:application  
       # uvicorn english_center.asgi:application --host 0.0.0.0 --port 8000 --reload  

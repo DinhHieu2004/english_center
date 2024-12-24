@@ -37,10 +37,23 @@
     </nav>
     <div class="container">
         <h2>Điểm danh</h2>
+        <div class="d-flex align-items-center mb-3">
+            <span>Chọn lớp: </span>
+            <select id="courseSelect" class="form-select" style="width: 200px;">
+                <option value="" disabled selected>Chọn lớp học</option>
+                <!-- Các lớp học sẽ được thêm vào đây bằng JavaScript -->
+            </select>
+        </div>
         <form method="post">
             <div class="card">
                 <div class="card-body">
                     <div class="table-responsive">
+                        <div class="d-flex justify-content-end align-items-center">
+                            <span>Ngày khác: </span>
+                            <div id="pagination" class="pagination" style="margin-left: 10px;">
+                            <!-- Các liên kết phân trang sẽ được thêm vào đây bằng JavaScript -->
+                            </div>
+                        </div>
                         <table class="table" id="attendanceTable">
                             <thead>
                                 <tr>
@@ -56,7 +69,6 @@
                     </div>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary mt-3">Lưu điểm danh</button>
         </form>
     </div>
 

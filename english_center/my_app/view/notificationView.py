@@ -3,7 +3,7 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from asgiref.sync import async_to_sync
 from channels.layers import get_channel_layer
-from ..models import Notification, Course, Teacher
+from ..models import Notification, Course, Teacher, Attendance
 import logging
 from rest_framework import status
 from ..serializers import NotificationSerializer
@@ -17,6 +17,7 @@ class NotificationListView(APIView):
 
     def get(self, request, course_id):
         notifications = Notification.objects.filter(course_id=course_id).order_by('-timestamp')
+        
         data = [
             {
                 'title': n.title,

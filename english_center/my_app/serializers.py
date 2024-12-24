@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam, Notification,  Attendance, StudySession
+from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam, Notification,  Attendance, StudySession, Discount
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
@@ -8,6 +8,7 @@ from django.contrib.auth.forms import PasswordResetForm
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import PasswordResetTokenGenerator
+from datetime import date
 
 
 
@@ -76,13 +77,32 @@ class CourseScheduleSerializer(serializers.ModelSerializer):
         model = CourseSchedule
         fields = ['weekday_display', 'session']    
 
+#discount
+class DiscountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Discount
+        fields = ['name', 'discount_type', 'value','start_date','end_date']
+
 class CourseSerialozer(serializers.ModelSerializer):
     schedules = CourseScheduleSerializer(many = True)
+    discounted_price = serializers.SerializerMethodField() 
+    is_discounted = serializers.SerializerMethodField()
+    discounts = DiscountSerializer(many=True, read_only=True)
+
+
     class Meta:
         model = Course
-        fields = ['id','name', 'level', 'description','price', 'teacher', 'start_date', 'total_session', 'schedules']
+        fields = ['id','name', 'level', 'description','price','is_discounted','discounted_price', 'teacher', 'start_date', 'total_session', 'schedules','discounts']
 
-
+    def get_is_discounted(self, obj):
+        current_discounts = obj.discounts.filter(
+            start_date__lte=date.today(),
+            end_date__gte=date.today()
+        )
+        return current_discounts.exists()
+    def get_discounted_price(self, obj):
+      
+        return obj.calculate_discounted_price()
 #
 class QuestionSerializer(serializers.ModelSerializer):
     audio_file_url = serializers.SerializerMethodField()

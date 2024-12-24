@@ -10,7 +10,8 @@ from django.db.models import Sum, Count
 from dateutil.relativedelta import relativedelta
 from django.db.models import Q
 from django.core.exceptions import ValidationError
-
+from datetime import date
+from decimal import Decimal, ROUND_HALF_UP
 
 class User(AbstractUser):
     id = models.AutoField(primary_key=True)  
@@ -93,6 +94,25 @@ class Course(models.Model):
     start_date = models.DateField()
     total_session = models.IntegerField() 
 
+    def calculate_discounted_price(self):
+       
+        current_discounts = self.discounts.filter(
+            start_date__lte=date.today(),
+            end_date__gte=date.today()
+        )
+        if not current_discounts.exists():
+            return self.price.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+
+
+        discounted_price = self.price
+        for discount in current_discounts:
+            discounted_price = discount.calculate_discounted_price(discounted_price)
+        return discounted_price.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+
+
+    def __str__(self):
+        return f"{self.name} - {self.get_level_display()}"
+
     def calculate_end_date(self):
         class_days = [schedule.weekday for schedule in self.schedules.all()]
         if not class_days:
@@ -103,18 +123,14 @@ class Course(models.Model):
         while session_count < self.total_session:
             if current_date.weekday() in class_days:
                 session_count += 1
-            current_date += datetime.timedelta(days=1)
-        return current_date - datetime.timedelta(days=1)
+            current_date += timedelta(days=1)
+        return current_date - timedelta(days=1)
     
     def calculate_class_dates(self):
-        """
-        Tính toán tất cả các ngày học cho khóa học
-        :return: Danh sách các ngày học
-        """
+       
         all_class_dates = []
         num_schedules = len(self.schedules.all())
         
-        # Sắp xếp các lịch học theo thứ tự
         week_days_sorted = sorted(self.schedules.all(), key=lambda x: x.weekday)
         
         current_date = self.start_date
@@ -155,6 +171,40 @@ class StudySession(models.Model):
     def __str__(self):
         return f"{self.name} ({self.start_time} - {self.end_time})"
 
+class Discount(models.Model):
+    courses = models.ManyToManyField('Course', related_name='discounts')
+    name = models.CharField(max_length=200, help_text="discount program name")
+    discount_type = models.CharField(
+       max_length=10,
+        choices=(
+            ('fixed', 'Fixed Amount'),
+            ('percent', 'Percentage'),
+        ),
+        default='percent',
+    )
+    value = models.DecimalField(max_digits=10, decimal_places=2, help_text="Discount value (amount or %)")
+    start_date = models.DateField(default=now, help_text="Discount Start Date")
+    end_date = models.DateField(help_text="Discount End Date")
+
+    def is_valid(self):
+        today = now().date()
+        return self.start_date <= today <= self.end_date
+
+    def calculate_discounted_price(self, original_price):
+       
+        original_price = Decimal(original_price)
+        if self.discount_type == 'fixed':
+            discounted_price = max(original_price - Decimal(self.value), 0)
+        elif self.discount_type == 'percent':
+            discounted_price = max(original_price * (1 - Decimal(self.value) / 100), 0)
+        else:
+            return original_price
+
+        return discounted_price.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
+
+    def __str__(self):
+        return f"{self.name} ({self.get_discount_type_display()} - {self.value})"
+
 class CourseSchedule(models.Model):
     WEEKDAYS = (
         (0, 'Thứ 2'),
@@ -184,10 +234,14 @@ class CourseSchedule(models.Model):
             ).exclude(pk=self.pk) 
 
             if conflicts.exists():
-                conflict_courses = ', '.join([conf.course.name for conf in conflicts])
-                raise ValidationError(
-                    f"Giáo viên {teacher} đã dạy các khóa học sau trong cùng thời gian: {conflict_courses}"
-                )
+                for conf in conflicts:
+                    end_date = conf.course.calculate_end_date()
+                    if end_date and end_date < self.course.start_date:
+                        continue
+                    conflict_courses = ', '.join([conf.course.name for conf in conflicts])
+                    raise ValidationError(
+                        f"Giáo viên {teacher} đã dạy các khóa học sau trong cùng thời gian: {conflict_courses}"
+                    )
     def __str__(self):
         return f"{self.course.name} - {self.get_weekday_display()} {self.session}"
     
@@ -319,7 +373,7 @@ class Attendance(models.Model):
         student=student, course=course).filter(Q(status="x") | Q(status="cp")).count()
 
         completion_percentage = (attendances / total_sessions) * 100
-        return completion_percentage
+        return round(completion_percentage, 2)
     
 class Notification(models.Model):
     title = models.CharField(max_length=200)
