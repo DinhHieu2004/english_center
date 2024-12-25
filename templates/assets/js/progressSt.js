@@ -6,8 +6,8 @@
 // ];
 
 // const studentProgress = {
-//     currentCourse: "A2", 
-//     completedSessions: 8, 
+//     currentCourse: "A2",
+//     completedSessions: 8,
 // };
 
 // function renderCourseProgress(courses, progress) {
