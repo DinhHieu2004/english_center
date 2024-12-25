@@ -125,30 +125,44 @@ $(document).ready(function () {
     function displayAvailableCourses(courses) {
         const registerContainer = $('#registerCourses');
         registerContainer.empty();
-
+    
         if (!courses || courses.length === 0) {
             registerContainer.html('<p>Không có khóa học phù hợp hiện tại.</p>');
             return;
         }
-
-        const  coursesList = courses.map(course => {
+    
+        const coursesList = courses.map(course => {
             let discountText = '';
-            if (course.is_discounted) {
-                discountText = `<p class="card-text text-danger"><strong>Đang giảm giá!</strong></p>`;
+            if (course.is_discounted && course.discounts && course.discounts.length > 0) {
+                const discount = course.discounts[0]; 
+                const discountInfo = `
+                    <strong>${discount.name}</strong><br>
+                    <strong>Loại:</strong> ${discount.discount_type === 'percent' ? 'Phần trăm' : 'Số tiền cố định'}<br>
+                    <strong>Giá trị:</strong> ${discount.value}${discount.discount_type === 'percent' ? '%' : ' VNĐ'}<br>
+                    <strong>Bắt đầu:</strong> ${discount.start_date}<br>
+                    <strong>Kết thúc:</strong> ${discount.end_date}
+                `;
+    
+                discountText = `
+                    <p 
+                        class="card-text text-danger" 
+                        data-bs-toggle="tooltip" 
+                        data-bs-html="true"
+title="${discountInfo}"
+                    >
+                        <strong>Đang giảm giá!</strong>
+                    </p>
+                `;
             }
     
             return `
                 <div class="card mb-2">
                     <div class="card-body">
                         <p class="card-text"> Mã khóa học :${course.id}</p>
-    
                         <p class="card-text">${course.name}</p>
                         <p class="card-text">${course.description}</p>
-    
                         <p><strong>Cấp độ:</strong> ${course.level.toUpperCase()}</p>
-    
                         ${discountText}
-    
                         <a href="course-detail.html?id=${course.id}" >
                             <button class="btn btn-success look-course" data-course-id="${course.id}">
                                 Xem khóa học
@@ -163,6 +177,8 @@ $(document).ready(function () {
             ${coursesList}
         `);
 
+        $('[data-bs-toggle="tooltip"]').tooltip();
+
         $('.look-course').on('click', function() {
             const courseId = $(this).data('course-id'); 
             window.location.href = `/course-detail.html?id=${courseId}`; 
@@ -172,4 +188,3 @@ $(document).ready(function () {
 
     fetchDashboardData();
 });
-

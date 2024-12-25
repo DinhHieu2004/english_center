@@ -21590,3 +21590,52 @@ platform is win32
 CACHEDIR=C:\Users\NGUYENVUBAO\.matplotlib
 Using fontManager instance from C:\Users\NGUYENVUBAO\.matplotlib\fontlist-v390.json
 Watching for file changes with StatReloader
+matplotlib data path: C:\Users\ASUS VIVOBOOK\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\ASUS VIVOBOOK\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\ASUS VIVOBOOK\.matplotlib
+Using fontManager instance from C:\Users\ASUS VIVOBOOK\.matplotlib\fontlist-v390.json
+Unauthorized: /api/course/5/
+Unauthorized: /api/course/5/
+Unauthorized: /api/course/5/
+Bad Request: /api/student/dashboard/
+Bad Request: /api/student/dashboard/
+matplotlib data path: C:\Users\ASUS VIVOBOOK\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\ASUS VIVOBOOK\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\ASUS VIVOBOOK\.matplotlib
+Using fontManager instance from C:\Users\ASUS VIVOBOOK\.matplotlib\fontlist-v390.json
+Not Found: /static/admin/img/calendar-icons.svg
+Not Found: /static/admin/img/calendar-icons.svg
+Not Found: /static/admin/js/SelectBox.js
+Not Found: /static/admin/js/SelectFilter2.js
+Not Found: /static/admin/img/calendar-icons.svg
+Not Found: /static/admin/js/SelectBox.js
+Not Found: /static/admin/js/SelectFilter2.js
+Unauthorized: /api/final-exam/1/
+matplotlib data path: C:\Users\ASUS VIVOBOOK\AppData\Local\Programs\Python\Python312\Lib\site-packages\matplotlib\mpl-data
+CONFIGDIR=C:\Users\ASUS VIVOBOOK\.matplotlib
+interactive is False
+platform is win32
+CACHEDIR=C:\Users\ASUS VIVOBOOK\.matplotlib
+Using fontManager instance from C:\Users\ASUS VIVOBOOK\.matplotlib\fontlist-v390.json
+Not Found: /favicon.ico
+User attempting to submit test: dinhHieu
+Found student: Student: dinhHieu - Level: none
+Processing 5 answers for student Student: dinhHieu - Level: none
+Deleted 4 old answers
+Created 5 new answers
+Student Student: dinhHieu - Level: none scored 60.0% and achieved level a2
+Created test result: dinhHieu - placement - 60.0% - a2
+Updated student level to a2
+Not Found: /static/admin/js/cancel.js
+User attempting to submit test: dinhHieu
+Found student: Student: dinhHieu - Level: none
+Processing 4 answers for student Student: dinhHieu - Level: none
+Deleted 5 old answers
+Created 4 new answers
+Student Student: dinhHieu - Level: none scored 60.0% and achieved level a2
+Created test result: dinhHieu - placement - 60.0% - a2
+Updated student level to a2

@@ -1,4 +1,4 @@
- $(document).ready(function () {
+$(document).ready(function () {
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get('id'); 
     const is_register = localStorage.getItem('is_register') === 'true'; 
@@ -49,9 +49,11 @@ function renderCourseDetails(course, teacherName, is_register) {
                 ${course.schedules.map(schedule => `
                     <li>
                         <strong>Thứ:</strong> ${schedule.weekday_display}, 
-                        <strong>Giờ bắt đầu:</strong> ${schedule.session}
+                        <strong>Giờ bắt đầu:</strong> ${schedule.session},
+                        
                     </li>
                 `).join('')}
+                <button class = "btn btn-primary">Làm bài kiểm tra đầu ra</button>
             </ul>
         `;
     } else {
@@ -66,6 +68,7 @@ function renderCourseDetails(course, teacherName, is_register) {
     }
     
      let paymentButton ='';
+     let watchButton ='';
      if(is_register){
         paymentButton = `<p style="color: green;">Bạn đã đăng ký khóa học này.</p>`;
 
@@ -83,7 +86,7 @@ function renderCourseDetails(course, teacherName, is_register) {
         <h3>Thông tin lớp học: ${course.name}</h3>
         <p><strong>Miêu tả:</strong> ${course.description}</p>
         <p><strong>Trình độ:</strong> ${course.level}</p>
-        <p><strong>Giá gốc:</strong> ${course.price} VND</p>
+<p><strong>Giá gốc:</strong> ${course.price} VND</p>
         ${discountText}
         ${discounted_price}
         <p><strong>Ngày bắt đầu:</strong> ${course.start_date}</p>
