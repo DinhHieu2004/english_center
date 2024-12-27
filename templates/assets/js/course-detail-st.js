@@ -16,6 +16,7 @@ $(document).ready(function () {
 });
 
 
+
 function getAuthHeaders() {
     return {
         'Authorization': 'Token ' + localStorage.getItem('token'),
@@ -49,9 +50,11 @@ function renderCourseDetails(course, teacherName, is_register) {
                 ${course.schedules.map(schedule => `
                     <li>
                         <strong>Thứ:</strong> ${schedule.weekday_display}, 
-                        <strong>Giờ bắt đầu:</strong> ${schedule.session}
+                        <strong>Giờ bắt đầu:</strong> ${schedule.session},
+                        
                     </li>
                 `).join('')}
+                <button class = "btn btn-primary">Làm bài kiểm tra đầu ra</button>
             </ul>
         `;
     } else {
@@ -71,15 +74,17 @@ function renderCourseDetails(course, teacherName, is_register) {
         paymentButton = `<p style="color: green;">Bạn đã đăng ký khóa học này.</p>`;
 
         watchButton =`<div class="container mt-4 text-center">
-            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#notificationModal">
-            <i class="bi bi-bell"></i> Xem thông báo lớp học
-            </button>
-            </div>`
+                     <button class="btn btn-primary" id = "view-notifications">
+                    <i class="bi bi-bell"></i> Quản lý thông báo
+                     </button>
+                    </div>`
+
+                    
      }else{
         paymentButton = `<button class="btn btn-primary" id="payButton">Đăng kí khóa học này</button>`;
      }
      
-
+    
     let courseDetailsHtml = `
         <h3>Thông tin lớp học: ${course.name}</h3>
         <p><strong>Miêu tả:</strong> ${course.description}</p>
@@ -96,6 +101,14 @@ function renderCourseDetails(course, teacherName, is_register) {
 
     `;
     $('#courseDetail').html(courseDetailsHtml);
+
+    if (is_register) {
+        $('#view-notifications').on('click', function(e) {
+            e.preventDefault();
+            const courseId = course.id;
+            window.location.href = `../notification/notification.html?course_id=${courseId}`;
+        });
+    }
 
     if (!is_register) {
         $('#payButton').on('click', function (e) {

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam, Notification,  Attendance, StudySession, Discount
+from .models import User, Student, Teacher, Course, CourseSchedule, Question, PlacementTest, FinalExam, Notification,  Attendance, StudySession, Discount, Comment, UserNotification
 from django.contrib.auth.password_validation import validate_password
 from django.contrib.auth import authenticate
 from django.contrib.auth import get_user_model
@@ -12,13 +12,6 @@ from datetime import date
 
 
 
-class NotificationSerializer(serializers.ModelSerializer):
-    teacher_name = serializers.CharField(source='teacher.user.username', read_only=True)
-    course_name = serializers.CharField(source='course.name', read_only=True)
-    
-    class Meta:
-        model = Notification
-        fields = ['id', 'title', 'message', 'course_name', 'teacher_name', 'timestamp']
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField(required=True)
@@ -125,7 +118,11 @@ class PlacementTestSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlacementTest
         fields = ['id', 'title', 'description', 'duration', 'questions']
-
+class FinalExamSerializer(serializers.ModelSerializer):
+    questions = QuestionSerializer(many=True, read_only = True)
+    class Meta:
+        model = FinalExam
+        fields = ['id', 'title', 'description', 'duration', 'questions']
 
 class AttendanceSerializer(serializers.ModelSerializer):
     student_name = serializers.CharField(source='student.name', read_only=True)
@@ -178,3 +175,28 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         user = User.objects.get(pk=uid)
         user.set_password(self.validated_data['new_password'])
         user.save()
+
+#notification
+
+class CommentSerializer(serializers.ModelSerializer):
+    created_by = serializers.StringRelatedField()  # Chỉ lấy tên người tạo bình luận
+
+    class Meta:
+        model = Comment
+        fields = ['id', 'content', 'created_by', 'created_at']
+
+class NotificationSerializer(serializers.ModelSerializer):
+    # Lấy danh sách bình luận của thông báo
+    comments = CommentSerializer(many=True, read_only=True)
+    
+    class Meta:
+        model = Notification
+        fields = ['id', 'title', 'content', 'created_by', 'created_at', 'course', 'comments']
+
+class UserNotificationSerializer(serializers.ModelSerializer):
+    notification = NotificationSerializer()  # Hiển thị thông tin thông báo
+    is_read = serializers.BooleanField()
+
+    class Meta:
+        model = UserNotification
+        fields = ['id', 'notification', 'is_read', 'created_at']

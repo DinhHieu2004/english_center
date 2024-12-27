@@ -375,16 +375,7 @@ class Attendance(models.Model):
         completion_percentage = (attendances / total_sessions) * 100
         return round(completion_percentage, 2)
     
-class Notification(models.Model):
-    title = models.CharField(max_length=200)
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='notifications')
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE) 
-    message = models.TextField()
-    timestamp = models.DateTimeField(default=now)
 
-    def __str__(self):
-        return f"Notification for {self.course.name} by {self.teacher.user.username} at {self.timestamp}"
-    
 class Revenue(models.Model):
     date = models.DateField(default=timezone.now)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -426,4 +417,45 @@ class Statistics(models.Model):
     def __str__(self):
         return f"{self.get_type_display()} Statistics for {self.date}"
     
+
+class Notification(models.Model):
+    title = models.CharField(max_length= 255)
+    content = models.TextField()
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    created_at = models.DateTimeField(default= timezone.now)
+    course = models.ForeignKey(Course, related_name='notifications', on_delete=models.CASCADE, default=1)
+
+    class Meta:
+        ordering = ['-created_at']  
     
+    def __str__(self):
+        return self.title
+    
+    def mark_as_read(self, user):
+        user_notification, created = UserNotification.objects.get_or_create(
+            user=user,
+            notification=self,
+        )
+        user_notification.is_read = True
+        user_notification.save()
+
+class UserNotification(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    notification = models.ForeignKey(Notification, on_delete=models.CASCADE)
+    is_read = models.BooleanField(default=False)  # Trạng thái đã đọc
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = ('user', 'notification') 
+
+    def __str__(self):
+        return f"Notification for {self.user} - {self.notification.title}"   
+
+
+class Comment(models.Model):
+    notification = models.ForeignKey(Notification, related_name='comments', on_delete= models.CASCADE)
+    content = models.TextField()  
+    created_by = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True)
+    created_at = models.DateTimeField(default=now)
+      
+        

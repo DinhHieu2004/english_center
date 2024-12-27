@@ -9,9 +9,11 @@ $(document).ready(function () {
     $('#teacherName').text(userData.username);
     $('#fullName').text(userData.fullname);
     $('#email').text(userData.email);
+    $('#sdt').text(userData.phone);
+    $('#birthDay').text(userData.date_of_birth); 
 
     if (userData.teacher_details) {
-        $('#level').text(userData.teacher_details.level || 'Chưa xác định');
+        $('#level').text(userData.teacher_details.education_level || 'Chưa xác định');
 
         if (userData.join_date) {
             const joinDate = new Date(userData.join_date);
@@ -25,6 +27,15 @@ $(document).ready(function () {
             $('#joinDate').text('Chưa có thông tin');
         }
     }
+    document.getElementById('editInfoModal').addEventListener('show.bs.modal', function (event) {
+        if (userData) {
+            document.getElementById('editFullName').value = userData.fullname || '';
+        document.getElementById('editEmail').value = userData.email || '';
+        document.getElementById('editPhone').value = userData.phone || '';
+        document.getElementById('editBirthday').value = userData.date_of_birth || '';
+        document.getElementById('editAddress').value = userData.address || ''; 
+        }
+    });
     // Hiển thị danh sách lớp học
     let teacherId = null;
     $.ajax({
@@ -63,17 +74,14 @@ $(document).ready(function () {
             $('#classList').html('<p>Không thể lấy danh sách lớp học. Vui lòng thử lại sau.</p>');
         }
     });
-    // Xử lý sự kiện khi người dùng nhấn nút Xem chi tiết
     $('#classList').on('click', '.look-course', function () {
         const courseId = $(this).data('id');
         window.location.href = `../teacher/course_detail.html?id=${courseId}`;
     });
     $('.viewScheduleButton').on('click', function () {
         if (teacherId) {
-            // Chuyển hướng đến trang thời khóa biểu với teacherId trong URL
             window.location.href = `../teacher/teacher_schedule.html?id=${teacherId}`;
         } else {
-            // Nếu teacherId không có giá trị hợp lệ, hiển thị thông báo lỗi
             alert("Không tìm thấy thông tin giáo viên.");
         }
     });

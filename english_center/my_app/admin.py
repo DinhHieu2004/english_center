@@ -2,7 +2,7 @@ from django.contrib import admin
 from django import forms
 from .models import (User, Question, FinalExam, PlacementTest, Student, Teacher,Course,
                     CourseEnrollment, CourseSchedule,
-                    Answer, TestResult,  Attendance, Notification , StudySession, Discount
+                    Answer, TestResult,  Attendance, Notification , StudySession, Discount, UserNotification
                    )
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password
@@ -338,8 +338,13 @@ class AttendanceAdmin(admin.ModelAdmin):
     ordering = ('-date',) 
 
 class NotificationAdmin(admin.ModelAdmin):
-    list_display =('id', 'title', 'course', 'teacher', 'message', 'timestamp')
-admin.site.register(Notification)    
+    list_display =('id', 'title', 'content', 'created_by', 'created_at', 'course')
+admin.site.register(Notification, NotificationAdmin)
+
+class UserNotificationAdmin(admin.ModelAdmin):
+    list_display = ('id','user','notification', 'is_read')
+admin.site.register(UserNotification, UserNotificationAdmin)
+
 
 class RevenueAdmin(admin.ModelAdmin):
     list_per_page = 10

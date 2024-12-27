@@ -3,12 +3,15 @@ $(document).ready(function() {
     const courseId = urlParams.get('id');
     console.log(courseId);
 
+  
+  
     if (courseId) {
         fetchCourseDetails(courseId);
         
     } else {
         alert("Không có lớp học được tìm thấy.");
     }
+     
 });
 
 function fetchCourseDetails(courseId) {
@@ -114,6 +117,18 @@ $('.look-course').on('click', function(e) {
     
     if (courseId) {
         window.location.href = `attendance.html?id=${courseId}`;
+    } else {
+        alert('Không tìm thấy thông tin khóa học!');
+    }
+
+});
+$('#view-notifications').on('click', function(e) {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('id');
+    
+    if (courseId) {
+        window.location.href = `../notification/notification.html?course_id=${courseId}`;
     } else {
         alert('Không tìm thấy thông tin khóa học!');
     }
