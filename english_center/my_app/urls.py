@@ -12,6 +12,7 @@ from .view.attendanceView import AttendanceList, CourseScheduleListView
 
 
 
+
 urlpatterns = [
     path('register/student/', RegisterStudent.as_view(), name='register_student'),
     path('login/', LoginView.as_view(), name='login'),
@@ -32,6 +33,7 @@ urlpatterns = [
     path('password-reset/', PasswordResetRequestView.as_view(), name='password_reset'),
     path('password-reset-confirm/<str:uidb64>/<str:token>/', password_reset_form, name='password_reset_confirm'),
     path('final-exam/<int:exam_id>/', FinalExamView.as_view(), name='final-exam'),
+   
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -389,3 +389,5 @@ class RevenueAdmin(admin.ModelAdmin):
         return super().changelist_view(request, extra_context=extra_context)
 
 admin.site.register(Revenue, RevenueAdmin)
+
+

@@ -12,11 +12,22 @@ $(document).ready(function () {
     $("#studentName").text(userData.fullname);
 
     if (userData.student_details) {
-      $("#level").text(
-        userData.student_details.level === "none"
-          ? "Không xác định"
-          : userData.student_details.level
-      );
+      $.ajax({
+        url: "http://127.0.0.1:8000/api/student/dashboard/",
+        method: "GET",
+        headers: {
+          Authorization: `Token ${token}`,
+        },
+        success: function (response) {
+        console.log(response.current_course.level)
+        $("#level").text(
+          userData.student_details.level === "none"
+            ? "Không xác định"
+            : response.current_course.level
+        );
+        }
+      });
+      console.log(userData.student_details.level)
       if (userData.join_date) {
         const joinDate = new Date(userData.join_date);
         $("#joinDate").text(
@@ -35,18 +46,34 @@ $(document).ready(function () {
   $("#email").text(userData.email);
 
   if (userData.student_details) {
+    $.ajax({
+      url: "http://127.0.0.1:8000/api/student/dashboard/",
+      method: "GET",
+      headers: {
+        Authorization: `Token ${token}`,
+      },
+      success: function (response) {
+      console.log(response.current_course.level)
+      $("#level").text(
+        userData.student_details.level === "none"
+          ? "Không xác định"
+          : response.current_course.level
+      );
+      $("#level").text(response.current_course.level === "none" ? "Chưa xác định" : response.current_course.level);
+      console.log(userLevel)
+      if (response.current_course.level === "none") {
+        $("#takeTestButton").show();
+        $("#takeTestButton").click(function () {
+          window.location.href = "entrance_test.html";
+        });
+      } else {
+        $("#takeTestButton").hide();
+      }
+      }
+    });
+    console.log(userData.student_details.level)
     const userLevel = userData.student_details.level || "none";
 
-    $("#level").text(userLevel === "none" ? "Chưa xác định" : userLevel);
-
-    if (userLevel === "none") {
-      $("#takeTestButton").show();
-      $("#takeTestButton").click(function () {
-        window.location.href = "entrance_test.html";
-      });
-    } else {
-      $("#takeTestButton").hide();
-    }
 
     if (userData.join_date) {
       const joinDate = new Date(userData.join_date);
@@ -83,6 +110,7 @@ $(document).ready(function () {
       success: function (response) {
         const is_register = response.current_course != null;
         console.log(is_register, typeof is_register);
+             console.log(response.current_course.level)
         localStorage.setItem("is_register", is_register);
         if (is_register) {
           displayCurrentCourses(response.current_course, response.complete);

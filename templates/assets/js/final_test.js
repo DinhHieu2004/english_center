@@ -10,6 +10,7 @@ class TOEICTest {
       b2: "http://127.0.0.1:8000/api/final-exam/4/",
     };
     this.initializeEventListeners();
+    console.log(this.initializeEventListeners())
   }
 
   initializeEventListeners() {
@@ -21,14 +22,17 @@ class TOEICTest {
 
   getUserLevel() {
     const userData = JSON.parse(localStorage.getItem("userData"));
-    return userData?.student_details?.level?.toLowerCase() || "a1"; // Default to 'a1' if no level is set
+    console.log(userData?.student_details?.level?.toLowerCase())
+
+    return userData?.student_details?.level?.toLowerCase();
   }
 
   getApiUrl() {
     const userLevel = this.getUserLevel();
-    return this.levelUrlMap[userLevel] || this.levelUrlMap["a1"]; // Fallback to a1 if level not found
+    console.log(this.levelUrlMap[userLevel] )
+    return this.levelUrlMap[userLevel];
   }
-
+  
   async initTest() {
     try {
       const apiUrl = this.getApiUrl();
@@ -50,7 +54,6 @@ class TOEICTest {
       this.showError("Không thể tải bài kiểm tra. Vui lòng thử lại sau.");
     }
   }
-
   async handleSubmit(isAutoSubmit = false) {
     if (!isAutoSubmit && !confirm("Bạn có chắc chắn muốn nộp bài?")) {
       return;
@@ -85,7 +88,7 @@ class TOEICTest {
     }
   }
 
-  // ... rest of the methods remain the same ...
+  
   displayTestInfo(testData) {
     $("#test-description").html(`
         <p class="mb-2">${testData.description}</p>
@@ -94,11 +97,11 @@ class TOEICTest {
   }
 
   sortAndDisplayQuestions() {
-    const listeningQuestions = this.questions.filter((q) => q.audio_file);
-    const readingQuestions = this.questions.filter((q) => !q.audio_file);
+    const listeningQuestions = this.questions.filter((q) => q.audio_file_url);
+    const readingQuestions = this.questions.filter((q) => !q.audio_file_url);
 
     $("#listening-questions").html(
-      this.generateQuestionsHTML(listeningQuestions, true)
+      this.generateQuestionsHTML(listeningQuestions, true) 
     );
     $("#reading-questions").html(
       this.generateQuestionsHTML(readingQuestions, false)

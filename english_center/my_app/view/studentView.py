@@ -61,12 +61,13 @@ class StudentDetailView(APIView):
 
         return Response({'student': student_data}, status= status.HTTP_200_OK)    
 
-
+    
 class StudentEnrollmentView(APIView):
     permission_classes = [IsAuthenticated]
 
     def post(self, request):
         try:
+        
             student = request.user.student  
             if student.is_studying:
                 return Response(
@@ -94,4 +95,4 @@ class StudentEnrollmentView(APIView):
             )
 
         except Exception as e:
-            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)            
+            return Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)   
