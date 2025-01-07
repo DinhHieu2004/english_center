@@ -49,9 +49,13 @@ class UserSerializer(serializers.ModelSerializer):
     
 
 class StudentSerializer(serializers.ModelSerializer):
+    is_old_student = serializers.SerializerMethodField()
     class Meta:
         model = Student
-        fields = [ 'level','has_taken_test']
+        fields = [ 'level','has_taken_test','is_old_student']
+
+    def get_is_old_student(self, obj):
+        return obj.is_old_student()    
 
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:
@@ -74,7 +78,7 @@ class CourseScheduleSerializer(serializers.ModelSerializer):
 class DiscountSerializer(serializers.ModelSerializer):
     class Meta:
         model = Discount
-        fields = ['name', 'discount_type', 'value','start_date','end_date']
+        fields = ['name', 'discount_type', 'value','for_old_students_only','start_date','end_date']
 
 class CourseSerialozer(serializers.ModelSerializer):
     schedules = CourseScheduleSerializer(many = True)
@@ -93,9 +97,28 @@ class CourseSerialozer(serializers.ModelSerializer):
             end_date__gte=date.today()
         )
         return current_discounts.exists()
+    
     def get_discounted_price(self, obj):
-      
-        return obj.calculate_discounted_price()
+        student = self.context.get('student', None) 
+
+        current_discounts = obj.discounts.filter(
+            start_date__lte=date.today(),
+            end_date__gte=date.today()
+        )
+
+        if current_discounts.exists():
+            discount = current_discounts.first()  
+            
+            if discount.for_old_students_only:
+                if student and student.is_old_student():
+                    return discount.calculate_discounted_price(obj.price, student)
+                else:
+                
+                    return obj.price
+            else:
+                return discount.calculate_discounted_price(obj.price, student)
+
+        return obj.price 
 #
 class QuestionSerializer(serializers.ModelSerializer):
     audio_file_url = serializers.SerializerMethodField()
@@ -179,19 +202,26 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
 #notification
 
 class CommentSerializer(serializers.ModelSerializer):
-    created_by = serializers.StringRelatedField()  # Chỉ lấy tên người tạo bình luận
-
+    created_by_name = serializers.SerializerMethodField()
     class Meta:
         model = Comment
-        fields = ['id', 'content', 'created_by', 'created_at']
+        fields = ['id', 'content', 'notification', 'created_by_name', 'created_at']
+
+    def create(self, validated_data):
+        notification = validated_data.pop('notification')
+        comment = Comment.objects.create(notification=notification, **validated_data)
+        return comment
+    
+    def get_created_by_name(self, obj):
+        return obj.created_by.fullname if obj.created_by else None
 
 class NotificationSerializer(serializers.ModelSerializer):
-    # Lấy danh sách bình luận của thông báo
     comments = CommentSerializer(many=True, read_only=True)
     
     class Meta:
         model = Notification
         fields = ['id', 'title', 'content', 'created_by', 'created_at', 'course', 'comments']
+
 
 class UserNotificationSerializer(serializers.ModelSerializer):
     notification = NotificationSerializer()  # Hiển thị thông tin thông báo

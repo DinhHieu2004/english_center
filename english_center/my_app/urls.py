@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 
 from .view.authViews import LoginView, RegisterStudent, ChangePasswordView, LogoutView,PasswordResetRequestView, password_reset_form
 from  .view.examViews import FinalExamView, PlacementTestView
-from  .view.coursevView import  CourseDetailView, CourseStudentsAPIView
+from  .view.coursevView import  CourseDetailView, CourseStudentsAPIView, CourseDetailStudentView
 from .view.teacherView import TeacherView,TeacherDashboardView, TeacherScheduleView
 from .view.studentView import StudentDashboardView, StudentDetailView, StudentEnrollmentView
 from .view.notificationView import NotificationListCreate, UnreadNotifications, DeleteUserNotification,UserNotificationList, CheckNewNotifications
@@ -21,6 +21,8 @@ urlpatterns = [
     path('placement-test/', PlacementTestView.as_view(), name='placement-test'),  
     path('student/dashboard/', StudentDashboardView.as_view(), name='student_dashboard'),
     path('course/<int:id>/', CourseDetailView.as_view(), name='course-detail'),
+    path('course-student/<int:id>/', CourseDetailStudentView.as_view(), name='course-detail'),
+
     path('teacher/<int:id>/', TeacherView.as_view(), name='teacher-detail'),
     path('teacher/dashboard/', TeacherDashboardView.as_view(), name='teacher_courses'),
     path('change-password/', ChangePasswordView.as_view(), name='change-password'),

@@ -14,13 +14,16 @@ class StudentDashboardView(APIView):
 
     def get(self, request):
         user = request.user
+        
         if not hasattr(user, 'student'):
             return Response({'error': 'user is not student'}, status= status.HTTP_400_BAD_REQUEST)
         
         student = user.student
-        current_course = Course.objects.filter(students = student).first()
-        if current_course:
-            course_data= CourseSerialozer(current_course).data
+        enrolled_courses = CourseEnrollment.objects.filter(student=student, completed=False)
+        current_courses = [enrollment.course for enrollment in enrolled_courses]
+        if current_courses:
+            current_course = current_courses[0]
+            course_data = CourseSerialozer(current_course).data
             complete = Attendance.calculate_completion(student, current_course)
             return Response({
                 'complete': complete,
@@ -29,7 +32,7 @@ class StudentDashboardView(APIView):
             })
         else:
             next_level_courses = Course.objects.filter(level=student.level)
-            available_courses =CourseSerialozer(next_level_courses, many =True).data
+            available_courses =CourseSerialozer(next_level_courses, many =True,  context={'student': student}).data
             return Response({
                 'current_courses': [],
                 'available_courses': available_courses

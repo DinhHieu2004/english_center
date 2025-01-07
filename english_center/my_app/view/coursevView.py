@@ -6,6 +6,19 @@ from ..models import Course, Attendance
 from rest_framework.exceptions import NotFound
 
 
+class CourseDetailStudentView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, id):
+        try: 
+            student = request.user.student
+            course = Course.objects.get(id = id)
+        except Course.DoesNotExist:
+            raise NotFound(detail="Course not found")
+
+        course_data =CourseSerialozer(course,  context={'student': student}).data
+        return Response({'course': course_data, }, status= 200)   
+             
 class CourseDetailView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -17,6 +30,7 @@ class CourseDetailView(APIView):
 
         course_data =CourseSerialozer(course).data
         return Response({'course': course_data, }, status= 200)            
+
 
 class CourseStudentsAPIView(APIView):
     def get(self, request, course_id, *args, **kwargs):

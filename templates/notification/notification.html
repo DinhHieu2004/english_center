@@ -127,7 +127,11 @@
         .comment strong {
             color: #333;
         }
-
+        #title {
+        width: 100%;
+        height: 50px !important; 
+        resize: none; 
+    }
         textarea {
             width: 100%;
             height: 50px;
@@ -187,6 +191,7 @@
     <!-- Notification Form for creating new notifications -->
     <div id="notification-form">
         <h2>Gửi một thông báo mới đến lớp học</h2>
+        <textarea id="title" placeholder="Nhập tiêu đề..."></textarea>      
         <textarea id="new-notification-content" placeholder="Write your notification here..."></textarea>
         <button id ="create-notification-btn">Gửi</button>
     </div>

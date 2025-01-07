@@ -2,7 +2,7 @@ from django.contrib import admin
 from django import forms
 from .models import (User, Question, FinalExam, PlacementTest, Student, Teacher,Course,
                     CourseEnrollment, CourseSchedule,
-                    Answer, TestResult,  Attendance, Notification , StudySession, Discount, UserNotification
+                    Answer, TestResult,  Attendance, Notification , StudySession, Discount, UserNotification, Comment
                    )
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth.hashers import make_password
@@ -340,6 +340,11 @@ class AttendanceAdmin(admin.ModelAdmin):
 class NotificationAdmin(admin.ModelAdmin):
     list_display =('id', 'title', 'content', 'created_by', 'created_at', 'course')
 admin.site.register(Notification, NotificationAdmin)
+
+class CommentsAdmin(admin.ModelAdmin):
+    list_display =('id', 'notification', 'content', 'created_by', 'created_at')
+admin.site.register(Comment, CommentsAdmin)
+
 
 class UserNotificationAdmin(admin.ModelAdmin):
     list_display = ('id','user','notification', 'is_read')

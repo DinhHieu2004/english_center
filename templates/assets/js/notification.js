@@ -48,8 +48,11 @@ $(document).ready(function () {
         });
     }
 
-    $("#create-notification-btn").on("click", function () {
+    $("#create-notification-btn").on("click", function (e) {
+        e.preventDefault();
+        
         const content = $("#new-notification-content").val().trim();
+        const title =$("#title").val().trim();
         if (!content) {
             alert("Notification content cannot be empty!");
             return;
@@ -60,7 +63,7 @@ $(document).ready(function () {
             type: "POST",
             headers: getAuthHeaders(),
             data: JSON.stringify({
-                title: `Notification ${Date.now()}`,
+                title: title,
                 content: content,
             }),
             success: function () {
@@ -119,7 +122,7 @@ $(document).ready(function () {
                 const commentsDiv = $(`#comments-${notificationId}`);
                 commentsDiv.empty();
                 data.forEach(comment => {
-                    commentsDiv.append(`<div class="comment"><strong>${comment.user}:</strong> ${comment.content}</div>`);
+                    commentsDiv.append(`<div class="comment"><strong>${comment.created_by_name}:</strong> ${comment.content}</div>`);
                 });
             },
             error: function (xhr, status, error) {

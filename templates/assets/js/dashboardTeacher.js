@@ -36,6 +36,9 @@ $(document).ready(function () {
         document.getElementById('editAddress').value = userData.address || ''; 
         }
     });
+
+ 
+   
     // Hiển thị danh sách lớp học
     let teacherId = null;
     $.ajax({
@@ -50,11 +53,14 @@ $(document).ready(function () {
             teacherId = response.teacher_id
             if (response.courses_data && response.courses_data.length > 0) {
                 let classListHtml = '';
-                response.courses_data.forEach(course => {
+                for (const course of response.courses_data) {
+    
                     classListHtml += `
                         <div class="card mt-3">
                             <div class="card-body">
-                                <h5 class="card-title">${course.name}</h5>
+                                <h5 class="card-title">
+                                    ${course.name}
+                                </h5>
                                 <p>${course.description}</p>
                                 <p><strong>Cấp độ:</strong> ${course.level}</p>
                                 <p><strong>Ngày bắt đầu:</strong> ${course.start_date}</p>
@@ -63,7 +69,7 @@ $(document).ready(function () {
                             </div>
                         </div>
                     `;
-                });
+                }
                 $('#classList').html(classListHtml);
             } else {
                 $('#classList').html('<p>Chưa có lớp học nào.</p>');

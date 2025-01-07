@@ -53,6 +53,8 @@ class Student(models.Model):
     has_taken_test = models.BooleanField(default=False)  
 
 
+    def is_old_student(self):
+        return CourseEnrollment.objects.filter(student=self, completed = True).exists()
     def __str__(self):
         return f"Student: {self.user.username} - Level: {self.level}"
     
@@ -175,7 +177,7 @@ class Discount(models.Model):
     courses = models.ManyToManyField('Course', related_name='discounts')
     name = models.CharField(max_length=200, help_text="discount program name")
     discount_type = models.CharField(
-       max_length=10,
+       max_length=20,
         choices=(
             ('fixed', 'Fixed Amount'),
             ('percent', 'Percentage'),
@@ -185,14 +187,20 @@ class Discount(models.Model):
     value = models.DecimalField(max_digits=10, decimal_places=2, help_text="Discount value (amount or %)")
     start_date = models.DateField(default=now, help_text="Discount Start Date")
     end_date = models.DateField(help_text="Discount End Date")
+    for_old_students_only = models.BooleanField(default=False, help_text="Apply only for old students")
 
     def is_valid(self):
         today = now().date()
         return self.start_date <= today <= self.end_date
 
-    def calculate_discounted_price(self, original_price):
-       
+    def calculate_discounted_price(self, original_price, student=None):
+        is_old_student = student.is_old_student() if student else False
+
+        if self.for_old_students_only and not is_old_student:
+            return original_price
+
         original_price = Decimal(original_price)
+
         if self.discount_type == 'fixed':
             discounted_price = max(original_price - Decimal(self.value), 0)
         elif self.discount_type == 'percent':
@@ -201,9 +209,6 @@ class Discount(models.Model):
             return original_price
 
         return discounted_price.quantize(Decimal('0.01'), rounding=ROUND_HALF_UP)
-
-    def __str__(self):
-        return f"{self.name} ({self.get_discount_type_display()} - {self.value})"
 
 class CourseSchedule(models.Model):
     WEEKDAYS = (

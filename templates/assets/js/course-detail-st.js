@@ -27,7 +27,7 @@ function getAuthHeaders() {
 
 function fetchCourseDetails(courseId, is_register) {
     $.ajax({
-        url: `http://127.0.0.1:8000/api/course/${courseId}/`,
+        url: `http://127.0.0.1:8000/api/course-student/${courseId}/`,
         method: 'GET',
         headers: getAuthHeaders(),
         success: function(courseDetails) {
@@ -51,59 +51,74 @@ function renderCourseDetails(course, teacherName, is_register) {
                     <li>
                         <strong>Thứ:</strong> ${schedule.weekday_display}, 
                         <strong>Giờ bắt đầu:</strong> ${schedule.session},
-                        
                     </li>
                 `).join('')}
-                <button class = "btn btn-primary">Làm bài kiểm tra đầu ra</button>
             </ul>
         `;
     } else {
         schedulesHtml = `<p>Không có lịch học nào được thiết lập.</p>`;
     }
 
-    let discountText='';
-    let discounted_price='';
-    if (course.is_discounted) {
-        discountText = `<p class="card-text text-danger"><strong>Đang giảm giá!</strong></p>`;
-        discounted_price =` <p><strong>Giá đã giảm:</strong> ${course.discounted_price}.00 VND</p>`
+    const userData = JSON.parse(localStorage.getItem("userData") || "{}");
+    const isOldStudent = userData.student_details.is_old_student || false;
+
+    let discountText = '';
+    let discountedPrice = '';
+
+    if (course.is_discounted && course.discounts && course.discounts.length > 0) {
+        course.discounts.forEach((discount) => {
+            if (discount.for_old_students_only && !isOldStudent) {
+                return; // Bỏ qua nếu không thỏa mãn
+            }
+
+            discountText = `<p class="card-text text-danger"><strong>Đang giảm giá!</strong></p>`;
+            if (discount.discount_type === "percent") {
+                discountedPrice = `
+                    <p><strong>Giá đã giảm:</strong> ${
+                        course.price - (course.price * discount.value) / 100
+                    } VND</p>
+                `;
+            } else {
+                discountedPrice = `
+                    <p><strong>Giá đã giảm:</strong> ${
+                        course.price - discount.value
+                    } VND</p>
+                `;
+            }
+        });
     }
-    
-     let paymentButton ='';
-     let watchButton ='';
-     if(is_register){
+
+    let paymentButton = '';
+    let watchButton = '';
+    if (is_register) {
         paymentButton = `<p style="color: green;">Bạn đã đăng ký khóa học này.</p>`;
-
-        watchButton =`<div class="container mt-4 text-center">
-                     <button class="btn btn-primary" id = "view-notifications">
-                    <i class="bi bi-bell"></i> Quản lý thông báo
-                     </button>
-                    </div>`
-
-                    
-     }else{
+        watchButton = `<div class="container mt-4 text-center">
+            <button class="btn btn-primary" id="view-notifications">
+                <i class="bi bi-bell"></i> Quản lý thông báo
+            </button>
+        </div>`;
+    } else {
         paymentButton = `<button class="btn btn-primary" id="payButton">Đăng kí khóa học này</button>`;
-     }
-     
-    
+    }
+
     let courseDetailsHtml = `
         <h3>Thông tin lớp học: ${course.name}</h3>
         <p><strong>Miêu tả:</strong> ${course.description}</p>
         <p><strong>Trình độ:</strong> ${course.level}</p>
         <p><strong>Giá gốc:</strong> ${course.price} VND</p>
         ${discountText}
-        ${discounted_price}
+        ${discountedPrice}
         <p><strong>Ngày bắt đầu:</strong> ${course.start_date}</p>
         <p><strong>Giáo viên:</strong> ${teacherName}</p>
-      
         ${schedulesHtml}
         ${paymentButton}
         ${watchButton}
-
     `;
+
     $('#courseDetail').html(courseDetailsHtml);
 
     if (is_register) {
-        $('#view-notifications').on('click', function(e) {
+        $('#view-notifications').on('click', function (e) {
             e.preventDefault();
             const courseId = course.id;
             window.location.href = `../notification/notification.html?course_id=${courseId}`;
@@ -117,6 +132,7 @@ function renderCourseDetails(course, teacherName, is_register) {
         });
     }
 }
+
 
 
 function fetchTeacherDetails(teacherId, course, is_register) {

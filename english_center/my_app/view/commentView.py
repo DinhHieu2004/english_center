@@ -18,20 +18,26 @@ class CommentListCreateAPIView(APIView):
             return Response({"error": "Notification not found"}, status=status.HTTP_404_NOT_FOUND)
 
     def post(self, request, notification_id):
+        # Kiểm tra xem Notification có tồn tại hay không
         try:
             notification = Notification.objects.get(id=notification_id)
         except Notification.DoesNotExist:
             return Response({"error": "Notification not found"}, status=status.HTTP_404_NOT_FOUND)
 
+        # Log thông tin người dùng (nên sử dụng logging thay vì print)
         print(f"User ID: {request.user.id}, Username: {request.user.username}")
 
+        # Sao chép và thêm dữ liệu 'notification' vào payload
         data = request.data.copy()
         data['notification'] = notification.id 
 
+        # Khởi tạo serializer với dữ liệu
         serializer = CommentSerializer(data=data)
         
         if serializer.is_valid():
+            # Lưu dữ liệu, thêm trường created_by
             serializer.save(created_by=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         
+        # Trả về lỗi nếu dữ liệu không hợp lệ
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
