@@ -242,6 +242,9 @@ class FinalExamView(APIView):
             # Kiểm tra điều kiện điểm >= 50
             if score >= 50:
                 message = "Bạn đã vượt qua bài kiểm tra"
+                student.is_studying = False
+                student.level = exam.level
+                student.save()
             else:
                 message = "Bạn chưa vượt qua bài kiểm tra"
             return Response({

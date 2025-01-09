@@ -84,7 +84,7 @@ function loadScheduleForWeek() {
         
             Object.keys(data.teacher_schedule).forEach(function(dayIndex) {
                 const daySchedule = data.teacher_schedule[dayIndex];
-                const day = daysOfWeek[parseInt(dayIndex)]; 
+                const day = daysOfWeek[parseInt(dayIndex) - 1];
                     for (let i = 1; i <= length; i++) {
                         if (daySchedule[i]) {
                             const classInfo = `${daySchedule[i].course_name}`;

@@ -21,12 +21,14 @@ class TOEICTest {
 
   getUserLevel() {
     const userData = JSON.parse(localStorage.getItem("userData"));
-    return userData?.student_details?.level?.toLowerCase() || "a1"; // Default to 'a1' if no level is set
+    console.log(userData?.student_details?.level?.toLowerCase())
+    return userData?.student_details?.level?.toLowerCase();
   }
 
   getApiUrl() {
     const userLevel = this.getUserLevel();
-    return this.levelUrlMap[userLevel] || this.levelUrlMap["a1"]; // Fallback to a1 if level not found
+    console.log(this.levelUrlMap[userLevel] )
+    return this.levelUrlMap[userLevel];
   }
 
   async initTest() {
@@ -69,10 +71,7 @@ class TOEICTest {
       const response = await $.ajax({
         url: apiUrl,
         method: "POST",
-        headers: {
-          Authorization: "Token " + localStorage.getItem("token"),
-          "Content-Type": "application/json",
-        },
+        headers: getAuthHeaders(),
         data: JSON.stringify(answers),
       });
 
@@ -94,8 +93,8 @@ class TOEICTest {
   }
 
   sortAndDisplayQuestions() {
-    const listeningQuestions = this.questions.filter((q) => q.audio_file);
-    const readingQuestions = this.questions.filter((q) => !q.audio_file);
+    const listeningQuestions = this.questions.filter((q) => q.audio_file_url);
+    const readingQuestions = this.questions.filter((q) => !q.audio_file_url);
 
     $("#listening-questions").html(
       this.generateQuestionsHTML(listeningQuestions, true)
@@ -192,3 +191,9 @@ $(document).ready(() => {
   const test = new TOEICTest();
   test.initTest();
 });
+function getAuthHeaders() {
+  return {
+      'Authorization': 'Token ' + localStorage.getItem('token'),
+      'Content-Type': 'application/json'
+  };
+}

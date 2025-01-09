@@ -6,6 +6,7 @@
     <title>Trung Tâm Anh Ngữ</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/templates/assets/css/base.css">
 </head>
 <body>
     <!-- Header -->
@@ -30,33 +31,40 @@
                         <a class="nav-link" href="#">Liên hệ</a>
                     </li>
                 </ul>
-                <div class="d-flex">
-                    <button class="btn btn-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng nhập</button>
-                    <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng ký</button>
+                <div class="d-flex justify-content-end">
+                    <div id="guestActions" class="d-flex">
+                        <button class="btn btn-light me-2" data-bs-toggle="modal" data-bs-target="#loginModal">Đăng nhập</button>
+                        <button class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#registerModal">Đăng ký</button>
+                    </div>
+                    
+                    <div id="userActions" class="d-flex d-none">
+                        <div class="dropdown">
+                            <button class="btn btn-light dropdown-toggle" type="button" id="userDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="fa fa-user-circle me-2" id="userIcon"></i>
+                                <span id="userName">Người dùng</span>
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                                <li><a class="dropdown-item" href="#" id="profileLink">Trang cá nhân</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="#" id="logoutButton">Đăng xuất</a></li>
+                            </ul>                            
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <!-- Banner -->
     <div class="bg-light py-5">
         <div class="container text-center">
             <h1 class="display-4 fw-bold mb-4">Tiếng Anh - Chìa khóa mở cửa tương lai</h1>
             <p class="lead mb-4">Học tiếng Anh với giáo viên bản ngữ và phương pháp hiện đại</p>
-            <button class="btn btn-primary btn-lg">Đăng ký học thử miễn phí</button>
         </div>
     </div>
 
     <!-- Courses Section -->
     <div class="container py-5">
-        <h2 class="text-center mb-5">Các Khóa Học</h2>
-        <div class="row" id="coursesList">
-            <!-- Courses will be loaded here via Ajax -->
-            <div class="col-12 text-center">
-                <div class="spinner-border text-primary" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            </div>
+        <div id="discounts-container">
         </div>
     </div>
 
@@ -89,6 +97,7 @@
             </div>
         </div>
     </div>
+    
 
     <!-- Login Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1">

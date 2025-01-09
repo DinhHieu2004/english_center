@@ -1,4 +1,22 @@
+$(document).ready(function () {
+    const token = localStorage.getItem('token');
+    const userData = JSON.parse(localStorage.getItem('userData'));
+    const usertype = localStorage.getItem('userType');
+    if (token) {
+        document.getElementById("guestActions").classList.add("d-none");
+        document.getElementById("userActions").classList.remove("d-none");
+        $("#userName").text(userData.fullname);
 
+    } else {
+        document.getElementById("guestActions").classList.remove("d-none");
+        document.getElementById("userActions").classList.add("d-none");
+    }
+    if (usertype === 'student') {
+        profileLink.href = "/templates/student/dashboard.html";
+    } else if (usertype === 'teacher') {
+        profileLink.href = "/templates/teacher/dashboard.html";
+    }
+});
 function getCSRFToken() {
     //var name = "csrftoken=";
     var decodedCookie = decodeURIComponent(document.cookie);
@@ -22,19 +40,24 @@ function getCSRFToken() {
             password: $('#password').val()
         },
         success: function(response) {
+            console.log(response);
             localStorage.setItem('token', response.token);
             localStorage.setItem('userType', response.user_type);
             localStorage.setItem('userData', JSON.stringify(response.user_data));
             if (response.message === 'Login successful') {
+                document.getElementById("guestActions").classList.add("d-none");
+                document.getElementById("userActions").classList.remove("d-none");
+                $("#userName").text(response.user_data.fullname);
                 const userType = response.user_type;
                 
                 if (userType === 'admin') {
                     window.location.href = '/templates/admin/dashboard.html';
                 } else if (userType === 'student') {
-                    window.location.href = '/templates/student/dashboard.html';
+                    profileLink.href = "/templates/student/dashboard.html";
                 } else if (userType === 'teacher') {
-                    window.location.href = '/templates/teacher/dashboard.html';
+                    profileLink.href = "/templates/teacher/dashboard.html";
                 }
+                $('#loginModal').modal('hide');
             } else {
                 alert('Invalid credentials');
             }
@@ -123,4 +146,68 @@ $(document).ready(function() {
             $(this).removeClass('is-invalid');
         }
     });
+});
+$('#logoutButton').click(function (event) {
+    event.preventDefault();
+    localStorage.clear();
+    window.location.href = '/templates/base.html';
+});$(document).ready(function () {
+    function fetchCourses() {
+      $.ajax({
+        url: 'http://127.0.0.1:8000/api/course/',  
+        method: 'GET',
+        success: function (response) {
+            let discountContent = '';
+            response.forEach(function(item) {
+                let discount = item.discount;
+                let courses = item.courses;
+                
+                // Thêm thông tin giảm giá vào nội dung
+                discountContent += `
+                <div id="discount-banner" class="alert alert-danger">
+                    <strong class="discount-heading">${discount.name}</strong><br>
+                    <strong class="discount-details">Giảm giá: ${discount.value}%</strong><br>
+                    <strong class="discount-dates">Thời gian: Từ ${discount.start_date} đến ${discount.end_date}</strong>
+                    </div>
+                `;
+                discountContent += '<div class="d-flex flex-wrap justify-content-between">';
+                // Vòng lặp qua từng khóa học trong chương trình giảm giá
+                if (courses.length > 0) {
+                    courses.forEach(function(course) {
+                        discountContent += `
+                           <div class="card mb-2">
+                                <div class="card-body">
+                                    <h4 class="card-title">Khóa học - ${course.level.toUpperCase()}</h4>
+                                    <p class="card-text inline"><strong>Mã khóa học:</strong> ${course.id} <strong>Số buổi:</strong> ${course.total_session}</p>
+                                    <p class="card-text"><strong>Mô tả:</strong> ${course.description}</p>
+                                    <p class="card-text"><strong>Cấp độ:</strong> ${course.level.toUpperCase()}</p>
+                                    <p class="card-text"><strong>Bắt đầu:</strong> ${course.start_date}</p>
+                                    <ul>
+                                    ${course.schedules.map(schedule => `
+                                    <li>
+                                        <strong>Thứ:</strong> ${schedule.weekday_display}, 
+                                        <strong>Giờ bắt đầu:</strong> ${schedule.session},
+                        
+                                    </li>
+                                    `).join('')}
+                                    </ul>
+                                </div>
+                            </div>
+                        `;
+                    });
+                    discountContent += '</ul>';
+                } else {
+                    discountContent += '<p>Không có khóa học nào trong chương trình giảm giá này.</p>';
+                }
+
+                discountContent += '</div>';
+            });
+
+            $('#discounts-container').html(discountContent);
+        },
+         
+      });
+    }
+
+    fetchCourses();
 });

@@ -378,6 +378,8 @@ class Attendance(models.Model):
         student=student, course=course).filter(Q(status="x") | Q(status="cp")).count()
 
         completion_percentage = (attendances / total_sessions) * 100
+        if completion_percentage == 100:
+            student.is_studying = False
         return round(completion_percentage, 2)
     
 

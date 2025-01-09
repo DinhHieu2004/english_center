@@ -304,12 +304,20 @@ class TestResultAdmin(admin.ModelAdmin):
             title='Average Score and Average Correct Percentage by Level',
             labels={'level', 'value'}
         )
+        fig6 = px.pie(
+            test_type_counts,
+            names='test_type',
+            values='total',
+            title='Percentage of tests by type'
+)
 
         chart_html1 = pio.to_html(fig1, full_html=False)
         chart_html2 = pio.to_html(fig2, full_html=False)
         chart_html3 = pio.to_html(fig3, full_html=False)
         chart_html4 = pio.to_html(fig4, full_html=False)
         chart_html5 = pio.to_html(fig5, full_html=False)
+        chart_html6 = pio.to_html(fig6, full_html=False)
+
 
 
         extra_context = extra_context or {}
@@ -318,6 +326,8 @@ class TestResultAdmin(admin.ModelAdmin):
         extra_context['chart3'] = chart_html3
         extra_context['chart4'] = chart_html4
         extra_context['chart5'] = chart_html5
+        extra_context['chart6'] = chart_html6
+
 
         return super().changelist_view(request, extra_context=extra_context)
 
@@ -325,6 +335,8 @@ class TestResultAdmin(admin.ModelAdmin):
         css = {
             'all': ('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css',)
         }
+
+
 
 admin.site.register(TestResult, TestResultAdmin)
 

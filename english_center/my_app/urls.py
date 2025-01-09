@@ -10,6 +10,7 @@ from .view.studentView import StudentDashboardView, StudentDetailView, StudentEn
 from .view.notificationView import NotificationListCreate, UnreadNotifications, DeleteUserNotification,UserNotificationList, CheckNewNotifications
 from .view.attendanceView import AttendanceList, CourseScheduleListView
 from .view.commentView import CommentListCreateAPIView
+from .view.baseView import CoursesDiscount
 from .view.markNotificationAsRead import MarkNotificationsAsRead
 
 
@@ -37,6 +38,7 @@ urlpatterns = [
     path('user/notifications/', UserNotificationList.as_view(), name='user_notification_list'),
     path('courses/<int:course_id>/check-new-notifications/', CheckNewNotifications.as_view(), name='check_new_notifications'),
 
+    path('course/', CoursesDiscount.as_view(), name='course'),
     path('course/<int:course_id>/attendance/', AttendanceList.as_view(), name='attendance-list'),
     path('course/<int:course_id>/schedule/', CourseScheduleListView.as_view(), name='course-schedule-list'),
     path('teacher/<int:teacher_id>/schedule/', TeacherScheduleView.as_view(), name='teacher-schedule'),
